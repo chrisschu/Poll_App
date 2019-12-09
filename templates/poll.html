@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poll</title>
+     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='static/style.css') }}" />
+</head>
+<body>
+
+<div id="start">
+<form class="myForm" method="POST" enctype="application/x-www-form-urlencoded" action="{{ url_for('my_form') }}">
+
+
+<fieldset>
+<legend>Question 1?</legend>
+<p><label class="choice"> <input type="radio" name="question1" required value="yes"> yes </label></p>
+<p><label class="choice"> <input type="radio" name="question1" required value="no"> no </label></p>
+<p><label class="choice"> <input type="radio" name="question1" required value="unknown"> unknown </label></p>
+</fieldset>
+
+<fieldset>
+<legend>Question 2?</legend>
+<p><label class="choice"> <input type="radio" name="question2" value="yes"> yes </label></p>
+<p><label class="choice"> <input type="radio" name="question2" value="no"> no </label></p>
+<p><label class="choice"> <input type="radio" name="question2" value="unknown"> unknown </label></p>
+</fieldset>
+
+<p>
+<label>Options for Dropdown 1
+<select id="dropdown1" name="dropdown1">
+<option value="" selected="selected">Select One</option>
+<option value="a" >a</option>
+<option value="b" >b</option>
+<option value="c" >c</option>
+</select>
+</label>
+</p>
+
+<p>
+<label>Options for Dropdown 2
+<input type="text" name="dropdown2" required list="dropdown2_options">
+</label>
+
+<datalist id="dropdown2_options">
+<option value="A">
+<option value="B">
+<option value="C">
+</datalist>
+</p>
+
+<p>
+<label>Textbox
+<textarea name="textbox" maxlength="500"></textarea>
+</label>
+</p>
+
+<p><button type="submit">Submit Booking</button></p>
+
+</form>
+
+
+</body>
+</html>
