@@ -1,17 +1,28 @@
-from flask import Flask, render_template, request
-from flask_mongoengine import MongoEngine
-#
+import pymongo
+import json
+import os
+from flask import Flask, render_template, request, jsonify
+from mongoengine import connect
+from pymongo import *
+
 ## Author Christian Schuschnig
 
 app = Flask(__name__)
-##app.config["MONGO_URI"] = "mongodb+srv://christian:LkipSB6LPbBV8wM@mongodbmovie-702qa.mongodb.net/test?retryWrites" \
-##                          "=true&w=majority "
-##mongo = PyMongo(app)
+try:
+    client = pymongo.MongoClient(
+        "mongodb+srv://christian:LkipSB6LPbBV8wM@mongodbmovie-702qa.mongodb.net/test?retryWrites=true&w=majority")
+    db = client['masterproject']
+    collection = db['survey']
+    print("Connected succesfully!")
+except:
+    print("Could not connect to MongoDB")
+
 
 @app.route('/')
 def index():
     ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
-    return render_template('poll.html',thing_to_say='Click here to start')
+    return render_template('poll.html', thing_to_say='Click here to start')
+
 
 @app.route('/hello/<path:name>')
 def hello(name):
@@ -27,16 +38,23 @@ def hello(name):
 
 @app.route('/my_form', methods=['POST'])
 def my_form():
-    question1 = request.form['question1']
-    question2 = request.form['question2']
-    dropdown1 = request.form['dropdown1']
-    dropdown2 = request.form['dropdown2']
-    textbox = request.form['textbox']
 
-    dictionary = {"question1":question1, "question2" : question2, "dropdown1": dropdown1, "dropdown2": dropdown2, "textbox": textbox}
+    new = {
+        "question1": str(request.form['question1']),
+        "question2": str(request.form['question2']),
+        "dropdown1": str(request.form['dropdown1']),
+        "dropdown2":  str(request.form['dropdown2']),
+        "textbox": str(request.form['textbox'])
+    }
+    try:
+        _id = collection.insert_one(new)
+        print("database entry successfully")
+    except:
+        print("database entry not successfully!")
 
-    # Now that get value back to server can send it to a DB(use Flask-SQLAlchemy)
-    return dictionary
+    message = "db entry " + str(new) + "was successfully inserted"
+
+    return str(message)
 
 
 if __name__ == '__main__':

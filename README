@@ -1,1 +1,12 @@
-TEST
+Poll App
+
+The idea behind this project is to make first experiences with Mongodb, pymongo, virtuelenv and flask.
+It contains a simple questionnaire which results will be inserted into the database
+
+As database the cloud solution MongoDB Atlas will be used.
+
+<h3> Steps for deployment </h3>
+
+
+
+
