@@ -52,7 +52,7 @@ def my_form():
     except:
         print("database entry not successfully!")
 
-    message = "db entry " + str(new) + "was successfully inserted"
+    message = "db entry " + str(new) + " was successfully inserted in database"
 
     return str(message)
 

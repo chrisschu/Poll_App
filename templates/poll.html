@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Poll</title>
-     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='static/style.css') }}" />
+     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
 
@@ -13,16 +13,16 @@
 
 <fieldset>
 <legend>Question 1?</legend>
-<p><label class="choice"> <input type="radio" name="question1" required value="yes"> yes </label></p>
-<p><label class="choice"> <input type="radio" name="question1" required value="no"> no </label></p>
-<p><label class="choice"> <input type="radio" name="question1" required value="unknown"> unknown </label></p>
+<label class="choice"> <input type="radio" name="question1" required value="yes"> yes </label>
+<label class="choice"> <input type="radio" name="question1" required value="no"> no </label>
+<label class="choice"> <input type="radio" name="question1" required value="unknown"> unknown </label>
 </fieldset>
 
 <fieldset>
 <legend>Question 2?</legend>
-<p><label class="choice"> <input type="radio" name="question2" value="yes"> yes </label></p>
-<p><label class="choice"> <input type="radio" name="question2" value="no"> no </label></p>
-<p><label class="choice"> <input type="radio" name="question2" value="unknown"> unknown </label></p>
+<label class="choice"> <input type="radio" name="question2" value="yes"> yes </label>
+<label class="choice"> <input type="radio" name="question2" value="no"> no </label>
+<label class="choice"> <input type="radio" name="question2" value="unknown"> unknown </label>
 </fieldset>
 
 <p>
@@ -54,7 +54,7 @@
 </label>
 </p>
 
-<p><button type="submit">Submit Booking</button></p>
+<p><button type="submit">Submit</button></p>
 
 </form>
 
