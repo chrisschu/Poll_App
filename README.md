@@ -10,13 +10,14 @@ As database the cloud solution MongoDB Atlas will be used.
 ## Steps for deployment locally
 
 I used PyCharm.
+Tutorial is written for Windows/Linux.
 
 ### Python
 **Python 3** is required.
 
 ```bash
 # make sure you have Python 3
-python3 --version
+python --version
 ```
 ### PIP
 
@@ -25,13 +26,38 @@ python3 --version
 pip --version
 
 # install pip3 otherwise
-python3 -m pip --version
+python -m pip --version
+```
+if pip is not installed: 
+```bash
+
+To install pip, securely download get-pip.py. 1:
+
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+Then run the following:
+```
+python get-pip.py
+```bash
+```
+### Create a Virtual Python Environment
+cd to your project directory and run virtualenv to create the new virtual environment.
+
+The following commands will create a new virtual environment under Poll_App/my-venv.
+
+```bash
+cd Poll_App
+virtualenv --python C:\Path\To\Python\python.exe venv
 ```
 
 ### Activate virtual environment
 
+Linux:
 ```bash
 source env/bin/activate
+```
+Windows:
+```bash
+source .\venv\Scripts\activate
 ```
 ### Install dependencies
 
@@ -40,9 +66,20 @@ source env/bin/activate
 ```
 
 ### Start the app
+for Linux based OS:
 
 ```bash
-FLASK_APP=app/app.py flask run
+$ export FLASK_APP=app.py
 ```
 
+for Windows (cmd):
+```bash
+$ set FLASK_APP=app.py
+```
+```bash
+$ python -m flask run
+ * Running on http://127.0.0.1:5000/
+```
+
+App is now accessible via http://127.0.0.1:5000/
 

@@ -38,14 +38,14 @@ def hello(name):
 
 @app.route('/my_form', methods=['POST'])
 def my_form():
-
     new = {
         "question1": str(request.form['question1']),
         "question2": str(request.form['question2']),
         "dropdown1": str(request.form['dropdown1']),
-        "dropdown2":  str(request.form['dropdown2']),
+        "dropdown2": str(request.form['dropdown2']),
         "textbox": str(request.form['textbox'])
     }
+
     try:
         _id = collection.insert_one(new)
         print("database entry successfully")
