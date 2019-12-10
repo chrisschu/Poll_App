@@ -1,13 +1,15 @@
 # Poll App
 
-This is a simple polling app
+This is a simple polling app. 
 
-The idea behind this project is to make first experiences with Mongodb, pymongo, virtuelenv and flask.
-It contains a simple questionnaire which results will be inserted into the database
+The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
+It contains a simple questionnaire which results will be inserted into the database.
+ 
+At the moment this app offers only insertion, not viewing the database. 
 
-As database the cloud solution MongoDB Atlas will be used.
+As database the cloud solution **MongoDB Atlas** will be used.
 
-## Steps for deployment locally
+## Steps for deployment
 
 I used PyCharm.
 Tutorial is written for Windows/Linux.
@@ -35,7 +37,6 @@ To install pip, securely download get-pip.py. 1:
 
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 Then run the following:
-```
 python get-pip.py
 ```bash
 ```
@@ -82,4 +83,3 @@ $ python -m flask run
 ```
 
 App is now accessible via http://127.0.0.1:5000/
-
