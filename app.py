@@ -1,4 +1,5 @@
 import pymongo
+import datetime
 import json
 import os
 from flask import Flask, render_template, request, jsonify
@@ -13,7 +14,7 @@ try:
         "mongodb+srv://christian:LkipSB6LPbBV8wM@mongodbmovie-702qa.mongodb.net/test?retryWrites=true&w=majority")
     db = client['masterproject']
     collection = db['survey']
-    print("Connected succesfully!")
+    print("Connected to DB succesfully!")
 except:
     print("Could not connect to MongoDB")
 
@@ -21,12 +22,13 @@ except:
 @app.route('/')
 def index():
     ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
+    return render_template('home.html', thing_to_say='Click here to start')
+
+
+@app.route('/poll.html')
+def poll():
+    ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
     return render_template('poll.html', thing_to_say='Click here to start')
-
-
-@app.route('/hello/<path:name>')
-def hello(name):
-    return 'Hello ' + name + ' ! '
 
 
 ##@app.route("/db")
@@ -38,12 +40,14 @@ def hello(name):
 
 @app.route('/my_form', methods=['POST'])
 def my_form():
+
     new = {
         "question1": str(request.form['question1']),
         "question2": str(request.form['question2']),
         "dropdown1": str(request.form['dropdown1']),
         "dropdown2": str(request.form['dropdown2']),
-        "textbox": str(request.form['textbox'])
+        "textbox": str(request.form['textbox']),
+        "date": datetime.datetime.utcnow(),
     }
 
     try:
