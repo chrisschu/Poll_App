@@ -19,7 +19,7 @@ except:
     print("Could not connect to MongoDB")
 
 
-@app.route('/')
+@app.route('/home')
 def index():
     ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
     return render_template('home.html', thing_to_say='Click here to start')
@@ -31,6 +31,12 @@ def poll():
     return render_template('poll.html', thing_to_say='Click here to start')
 
 
+@app.route('/')
+def Movie_poll():
+    ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
+    return render_template('/Movie-Poll.html', thing_to_say='Click here to start')
+
+
 ##@app.route("/db")
 ## def home_page():
 ##    online_users = mongo.db.users.find({"online": True})
@@ -40,7 +46,6 @@ def poll():
 
 @app.route('/my_form', methods=['POST'])
 def my_form():
-
     new = {
         "question1": str(request.form['question1']),
         "question2": str(request.form['question2']),
