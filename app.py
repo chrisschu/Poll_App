@@ -6,6 +6,15 @@ from flask import Flask, render_template, request, jsonify
 from mongoengine import connect
 from pymongo import *
 
+from flask_wtf import Form
+
+
+
+from flask_wtf import FlaskForm
+from datetime import date
+from wtforms.fields.html5 import DateField
+from wtforms.fields.html5 import DateTimeField
+
 ## Author Christian Schuschnig
 
 app = Flask(__name__)
@@ -47,12 +56,39 @@ def Movie_poll():
 @app.route('/my_form', methods=['POST'])
 def my_form():
     new = {
-        "question1": str(request.form['question1']),
-        "question2": str(request.form['question2']),
-        "dropdown1": str(request.form['dropdown1']),
-        "dropdown2": str(request.form['dropdown2']),
-        "textbox": str(request.form['textbox']),
-        "date": datetime.datetime.utcnow(),
+        "question1": str(request.form.get('question1')),
+        "question2": str(request.form.get('question2')),
+        "dropdown1": str(request.form.get('dropdown1')),
+        "dropdown2": str(request.form.get('dropdown2')),
+        "textbox": str(request.form.get('textbox')),
+    }
+
+    try:
+        _id = collection.insert_one(new)
+        print("database entry successfully")
+    except:
+        print("database entry not successfully!")
+
+    message = "db entry " + str(new) + " was successfully inserted in database"
+
+    return str(message)
+
+
+@app.route('/my_new_form', methods=['POST', 'GET'])
+def my_new_form():
+    new = {
+        "question1": str(request.form.get('q4_overallSatisfaction[0]')),
+        "question2": str(request.form.get('q4_overallSatisfaction[1]')),
+        "question1": str(request.form.get('q4_overallSatisfaction[0]')),
+        "question2": str(request.form.get('q4_overallSatisfaction[1]')),
+        "dropdown1": str(request.form.get('dropdown1')),
+        "dropdown2": str(request.form.get('dropdown2')),
+        "textbox": str(request.form.get('textbox')),
+        "date_page_1": datetime.datetime.utcnow(),
+        "date_page_2": datetime.datetime.utcnow(),
+        "date_page_3": datetime.datetime.utcnow(),
+        "date_page_4": datetime.datetime.utcnow(),
+        "date_page_final": datetime.datetime.utcnow(),
     }
 
     try:
