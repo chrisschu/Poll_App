@@ -40,11 +40,13 @@ if pip is not installed:
 ```bash
 
 To install pip, securely download get-pip.py. 1:
-
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 Then run the following:
 python get-pip.py
-```windows
+```
+Windows\Powershell
+```
+python get-pip.py.
 ```
 ### Create a Virtual Python Environment
 cd to your project directory and run virtualenv to create the new virtual environment.
@@ -54,13 +56,13 @@ Linux/Bash:
 ```bash
 change to Poll_App - Directory
 cd Poll_App
-virtualenv --python C:\Path\To\Python\python.exe venv
 ```
 
 Win10/Powershell
 ```
 cd Poll_App 
 pip install virtualenv
+virtualenv venv
 ```
 
 ### Activate virtual environment
@@ -94,10 +96,10 @@ $ export FLASK_APP=app.py
 ```
 
 for Windows (cmd):
-```bash
+```cmd
 $ set FLASK_APP=app.py
 ```
-```bash
+```cmd
 $ python -m flask run
  * Running on http://127.0.0.1:5000/
 ```
