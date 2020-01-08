@@ -21,6 +21,12 @@ Tutorial is written for Windows/Linux.
 # make sure you have Python 3
 python --version
 ```
+If not install it and set up the environment variable:
+
+    How to set up environment variable for python:
+    https://datatofish.com/add-python-to-windows-path/
+
+
 ### PIP
 
 ```bash
@@ -38,28 +44,42 @@ To install pip, securely download get-pip.py. 1:
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 Then run the following:
 python get-pip.py
-```bash
+```windows
 ```
 ### Create a Virtual Python Environment
 cd to your project directory and run virtualenv to create the new virtual environment.
 
 The following commands will create a new virtual environment under Poll_App/my-venv.
-
+Linux/Bash:
 ```bash
+change to Poll_App - Directory
 cd Poll_App
 virtualenv --python C:\Path\To\Python\python.exe venv
 ```
 
+Win10/Powershell
+```
+cd Poll_App 
+pip install virtualenv
+```
+
 ### Activate virtual environment
 
-Linux:
+Linux/Bash:
 ```bash
 source env/bin/activate
 ```
-Windows:
-```bash
-source .\venv\Scripts\activate
+Win10/Powershell
+
+```powershell
+
+Set-ExecutionPolicy RemoteSigned
+change to yes
+
+cd Poll_App
+.\venv\Scripts/activate
 ```
+Now (venv) should be activated
 ### Install dependencies
 
 ```bash
