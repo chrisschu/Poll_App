@@ -1,9 +1,6 @@
 import pymongo
 import datetime
-import json
-import os
 from flask import Flask, render_template, request, jsonify
-from mongoengine import connect
 from pymongo import *
 
 ##from flask_wtf import Form
