@@ -6,14 +6,14 @@ from flask import Flask, render_template, request, jsonify
 from mongoengine import connect
 from pymongo import *
 
-from flask_wtf import Form
+##from flask_wtf import Form
 
 
 
-from flask_wtf import FlaskForm
-from datetime import date
-from wtforms.fields.html5 import DateField
-from wtforms.fields.html5 import DateTimeField
+##from flask_wtf import FlaskForm
+##from datetime import date
+##from wtforms.fields.html5 import DateField
+##from wtforms.fields.html5 import DateTimeField
 
 ## Author Christian Schuschnig
 
@@ -83,7 +83,7 @@ def my_new_form():
         "question2": str(request.form.get('q4_overallSatisfaction[1]')),
         "dropdown1": str(request.form.get('dropdown1')),
         "dropdown2": str(request.form.get('dropdown2')),
-        "textbox": str(request.form.get('textbox')),
+        "favouriteMovie": str(request.form.get('q23_bestRecommended')),
         "date_page_1": datetime.datetime.utcnow(),
         "date_page_2": datetime.datetime.utcnow(),
         "date_page_3": datetime.datetime.utcnow(),
