@@ -1,5 +1,6 @@
 # Poll App
 
+
 This is a simple polling app. 
 
 The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
