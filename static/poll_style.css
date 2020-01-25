@@ -1,4 +1,6 @@
     .form-label-left{
+
+
         width:150px;
     }
     .form-line{
@@ -147,7 +149,7 @@
 /* | */
 .supernova .form-all,
 .form-all {
-  background-color: #ffffff;
+  background-color: #9a8bff;
   border: 1px solid transparent;
 }
 .form-header-group {
@@ -748,10 +750,10 @@ li[data-type="control_image"] img {
     .supernova {
       background-color: #ffffff;
     }
-    .supernova body {
+  /*.supernova body {
       background: transparent;
     }
-
+   */
     .form-textbox,
     .form-textarea,
     .form-radio-other-input,

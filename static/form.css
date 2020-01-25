@@ -56,7 +56,6 @@
 }
 .supernova {
   background-color: #ffffff;
-  background-color: #f5f5f5;
 }
 .supernova body {
   background-color: transparent;
@@ -296,7 +295,7 @@ h2 ~ .form-subHeader {
 .form-checkbox-other-input,
 .form-captcha input,
 .form-spinner input {
-  background-color: #ffffff;
+  background-color: #9a8bff;
 }
 [data-type="control_dropdown"] .form-input,
 [data-type="control_dropdown"] .form-input-wide {
@@ -627,3 +626,11 @@ li[data-type="control_image"] img {
 /* | */
 
 /*__INSPECT_SEPERATOR__*/
+
+  .p customp {
+   font-size: 40px;
+  }
+
+  label {
+    text-align: right;
+  }

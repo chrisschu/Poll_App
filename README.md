@@ -3,6 +3,8 @@
 
 This is a simple polling app. 
 
+LAST CHANGE: 12.01.2020
+
 The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
 It contains a simple questionnaire which results will be inserted into the database.
  
