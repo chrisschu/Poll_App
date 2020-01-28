@@ -1,0 +1,657 @@
+Index: static/nova.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- static/nova.css	(revision bd5ff4e6e97bf6ccee01b9876a2324b53b572581)
++++ static/nova.css	(date 1578935368506)
+@@ -389,15 +389,14 @@
+ 
+ /*----- Matrix Field -----*/
+ 
+-.form-matrix-table {
+-	font-size:1em;
+-}
+-
+ .form-matrix-row-headers {
+-    font-size: 0.786em; /*11px*/
+-	font-weight: normal;
++    font-size: 0.950em; /*11px*/
++	font-weight: bold;
+ }
+ 
++.form-matrix-table {
++	font-size: 0.800em;
++}
+ .form-matrix-column-headers {
+ 	font-size:0.786em; /*11px*/
+ 	font-weight: normal;
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- README.md	(revision bd5ff4e6e97bf6ccee01b9876a2324b53b572581)
++++ README.md	(date 1578866536257)
+@@ -3,6 +3,8 @@
+ 
+ This is a simple polling app. 
+ 
++LAST CHANGE: 12.01.2020
++
+ The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
+ It contains a simple questionnaire which results will be inserted into the database.
+  
+Index: app.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app.py	(revision bd5ff4e6e97bf6ccee01b9876a2324b53b572581)
++++ app.py	(date 1579609944641)
+@@ -7,7 +7,6 @@
+ ##from flask_wtf import Form
+ 
+ 
+-
+ ##from flask_wtf import FlaskForm
+ ##from datetime import date
+ ##from wtforms.fields.html5 import DateField
+@@ -16,6 +15,8 @@
+ ## Author Christian Schuschnig
+ 
+ app = Flask(__name__)
++
++## Connection to the MongoDB Atlas Cloud
+ try:
+     client = pymongo.MongoClient(
+         "mongodb+srv://christian:LkipSB6LPbBV8wM@mongodbmovie-702qa.mongodb.net/test?retryWrites=true&w=majority")
+@@ -33,6 +34,7 @@
+ 
+ 
+ @app.route('/poll.html')
++##Routing to old poll, just for testing
+ def poll():
+     ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
+     return render_template('poll.html', thing_to_say='Click here to start')
+@@ -52,6 +54,7 @@
+ 
+ 
+ @app.route('/my_form', methods=['POST'])
++##old poll app, just for testing
+ def my_form():
+     new = {
+         "question1": str(request.form.get('question1')),
+@@ -74,35 +77,72 @@
+ 
+ @app.route('/my_new_form', methods=['POST', 'GET'])
+ def my_new_form():
++    ## Assignment of the resulted input of the html variables
++
++    pre_movie_0 = str(request.form.get('q4_overallSatisfaction[0]'))
++    pre_movie_1 = str(request.form.get('q4_overallSatisfaction[1]'))
++    pre_movie_2 = str(request.form.get('q4_overallSatisfaction[2]'))
++    pre_movie_3 = str(request.form.get('q4_overallSatisfaction[3]'))
++    pre_movie_4 = str(request.form.get('q4_overallSatisfaction[4]'))
++    suggested_movie_1 = str(request.form.get('q20_movies20[0]'))
++    suggested_movie_2 = str(request.form.get('q20_movies20[1]'))
++    suggested_movie_3 = str(request.form.get('q20_movies20[2]'))
++    suggested_movie_4 = str(request.form.get('q20_movies20[3]'))
++    suggested_movie_5 = str(request.form.get('q20_movies20[4]'))
++    suggested_movie_6 = str(request.form.get('q20_movies20[5]'))
++    favourite = str(request.form.get('q23_bestRecommended'))
++    poll_q1 = str(request.form.get('q26_theItems'))
++    poll_q2 = str(request.form.get('q27_someOf'))
++    poll_q3 = (request.form.get('q28_theItems28'))
++    date_page_1 = datetime.datetime.utcnow()
++    date_page_final = datetime.datetime.utcnow()
++
++    ## saving in mongodb
++    save(pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, suggested_movie_1, suggested_movie_2,
++         suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, favourite, poll_q1,
++         poll_q2, poll_q3, date_page_1, date_page_final)
++
++    return "Db entry successful"
++
++
++def save(pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, suggested_movie_1, suggested_movie_2,
++         suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, favourite, poll_q1, poll_q2,
++         poll_q3, date_page_1, date_page_final):
++    """
++    Saving in MongoDB
++    """
++
+     new = {
+-        "pre_movie_0": str(request.form.get('q4_overallSatisfaction[0]')),
+-        "pre_movie_1": str(request.form.get('q4_overallSatisfaction[1]')),
+-        "pre_movie_2": str(request.form.get('q4_overallSatisfaction[2]')),
+-        "pre_movie_3": str(request.form.get('q4_overallSatisfaction[3]')),
+-        "pre_movie_4": str(request.form.get('q4_overallSatisfaction[4]')),
+-        "suggested_movie_1": str(request.form.get('q20_movies20[0]')),
+-        "suggested_movie_2": str(request.form.get('q20_movies20[1]')),
+-        "suggested_movie_3": str(request.form.get('q20_movies20[2]')),
+-        "suggested_movie_4": str(request.form.get('q20_movies20[3]')),
+-        "suggested_movie_5": str(request.form.get('q20_movies20[4]')),
+-        "suggested_movie_6": str(request.form.get('q20_movies20[5]')),
+-        "favouriteMovie": str(request.form.get('q23_bestRecommended')),
+-        "poll_q1": str(request.form.get('q26_theItems')),
+-        "poll_q2": str(request.form.get('q27_someOf')),
+-        "poll_q3": str(request.form.get('q28_theItems28')),
+-        "date_page_1": datetime.datetime.utcnow(),
+-        "date_page_final": datetime.datetime.utcnow(),
++        "pre_movie_0": pre_movie_0,
++        "pre_movie_1": pre_movie_1,
++        "pre_movie_2": pre_movie_2,
++        "pre_movie_3": pre_movie_3,
++        "pre_movie_4": pre_movie_4,
++        "suggested_movie_1": suggested_movie_1,
++        "suggested_movie_2": suggested_movie_2,
++        "suggested_movie_3": suggested_movie_3,
++        "suggested_movie_4": suggested_movie_4,
++        "suggested_movie_5": suggested_movie_5,
++        "suggested_movie_6": suggested_movie_6,
++        "favourite": favourite,
++        "poll_q1": poll_q1,
++        "poll_q2": poll_q2,
++        "poll_q3": poll_q3,
++        "date_page_1": date_page_1,
++        "date_page_final": date_page_final,
+     }
+-
+     try:
++        ##Creates a new document in DB
+         _id = collection.insert_one(new)
+         print("database entry successfully")
+     except:
+         print("database entry not successfully!")
+ 
+-    message = "db entry " + str(new) + " was successfully inserted in database"
++    print("db entry " + str(new) + " was successfully inserted in database")
+ 
+-    return str(message)
++    ## return str(message)
++
++    pass
+ 
+ 
+ if __name__ == '__main__':
+Index: templates/Movie-Poll.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/Movie-Poll.html	(revision bd5ff4e6e97bf6ccee01b9876a2324b53b572581)
++++ templates/Movie-Poll.html	(date 1579624850864)
+@@ -27,7 +27,8 @@
+ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":"Satisfaction Poll","type":"control_head"},{"name":"submit","qid":"2","text":"Submit","type":"control_button"},null,{"name":"overallSatisfaction","qid":"4","text":"Overall satisfaction","type":"control_matrix"},null,{"name":"pageBreak","qid":"6","text":"Page Break","type":"control_pagebreak"},{"name":"questionnaire","qid":"7","text":"Questionnaire","type":"control_head"},null,{"name":"pageBreak9","qid":"9","text":"Page Break","type":"control_pagebreak"},{"name":"welcome","qid":"10","text":"Welcome","type":"control_head"},{"name":"input11","qid":"11","text":"Aufkl&auml;rungstext (following....)\n&nbsp;\nDSGVO","type":"control_text"},{"name":"pageBreak16","qid":"12","text":"Page Break","type":"control_pagebreak"},{"name":"taskDescription","qid":"13","text":"Task Description","type":"control_head"},{"name":"input14","qid":"14","text":"Following Pages contains:\n&nbsp;\n1)\n2)\n3)\n&nbsp;\nFollow the instructions","type":"control_text"},{"name":"pageBreak15","qid":"15","text":"Page Break","type":"control_pagebreak"},{"name":"pageBreak16","qid":"16","text":"Page Break","type":"control_pagebreak"},{"name":"movies","qid":"17","text":"Movies","type":"control_head"},{"name":"input18","qid":"18","text":"Instruction:\nTEXT\n\n\n\n&nbsp;d\n&nbsp;d\nd \nd d\n\n\n\n&nbsp;","type":"control_text"},null,{"description":"","name":"movies20","qid":"20","text":"Movies","type":"control_matrix"},{"name":"input21","qid":"21","text":"You liked Pulp Fiction, Inception","type":"control_text"},null,{"description":"","name":"bestRecommended","qid":"23","subLabel":"","text":"Best recommended Movie","type":"control_dropdown"},{"name":"thankYou","qid":"24","text":"Thank you very much for participating","type":"control_head"},{"name":"input25","qid":"25","text":"Submit for ending the poll and generating the amazon mechanical turk code","type":"control_text"},{"description":"","name":"theItems","qid":"26","text":"The items recommended to me matched my interests","type":"control_radio"},{"description":"","name":"someOf","qid":"27","text":"Some of the recommended items are familiar to me","type":"control_radio"},{"description":"","name":"theItems28","qid":"28","text":"The items recommended to me are novel","type":"control_radio"}]);}, 20);
+ </script>
+ 
+-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='poll_style.css') }}" />
++    <link rel=stylesheet type=
++            text/css href="{{ url_for('static', filename='poll_style.css') }}" />
+ <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/buttons/form-submit-button-simple_grey.css?3.3.14737"/>
+ </head>
+ <body>
+@@ -140,57 +141,39 @@
+         <div id="cid_4" class="form-input-wide jf-required">
+           <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
+             <tbody>
+-              <tr>
+-                <th style="border:none">
+-                   
+-                </th>
+-                <th scope="col" class="form-matrix-column-headers form-matrix-column_0">
+-                  <label id="label_4_col_0"> Description </label>
+-                </th>
+-                <th scope="col" class="form-matrix-column-headers form-matrix-column_1">
+-                  <label id="label_4_col_1"> Like </label>
+-                </th>
+-                <th scope="col" class="form-matrix-column-headers form-matrix-column_2">
+-                  <label id="label_4_col_2"> Dislike </label>
+-                </th>
+-                <th scope="col" class="form-matrix-column-headers form-matrix-column_3">
+-                  <label id="label_4_col_3"> Unknown  </label>
+-                </th>
+-              </tr>
+-              <tr>
+                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                   <label id="label_4_row_0"> The Shawshank Redemption </label>
+                 </th>
+-                <td style="text-align:center" class="form-matrix-values">
++                <td style="text-align" class="form-matrix-values">
+                  <!-- <input type="radio" id="input_4_0_0" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[0]" required value="Description" aria-labelledby="label_4 label_4_row_0 label_4_col_0" /> -->
+                 <p>Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency. </p>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_0_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[0]" required value="Like" aria-labelledby="label_4 label_4_row_0 label_4_col_1" />
++                  <label><input type="radio" id="input_4_0_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[0]" required value="Like" aria-labelledby="label_4 label_4_row_0 label_4_col_1" /> Like </label>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_0_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[0]" required value="Dislike" aria-labelledby="label_4 label_4_row_0 label_4_col_2" />
++                  <label><input type="radio" id="input_4_0_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[0]" required value="Dislike" aria-labelledby="label_4 label_4_row_0 label_4_col_2" /> Dislike </label>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_0_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[0]" required value="Unknown" aria-labelledby="label_4 label_4_row_0 label_4_col_3" />
++                  <input type="radio" id="input_4_0_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[0]" required value="Unknown" aria-labelledby="label_4 label_4_row_0 label_4_col_3" /> Unknown </label>
+                 </td>
+               </tr>
+               <tr>
+                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                   <label id="label_4_row_1"> Pulp Fiction </label>
+                 </th>
+-                <td style="text-align:center" class="form-matrix-values">
++                <td style="text-align:left" class="form-matrix-values">
+                   <!-- <input type="radio" id="input_4_1_0" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[1]" value="Description" aria-labelledby="label_4 label_4_row_1 label_4_col_0" /> -->
+                 <p>The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption. </p>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_1_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[1]" value="Like" aria-labelledby="label_4 label_4_row_1 label_4_col_1" />
++                 <label> <input type="radio" id="input_4_1_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[1]" value="Like" aria-labelledby="label_4 label_4_row_1 label_4_col_1" /> Like </label>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_1_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[1]" value="Dislike" aria-labelledby="label_4 label_4_row_1 label_4_col_2" />
++                 <label> <input type="radio" id="input_4_1_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[1]" value="Dislike" aria-labelledby="label_4 label_4_row_1 label_4_col_2" /> Dislike </label>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_1_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[1]" value="Unknown" aria-labelledby="label_4 label_4_row_1 label_4_col_3" />
++                 <label> <input type="radio" id="input_4_1_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[1]" value="Unknown" aria-labelledby="label_4 label_4_row_1 label_4_col_3" /> Unknown </label>
+                 </td>
+               </tr>
+               <tr>
+@@ -202,49 +185,49 @@
+                <p>In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker. </p>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_2_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[2]" value="Like" aria-labelledby="label_4 label_4_row_2 label_4_col_1" />
++                 <label> <input type="radio" id="input_4_2_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[2]" value="Like" aria-labelledby="label_4 label_4_row_2 label_4_col_1" /> Like </label>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_2_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[2]" value="Dislike" aria-labelledby="label_4 label_4_row_2 label_4_col_2" />
++                 <label> <input type="radio" id="input_4_2_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[2]" value="Dislike" aria-labelledby="label_4 label_4_row_2 label_4_col_2" /> Dislike </label>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_2_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[2]" value="Unknown" aria-labelledby="label_4 label_4_row_2 label_4_col_3" />
++                  <label><input type="radio" id="input_4_2_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[2]" value="Unknown" aria-labelledby="label_4 label_4_row_2 label_4_col_3" /> Unknown </label>
+                 </td>
+               </tr>
+               <tr>
+                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                   <label id="label_4_row_3"> Star Wars: Episode IX - The Rise of Skywalker </label>
+                 </th>
+-                <td style="text-align:center" class="form-matrix-values">
++                <td style="text-align:left" class="form-matrix-values">
+                  <!--  <input type="radio" id="input_4_3_0" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[3]" value="Like" aria-labelledby="label_4 label_4_row_3 label_4_col_0" /> -->
+-                <p>After Palpatine mysteriously returns, the Resistance faces the First Order once more in the final chapter of the Skywalker saga. </p>
++                <p class="customp">After Palpatine mysteriously returns, the Resistance faces the First Order once more in the final chapter of the Skywalker saga. </p>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_3_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[3]" value="Like" aria-labelledby="label_4 label_4_row_3 label_4_col_1" />
++                 <label> <input type="radio" id="input_4_3_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[3]" value="Like" aria-labelledby="label_4 label_4_row_3 label_4_col_1" /> Like </label>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_3_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[3]" value="Dislike" aria-labelledby="label_4 label_4_row_3 label_4_col_2" />
++                 <label> <input type="radio" id="input_4_3_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[3]" value="Dislike" aria-labelledby="label_4 label_4_row_3 label_4_col_2" /> Dislike </label>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_3_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[3]" value="Unknown" aria-labelledby="label_4 label_4_row_3 label_4_col_3" />
++                 <label> <input type="radio" id="input_4_3_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[3]" value="Unknown" aria-labelledby="label_4 label_4_row_3 label_4_col_3" /> Unknown </label>
+                 </td>
+               </tr>
+               <tr>
+                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                   <label id="label_4_row_4"> The Lion King </label>
+                 </th>
+-                <td style="text-align:center" class="form-matrix-values">
++                <td style="text-align:left" class="form-matrix-values">
+                 <!--   <input type="radio" id="input_4_4_0" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[4]" value="Like" aria-labelledby="label_4 label_4_row_4 label_4_col_0" /> -->
+                 <p>A Lion cub crown prince is tricked by a treacherous uncle into thinking he caused his father's death and flees into exile in despair, only to learn in adulthood his identity and his responsibilities. </p>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_4_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[4]" value="Like" aria-labelledby="label_4 label_4_row_4 label_4_col_1" />
++                 <label> <input type="radio" id="input_4_4_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[4]" value="Like" aria-labelledby="label_4 label_4_row_4 label_4_col_1" /> Like </label>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_4_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[4]" value="Dislike" aria-labelledby="label_4 label_4_row_4 label_4_col_2" />
++                 <label> <input type="radio" id="input_4_4_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[4]" value="Dislike" aria-labelledby="label_4 label_4_row_4 label_4_col_2" /> Dislike </label>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_4_4_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[4]" value="Unknown" aria-labelledby="label_4 label_4_row_4 label_4_col_3" />
++                 <label> <input type="radio" id="input_4_4_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[4]" value="Unknown" aria-labelledby="label_4 label_4_row_4 label_4_col_3" /> Unknown </label>
+                 </td>
+               </tr>
+             </tbody>
+@@ -281,7 +264,7 @@
+       <li class="form-line form-line-column form-col-1" data-type="control_text" id="id_21">
+         <div id="cid_21" class="form-input-wide">
+           <div id="text_21" class="form-html" data-component="text">
+-            <p style="text-align: left;">You liked Pulp Fiction, Inception</p>
++              <p style="text-align: left;">You liked <b>Pulp Fiction</b>, <b>Joker</b></p>
+           </div>
+         </div>
+       </li>
+@@ -294,23 +277,7 @@
+         <div id="cid_20" class="form-input-wide jf-required">
+           <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
+             <tbody>
+-              <tr>
+-                <th style="border:none">
+-                   
+-                </th>
+-                <th scope="col" class="form-matrix-column-headers form-matrix-column_0">
+-                  <label id="label_20_col_0"> Description </label>
+-                </th>
+-                <th scope="col" class="form-matrix-column-headers form-matrix-column_1">
+-                  <label id="label_20_col_1"> Trailer (click for watching) </label>
+-                </th>
+-                <th scope="col" class="form-matrix-column-headers form-matrix-column_2">
+-                  <label id="label_20_col_2"> Dislike </label>
+-                </th>
+-                <th scope="col" class="form-matrix-column-headers form-matrix-column_3">
+-                  <label id="label_20_col_3"> Like </label>
+-                </th>
+-              </tr>
++
+               <tr>
+                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                   <label id="label_20_row_0"> Prestige </label>
+@@ -323,10 +290,10 @@
+                   <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/ijXruSzfGEc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" value="Dislike" aria-labelledby="label_20 label_20_row_0 label_20_col_2" />
++                  <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" value="Like" aria-labelledby="label_20 label_20_row_0 label_20_col_2" />
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_0_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" value="Like" aria-labelledby="label_20 label_20_row_0 label_20_col_3" />
++                 <label> <input type="radio" id="input_20_0_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" value="Like" aria-labelledby="label_20 label_20_row_0 label_20_col_3" />
+                 </td>
+               </tr>
+               <tr>
+@@ -340,10 +307,10 @@
+                   <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/qh9yY7uk1Hg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_1_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" value="Dislike" aria-labelledby="label_20 label_20_row_1 label_20_col_2" />
++                  <label><input type="radio" id="input_20_1_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" value="Dislike" aria-labelledby="label_20 label_20_row_1 label_20_col_2" />
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_1_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" value="Like" aria-labelledby="label_20 label_20_row_1 label_20_col_3" />
++                  <label><input type="radio" id="input_20_1_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" value="Like" aria-labelledby="label_20 label_20_row_1 label_20_col_3" />
+                 </td>
+               </tr>
+               <tr>
+@@ -358,38 +325,37 @@
+         <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/zSWdZVtXT7E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_2_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" value="Dislike" aria-labelledby="label_20 label_20_row_2 label_20_col_2" />
++                 <label> <input type="radio" id="input_20_2_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" value="Dislike" aria-labelledby="label_20 label_20_row_2 label_20_col_2" />
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_2_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" value="Like" aria-labelledby="label_20 label_20_row_2 label_20_col_3" />
++                 <label> <input type="radio" id="input_20_2_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" value="Like" aria-labelledby="label_20 label_20_row_2 label_20_col_3" />
+                 </td>
+               </tr>
+               <tr>
+                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                   <label id="label_20_row_3"> Movie A </label>
+                 </th>
+-                <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_3_0" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" value="Description" aria-labelledby="label_20 label_20_row_3 label_20_col_0" />
++                <td style="text-align:left" class="form-matrix-values">
++                  <p>Description Movie A</p>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_3_1" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" value="Trailer (click for watching)" aria-labelledby="label_20 label_20_row_3 label_20_col_1" />
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_3_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" value="Dislike" aria-labelledby="label_20 label_20_row_3 label_20_col_2" />
++                 <label> <input type="radio" id="input_20_3_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" value="Dislike" aria-labelledby="label_20 label_20_row_3 label_20_col_2" />
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_3_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" value="Like" aria-labelledby="label_20 label_20_row_3 label_20_col_3" />
++                 <label> <input type="radio" id="input_20_3_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" value="Like" aria-labelledby="label_20 label_20_row_3 label_20_col_3" />
+                 </td>
+               </tr>
+               <tr>
+                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                   <label id="label_20_row_4"> Movie B </label>
+                 </th>
+-                <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_4_0" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[4]" value="Description" aria-labelledby="label_20 label_20_row_4 label_20_col_0" />
++                <td style="text-align:left" class="form-matrix-values">
++                       <p>Description Movie B</p>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_4_1" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[4]" value="Trailer (click for watching)" aria-labelledby="label_20 label_20_row_4 label_20_col_1" />
++
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+                   <input type="radio" id="input_20_4_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[4]" value="Dislike" aria-labelledby="label_20 label_20_row_4 label_20_col_2" />
+@@ -402,17 +368,16 @@
+                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                   <label id="label_20_row_5"> Movie C </label>
+                 </th>
+-                <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_5_0" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" value="Description" aria-labelledby="label_20 label_20_row_5 label_20_col_0" />
++                <td style="text-align:left" class="form-matrix-values">
++                    <p>Description Movie C</p>
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_5_1" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" value="Trailer (click for watching)" aria-labelledby="label_20 label_20_row_5 label_20_col_1" />
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_5_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_2" />
++                 <label> <input type="radio" id="input_20_5_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_2" />
+                 </td>
+                 <td style="text-align:center" class="form-matrix-values">
+-                  <input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" value="Like" aria-labelledby="label_20 label_20_row_5 label_20_col_3" />
++                  <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" value="Like" aria-labelledby="label_20 label_20_row_5 label_20_col_3" />
+                 </td>
+               </tr>
+             </tbody>
+@@ -611,6 +576,7 @@
+             <button id="input_2" type="submit" class="form-submit-button form-submit-button-simple_grey" data-component="button">
+               Submit
+             </button>
++
+           </div>
+         </div>
+       </li>
+@@ -622,4 +588,4 @@
+   </div>
+   <script>
+   //JotForm.showJotFormPowered = "new_footer";
+-  </script>
++  </script></form></body></html>
+\ No newline at end of file
+Index: templates/welcome.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/welcome.html	(date 1579973054600)
++++ templates/welcome.html	(date 1579973054600)
+@@ -0,0 +1,10 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <title>Title</title>
++</head>
++<body>
++
++</body>
++</html>
+\ No newline at end of file
+Index: static/poll_style.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- static/poll_style.css	(revision bd5ff4e6e97bf6ccee01b9876a2324b53b572581)
++++ static/poll_style.css	(date 1578864087829)
+@@ -1,4 +1,6 @@
+     .form-label-left{
++
++
+         width:150px;
+     }
+     .form-line{
+@@ -147,7 +149,7 @@
+ /* | */
+ .supernova .form-all,
+ .form-all {
+-  background-color: #ffffff;
++  background-color: #9a8bff;
+   border: 1px solid transparent;
+ }
+ .form-header-group {
+@@ -748,10 +750,10 @@
+     .supernova {
+       background-color: #ffffff;
+     }
+-    .supernova body {
++  /*.supernova body {
+       background: transparent;
+     }
+-
++   */
+     .form-textbox,
+     .form-textarea,
+     .form-radio-other-input,
+Index: templates/task_description.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/task_description.html	(date 1579973054616)
++++ templates/task_description.html	(date 1579973054616)
+@@ -0,0 +1,10 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <title>Title</title>
++</head>
++<body>
++
++</body>
++</html>
+\ No newline at end of file
+Index: templates/pref_movies.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/pref_movies.html	(date 1579973120038)
++++ templates/pref_movies.html	(date 1579973120038)
+@@ -0,0 +1,10 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <title>Title</title>
++</head>
++<body>
++
++</body>
++</html>
+\ No newline at end of file
+Index: templates/rec_movies.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/rec_movies.html	(date 1579973142452)
++++ templates/rec_movies.html	(date 1579973142452)
+@@ -0,0 +1,10 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <title>Title</title>
++</head>
++<body>
++
++</body>
++</html>
+\ No newline at end of file
+Index: templates/questionnaire.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/questionnaire.html	(date 1579973142418)
++++ templates/questionnaire.html	(date 1579973142418)
+@@ -0,0 +1,10 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <title>Title</title>
++</head>
++<body>
++
++</body>
++</html>
+\ No newline at end of file
+Index: static/form.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- static/form.css	(revision bd5ff4e6e97bf6ccee01b9876a2324b53b572581)
++++ static/form.css	(date 1579623995739)
+@@ -56,7 +56,6 @@
+ }
+ .supernova {
+   background-color: #ffffff;
+-  background-color: #f5f5f5;
+ }
+ .supernova body {
+   background-color: transparent;
+@@ -296,7 +295,7 @@
+ .form-checkbox-other-input,
+ .form-captcha input,
+ .form-spinner input {
+-  background-color: #ffffff;
++  background-color: #9a8bff;
+ }
+ [data-type="control_dropdown"] .form-input,
+ [data-type="control_dropdown"] .form-input-wide {
+@@ -626,4 +625,12 @@
+ }
+ /* | */
+ 
+-/*__INSPECT_SEPERATOR__*/
+\ No newline at end of file
++/*__INSPECT_SEPERATOR__*/
++
++  .p customp {
++   font-size: 40px;
++  }
++
++  label {
++    text-align: right;
++  }
+\ No newline at end of file
+Index: templates/submit.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- templates/submit.html	(date 1579973169893)
++++ templates/submit.html	(date 1579973169893)
+@@ -0,0 +1,10 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <title>Title</title>
++</head>
++<body>
++
++</body>
++</html>
+\ No newline at end of file

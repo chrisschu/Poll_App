@@ -4,15 +4,25 @@ import pymongo
 from flask import Flask, render_template, request
 from pymongo import *
 
-##from flask_wtf import Form
-
-
-##from flask_wtf import FlaskForm
-##from datetime import date
-##from wtforms.fields.html5 import DateField
-##from wtforms.fields.html5 import DateTimeField
-
 ## Author Christian Schuschnig
+
+pre_movie_0 = "X"
+pre_movie_1 = 'X'
+pre_movie_2 = 'X'
+pre_movie_3 = 'X'
+pre_movie_4 = 'X'
+
+suggested_movie_1 = 'X'
+suggested_movie_2 = 'X'
+suggested_movie_3 = 'X'
+suggested_movie_4 = 'X'
+suggested_movie_5 = 'X'
+suggested_movie_6 = 'X'
+
+favourite = 'X'
+poll_q1 = 'X'
+poll_q2 = 'X'
+poll_q3 = 'X'
 
 app = Flask(__name__)
 
@@ -46,13 +56,6 @@ def Movie_poll():
     return render_template('/Movie-Poll.html', thing_to_say='Click here to start')
 
 
-##@app.route("/db")
-## def home_page():
-##    online_users = mongo.db.users.find({"online": True})
-##    return render_template("index.html",
-##        online_users=online_users)
-
-
 @app.route('/my_form', methods=['POST'])
 ##old poll app, just for testing
 def my_form():
@@ -75,25 +78,68 @@ def my_form():
     return str(message)
 
 
-@app.route('/my_new_form', methods=['POST', 'GET'])
-def my_new_form():
-    ## Assignment of the resulted input of the html variables
+@app.route('/welcome.html')
+def welcome():
+    ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
+    return render_template('/welcome.html', thing_to_say='Click here to start')
+
+
+@app.route('/task_description.html')
+def task_description():
+    ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
+    return render_template('/task_description.html', thing_to_say='Click here to start')
+
+
+@app.route('/pref_movies.html', methods=['POST', 'GET'])
+def pref_movies():
+    global pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4
 
     pre_movie_0 = str(request.form.get('q4_overallSatisfaction[0]'))
     pre_movie_1 = str(request.form.get('q4_overallSatisfaction[1]'))
     pre_movie_2 = str(request.form.get('q4_overallSatisfaction[2]'))
     pre_movie_3 = str(request.form.get('q4_overallSatisfaction[3]'))
     pre_movie_4 = str(request.form.get('q4_overallSatisfaction[4]'))
+
+    return render_template('/pref_movies.html', thing_to_say='Click here to start')
+
+
+@app.route('/rec_movies.html', methods=['POST', 'GET'])
+def rec_movies():
+    global suggested_movie_1, suggested_movie_2, suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, favourite
     suggested_movie_1 = str(request.form.get('q20_movies20[0]'))
     suggested_movie_2 = str(request.form.get('q20_movies20[1]'))
     suggested_movie_3 = str(request.form.get('q20_movies20[2]'))
     suggested_movie_4 = str(request.form.get('q20_movies20[3]'))
     suggested_movie_5 = str(request.form.get('q20_movies20[4]'))
     suggested_movie_6 = str(request.form.get('q20_movies20[5]'))
+
     favourite = str(request.form.get('q23_bestRecommended'))
+
+    return render_template('/rec_movies.html', thing_to_say='Click here to start')
+
+
+@app.route('/questionnaire.html')
+def questionnaire():
+
+
     poll_q1 = str(request.form.get('q26_theItems'))
     poll_q2 = str(request.form.get('q27_someOf'))
     poll_q3 = (request.form.get('q28_theItems28'))
+    return render_template('/questionnaire.html', thing_to_say='Click here to start')
+
+
+@app.route('/submit.html')
+def submit():
+
+    return render_template('/submit.html', thing_to_say='Click here to start')
+
+
+@app.route('/my_new_form', methods=['POST', 'GET'])
+def my_new_form():
+    ## Assignment of the resulted input of the html variables
+
+
+
     date_page_1 = datetime.datetime.utcnow()
     date_page_final = datetime.datetime.utcnow()
 
@@ -105,29 +151,29 @@ def my_new_form():
     return "Db entry successful"
 
 
-def save(pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, suggested_movie_1, suggested_movie_2,
-         suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, favourite, poll_q1, poll_q2,
+def save(pre_movie_0_x, pre_movie_1_x, pre_movie_2_x, pre_movie_3_x, pre_movie_4_x, suggested_movie_1_x, suggested_movie_2_x,
+         suggested_movie_3_x, suggested_movie_4_x, suggested_movie_5_x, suggested_movie_6_x, favourite_x, poll_q1_x, poll_q_x2,
          poll_q3, date_page_1, date_page_final):
     """
     Saving in MongoDB
     """
 
     new = {
-        "pre_movie_0": pre_movie_0,
-        "pre_movie_1": pre_movie_1,
-        "pre_movie_2": pre_movie_2,
-        "pre_movie_3": pre_movie_3,
-        "pre_movie_4": pre_movie_4,
-        "suggested_movie_1": suggested_movie_1,
-        "suggested_movie_2": suggested_movie_2,
-        "suggested_movie_3": suggested_movie_3,
-        "suggested_movie_4": suggested_movie_4,
-        "suggested_movie_5": suggested_movie_5,
-        "suggested_movie_6": suggested_movie_6,
-        "favourite": favourite,
-        "poll_q1": poll_q1,
-        "poll_q2": poll_q2,
-        "poll_q3": poll_q3,
+        "pre_movie_0": pre_movie_0_x,
+        "pre_movie_1": pre_movie_1_x,
+        "pre_movie_2": pre_movie_2_x,
+        "pre_movie_3": pre_movie_3_x,
+        "pre_movie_4": pre_movie_4_x,
+        "suggested_movie_1": suggested_movie_1_x,
+        "suggested_movie_2": suggested_movie_2_x,
+        "suggested_movie_3": suggested_movie_3_x,
+        "suggested_movie_4": suggested_movie_4_x,
+        "suggested_movie_5": suggested_movie_5_x,
+        "suggested_movie_6": suggested_movie_6_x,
+        "favourite": favourite_x,
+        "poll_q1": poll_q1_x,
+        "poll_q2": poll_q2_x,
+        "poll_q3": poll_q3_x,
         "date_page_1": date_page_1,
         "date_page_final": date_page_final,
     }

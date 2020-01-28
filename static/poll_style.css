@@ -19,7 +19,7 @@
     .form-all{
         margin:0px auto;
         padding-top:0px;
-        width:650px;
+        width:1000px;
         color:#000000 !important;
         font-family:'Roboto';
         font-size:14px;
@@ -696,7 +696,7 @@ li[data-type="control_image"] img {
     }
 
     .form-all {
-      width: 650px;
+      width: 960px;
     }
 
     .form-label-left,
