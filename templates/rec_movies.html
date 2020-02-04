@@ -31,7 +31,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
 <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/buttons/form-submit-button-simple_grey.css?3.3.14737"/>
 </head>
 <body>
-<form class="myForm" method="POST" enctype="application/x-www-form-urlencoded" action="{{ url_for('my_new_form') }}">
+<form class="myForm" method="POST" enctype="application/x-www-form-urlencoded" action="{{ url_for('rec_movies') }}">
  <input type="hidden" name="formID" value="200006188570347" />
   <input type="hidden" id="JWTContainer" value="" />
   <input type="hidden" id="cardinalOrderNumber" value="" />
@@ -79,10 +79,10 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                   <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/ijXruSzfGEc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                  <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" value="Like" aria-labelledby="label_20 label_20_row_0 label_20_col_2" /> Dislike </label>
+                  <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" required value="Like" aria-labelledby="label_20 label_20_row_0 label_20_col_2" /> Like </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_20_0_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" value="Like" aria-labelledby="label_20 label_20_row_0 label_20_col_3" /> Like </label>
+                 <label> <input type="radio" id="input_20_0_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" required value="Dislike" aria-labelledby="label_20 label_20_row_0 label_20_col_3" /> Dislike </label>
                 </td>
               </tr>
               <tr>
@@ -96,10 +96,10 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                   <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/qh9yY7uk1Hg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                    <label><input type="radio" id="input_20_1_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" value="Dislike" aria-labelledby="label_20 label_20_row_1 label_20_col_2" /> Dislike </label>
+                    <label><input type="radio" id="input_20_1_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" required value="Like" aria-labelledby="label_20 label_20_row_1 label_20_col_2" /> Like </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                  <label><input type="radio" id="input_20_1_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" value="Like" aria-labelledby="label_20 label_20_row_1 label_20_col_3" /> Like </label>
+                  <label><input type="radio" id="input_20_1_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" required value="Dislike" aria-labelledby="label_20 label_20_row_1 label_20_col_3" /> Dislike </label>
                 </td>
               </tr>
               <tr>
@@ -114,10 +114,10 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
         <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/zSWdZVtXT7E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_20_2_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" value="Dislike" aria-labelledby="label_20 label_20_row_2 label_20_col_2" /> Dislike </label>
+                 <label> <input type="radio" id="input_20_2_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" required value="Like" aria-labelledby="label_20 label_20_row_2 label_20_col_2" /> Like </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_20_2_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" value="Like" aria-labelledby="label_20 label_20_row_2 label_20_col_3" /> Like </label>
+                 <label> <input type="radio" id="input_20_2_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" required value="Dislike" aria-labelledby="label_20 label_20_row_2 label_20_col_3" /> Dislike </label>
                 </td>
               </tr>
               <tr>
@@ -130,10 +130,10 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                 <td style="text-align:center" class="form-matrix-values">
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_20_3_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" value="Dislike" aria-labelledby="label_20 label_20_row_3 label_20_col_2" /> Dislike </label>
+                 <label> <input type="radio" id="input_20_3_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" required value="Like" aria-labelledby="label_20 label_20_row_3 label_20_col_2" /> Like </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_20_3_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" value="Like" aria-labelledby="label_20 label_20_row_3 label_20_col_3" /> Like </label>
+                 <label> <input type="radio" id="input_20_3_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" required value="Dislike" aria-labelledby="label_20 label_20_row_3 label_20_col_3" /> Dislike </label>
                 </td>
               </tr>
               <tr>
@@ -147,10 +147,10 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
 
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                  <input type="radio" id="input_20_4_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[4]" value="Dislike" aria-labelledby="label_20 label_20_row_4 label_20_col_2" /> Dislike </label>
+                  <input type="radio" id="input_20_4_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[4]" required value="Like" aria-labelledby="label_20 label_20_row_4 label_20_col_2" /> Like </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                  <input type="radio" id="input_20_4_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[4]" value="Like" aria-labelledby="label_20 label_20_row_4 label_20_col_3" /> Like </label>
+                  <input type="radio" id="input_20_4_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[4]" required value="Dislike" aria-labelledby="label_20 label_20_row_4 label_20_col_3" /> Dislike </label>
                 </td>
               </tr>
               <tr>
@@ -163,10 +163,10 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                 <td style="text-align:center" class="form-matrix-values">
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_20_5_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_2" /> Dislike </label>
+                 <label> <input type="radio" id="input_20_5_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" required value="Like" aria-labelledby="label_20 label_20_row_5 label_20_col_2" /> Like </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                  <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" value="Like" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Like </label>
+                  <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" required value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Dislike </label>
                 </td>
               </tr>
             </tbody>
@@ -189,15 +189,10 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
       </li>
       <li id="cid_15" class="form-input-wide" data-type="control_pagebreak">
         <div class="form-pagebreak" data-component="pagebreak">
-          <div class="form-pagebreak-back-container">
-            <button id="form-pagebreak-back_15" type="button" class="form-pagebreak-back  form-submit-button-simple_grey" data-component="pagebreak-back">
-              Back
-            </button>
-          </div>
           <div class="form-pagebreak-next-container">
-             <a href="questionnaire.html"><button id="form-pagebreak-next_15" type="button" class="form-pagebreak-next  form-submit-button-simple_grey" data-component="pagebreak-next">
+             <button class="form-pagebreak-next  form-submit-button-simple_grey" type="submit">
               Next
-             </button></a>
+             </button>
           </div>
           <div style="clear:both" class="pageInfo form-sub-label" id="pageInfo_15">
           </div>

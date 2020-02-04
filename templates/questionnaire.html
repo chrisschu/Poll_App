@@ -36,7 +36,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
   <input type="hidden" id="JWTContainer" value="" />
   <input type="hidden" id="cardinalOrderNumber" value="" />
 
-<form class="myForm" method="POST" enctype="application/x-www-form-urlencoded" action="{{ url_for('my_new_form') }}">
+<form class="myForm" method="POST" enctype="application/x-www-form-urlencoded" action="{{ url_for('questionnaire') }}">
   <div role="main" class="form-all">
       <li id="cid_13" class="form-input-wide" data-type="control_head">
         <div class="form-header-group ">
@@ -160,15 +160,10 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
       </li>
       <li id="cid_16" class="form-input-wide" data-type="control_pagebreak">
         <div class="form-pagebreak" data-component="pagebreak">
-          <div class="form-pagebreak-back-container">
-            <button id="form-pagebreak-back_16" type="button" class="form-pagebreak-back  form-submit-button-simple_grey" data-component="pagebreak-back">
-              Back
-            </button>
-          </div>
           <div class="form-pagebreak-next-container">
-            <a href="submit.html"> <button id="form-pagebreak-next_16" type="button" class="form-pagebreak-next  form-submit-button-simple_grey" data-component="pagebreak-next">
+             <button class="form-pagebreak-next  form-submit-button-simple_grey" type="submit">
               Next
-            </button></a>
+             </button>
           </div></div>
           </div>
           <div style="clear:both" class="pageInfo form-sub-label" id="pageInfo_16">
