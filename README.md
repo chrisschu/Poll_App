@@ -1,8 +1,5 @@
 # Poll App
 
-
-This is a simple polling app. 
-
 LAST CHANGE: 09.02.2020
 
     - Star Icon added
@@ -10,7 +7,7 @@ LAST CHANGE: 09.02.2020
         User A gets List 1, User B gets List 2, User C gets List 1, and so on....
 
 The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
-It contains a simple questionnaire which results will be inserted into the database.
+It contains a questionnaire which results will be inserted into the database.
  
 At the moment this app offers only insertion, not viewing the database. 
 
