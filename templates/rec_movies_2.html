@@ -31,138 +31,170 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
 <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/buttons/form-submit-button-simple_grey.css?3.3.14737"/>
 </head>
 <body>
-<form class="myForm" method="POST" enctype="application/x-www-form-urlencoded" action="{{ url_for('pref_movies') }}">
+<form class="myForm" method="POST" enctype="application/x-www-form-urlencoded" action="{{ url_for('rec_movies_2') }}">
  <input type="hidden" name="formID" value="200006188570347" />
   <input type="hidden" id="JWTContainer" value="" />
   <input type="hidden" id="cardinalOrderNumber" value="" />
 
-<div role="main" class="form-all">
+  <div role="main" class="form-all">
       <li id="cid_13" class="form-input-wide" data-type="control_head">
         <div class="form-header-group ">
           <div class="header-text httal htvam">
             <h2 id="header_13" class="form-header" data-component="header">
-              Preferences
+              Recommended Movies
             </h2>
           </div>
         </div>
       </li>
 
-      <li class="form-line" data-type="control_text" id="id_18">
-        <div id="cid_18" class="form-input-wide">
-          <div id="text_18" class="form-html" data-component="text">
-            <p>Instruction:</p>
+      <li class="form-line form-line-column form-col-1" data-type="control_text" id="id_21">
+        <div id="cid_21" class="form-input-wide">
+          <div id="text_21" class="form-html" data-component="text">
+              <p>Instruction:</p>
             <p>Fill in every row and rate the movie with 'Like', 'Dislike' or 'Unknown'.</p>
-           <p> </p>
+              <p style="text-align: left;">You liked <b>Pulp Fiction</b>, <b>Joker</b></p>
+
           </div>
         </div>
       </li>
-      <li class="form-line jf-required" data-type="control_matrix" id="id_4">
-        <label class="form-label form-label-top" id="label_4" for="input_4">
+      <li class="form-line jf-required" data-type="control_matrix" id="id_20">
+        <label class="form-label form-label-top" id="label_20" for="input_20">
+          12 Movies
+          <span class="form-required">
+          </span>
         </label>
-        <div id="cid_4" class="form-input-wide jf-required">
+        <div id="cid_20" class="form-input-wide jf-required">
           <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
             <tbody>
+
+              <tr>
                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_4_row_0"> The Shawshank Redemption </label>
+                  <label id="label_20_row_0"> Prestige </label>
                 </th>
                 <td style="text-align:left" class="form-matrix-values">
-                 <!-- <input type="radio" id="input_4_0_0" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[0]" required value="Description" aria-labelledby="label_4 label_4_row_0 label_4_col_0" /> -->
-                <p>Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency. </p>
+                  <p> After a tragic accident, two stage magicians engage in a battle to create the ultimate illusion while sacrificing everything they have to outwit each other.  </p>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                  <label><input type="radio" id="input_4_0_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[0]" required value="Like" aria-labelledby="label_4 label_4_row_0 label_4_col_1" /> Like </label>
+                  <!-- <input type="radio" id="input_20_0_1" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" value="Trailer (click for watching)" aria-labelledby="label_20 label_20_row_0 label_20_col_1" /> -->
+                  <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/ijXruSzfGEc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                  <label><input type="radio" id="input_4_0_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[0]" required value="Dislike" aria-labelledby="label_4 label_4_row_0 label_4_col_2" /> Dislike </label>
+                  <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" required value="Like" aria-labelledby="label_20 label_20_row_0 label_20_col_2" /> Like </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                  <input type="radio" id="input_4_0_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[0]" required value="Unknown" aria-labelledby="label_4 label_4_row_0 label_4_col_3" /> Unknown </label>
+                 <label> <input type="radio" id="input_20_0_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" required value="Dislike" aria-labelledby="label_20 label_20_row_0 label_20_col_3" /> Dislike </label>
                 </td>
               </tr>
               <tr>
                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_4_row_1"> Pulp Fiction </label>
+                  <label id="label_20_row_1"> Jumanji: Welcome </label>
                 </th>
                 <td style="text-align:left" class="form-matrix-values">
-                  <!-- <input type="radio" id="input_4_1_0" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[1]" value="Description" aria-labelledby="label_4 label_4_row_1 label_4_col_0" /> -->
-                <p>The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption. </p>
+                  <p>Four teenagers are sucked into a magical video game, and the only way they can escape is to work together to finish the game.</p>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_4_1_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[1]" required value="Like" aria-labelledby="label_4 label_4_row_1 label_4_col_1" /> Like </label>
+                  <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/qh9yY7uk1Hg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_4_1_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[1]" required value="Dislike" aria-labelledby="label_4 label_4_row_1 label_4_col_2" /> Dislike </label>
+                    <label><input type="radio" id="input_20_1_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" required value="Like" aria-labelledby="label_20 label_20_row_1 label_20_col_2" /> Like </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_4_1_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[1]" required value="Unknown" aria-labelledby="label_4 label_4_row_1 label_4_col_3" /> Unknown </label>
+                  <label><input type="radio" id="input_20_1_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" required value="Dislike" aria-labelledby="label_20 label_20_row_1 label_20_col_3" /> Dislike </label>
                 </td>
               </tr>
               <tr>
                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_4_row_2"> Joker </label>
+                  <label id="label_20_row_2"> Interstellar </label>
                 </th>
                 <td style="text-align:left" class="form-matrix-values">
-                 <!-- <input type="radio" id="input_4_2_0" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[2]" value="Like" aria-labelledby="label_4 label_4_row_2 label_4_col_0" /> -->
-               <p>In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker. </p>
+                <p> A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.  </p>
+
+                </td>
+                <td style="text-align:left" class="form-matrix-values">
+        <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/zSWdZVtXT7E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_4_2_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[2]" required value="Like" aria-labelledby="label_4 label_4_row_2 label_4_col_1" /> Like </label>
+                 <label> <input type="radio" id="input_20_2_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" required value="Like" aria-labelledby="label_20 label_20_row_2 label_20_col_2" /> Like </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_4_2_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[2]" required value="Dislike" aria-labelledby="label_4 label_4_row_2 label_4_col_2" /> Dislike </label>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                  <label><input type="radio" id="input_4_2_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[2]" required value="Unknown" aria-labelledby="label_4 label_4_row_2 label_4_col_3" /> Unknown </label>
+                 <label> <input type="radio" id="input_20_2_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" required value="Dislike" aria-labelledby="label_20 label_20_row_2 label_20_col_3" /> Dislike </label>
                 </td>
               </tr>
               <tr>
                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_4_row_3"> Star Wars: Episode IX - The Rise of Skywalker </label>
+                  <label id="label_20_row_3"> Movie A </label>
                 </th>
                 <td style="text-align:left" class="form-matrix-values">
-                 <!--  <input type="radio" id="input_4_3_0" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[3]" value="Like" aria-labelledby="label_4 label_4_row_3 label_4_col_0" /> -->
-                <p class="customp">After Palpatine mysteriously returns, the Resistance faces the First Order once more in the final chapter of the Skywalker saga. </p>
+                  <p>Description Movie A</p>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_4_3_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[3]" required value="Like" aria-labelledby="label_4 label_4_row_3 label_4_col_1" /> Like </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_4_3_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[3]" required value="Dislike" aria-labelledby="label_4 label_4_row_3 label_4_col_2" /> Dislike </label>
+                 <label> <input type="radio" id="input_20_3_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" required value="Like" aria-labelledby="label_20 label_20_row_3 label_20_col_2" /> Like </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_4_3_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[3]" required value="Unknown" aria-labelledby="label_4 label_4_row_3 label_4_col_3" /> Unknown </label>
+                 <label> <input type="radio" id="input_20_3_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" required value="Dislike" aria-labelledby="label_20 label_20_row_3 label_20_col_3" /> Dislike </label>
                 </td>
               </tr>
               <tr>
                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_4_row_4"> The Lion King </label>
+                  <label id="label_20_row_4"> Movie B </label>
                 </th>
                 <td style="text-align:left" class="form-matrix-values">
-                <!--   <input type="radio" id="input_4_4_0" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[4]" value="Like" aria-labelledby="label_4 label_4_row_4 label_4_col_0" /> -->
-                <p>A Lion cub crown prince is tricked by a treacherous uncle into thinking he caused his father's death and flees into exile in despair, only to learn in adulthood his identity and his responsibilities. </p>
+                       <p>Description Movie B</p>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_4_4_1" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[4]" required value="Like" aria-labelledby="label_4 label_4_row_4 label_4_col_1" /> Like </label>
+
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_4_4_2" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[4]" required value="Dislike" aria-labelledby="label_4 label_4_row_4 label_4_col_2" /> Dislike </label>
+                  <input type="radio" id="input_20_4_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[4]" required value="Like" aria-labelledby="label_20 label_20_row_4 label_20_col_2" /> Like </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                 <label> <input type="radio" id="input_4_4_3" class="form-radio validate[required, requireEveryRow]" name="q4_overallSatisfaction[4]" required value="Unknown" aria-labelledby="label_4 label_4_row_4 label_4_col_3" /> Unknown </label>
+                  <input type="radio" id="input_20_4_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[4]" required value="Dislike" aria-labelledby="label_20 label_20_row_4 label_20_col_3" /> Dislike </label>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                  <label id="label_20_row_5"> Movie C </label>
+                </th>
+                <td style="text-align:left" class="form-matrix-values">
+                    <p>Description Movie C</p>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                 <label> <input type="radio" id="input_20_5_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" required value="Like" aria-labelledby="label_20 label_20_row_5 label_20_col_2" /> Like </label>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                  <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" required value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Dislike </label>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </li>
-      <li id="cid_9" class="form-input-wide" data-type="control_pagebreak">
+      <li class="form-line" data-type="control_dropdown" id="id_23">
+        <label class="form-label form-label-top form-label-auto" id="label_23" for="input_23"> favourite movie </label>
+        <div id="cid_23" class="form-input-wide">
+          <select class="form-dropdown" id="input_23" name="q23_bestRecommended" style="width:150px" data-component="dropdown" aria-labelledby="label_23">
+            <option value="">  </option>
+            <option value="Prestige "> Prestige </option>
+            <option value="Jumanji: Welcome to the Jungle"> Jumanji: Welcome to the Jungle </option>
+            <option value="Interstellar"> Interstellar</option>
+            <option value="Movie A"> Movie A </option>
+            <option value="Movie B"> Movie B</option>
+            <option value="Movie C"> Movie C</option>
+          </select>
+        </div>
+      </li>
+      <li id="cid_15" class="form-input-wide" data-type="control_pagebreak">
         <div class="form-pagebreak" data-component="pagebreak">
           <div class="form-pagebreak-next-container">
              <button class="form-pagebreak-next  form-submit-button-simple_grey" type="submit">
               Next
              </button>
           </div>
-          <div style="clear:both" class="pageInfo form-sub-label" id="pageInfo_9">
+          <div style="clear:both" class="pageInfo form-sub-label" id="pageInfo_15">
           </div>
         </div>
       </li>
