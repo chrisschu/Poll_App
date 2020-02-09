@@ -32,6 +32,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
 </head>
 <body>
 <form class="myForm" method="POST" enctype="application/x-www-form-urlencoded" action="{{ url_for('rec_movies_1') }}">
+    <fieldset>
  <input type="hidden" name="formID" value="200006188570347" />
   <input type="hidden" id="JWTContainer" value="" />
   <input type="hidden" id="cardinalOrderNumber" value="" />
@@ -50,17 +51,24 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
       <li class="form-line form-line-column form-col-1" data-type="control_text" id="id_21">
         <div id="cid_21" class="form-input-wide">
           <div id="text_21" class="form-html" data-component="text">
-              <p>Instruction:</p>
-            <p>Fill in every row and rate the movie with 'Like', 'Dislike' or 'Unknown'.</p>
-              <p style="text-align: left;">You liked <b>Pulp Fiction</b>, <b>Joker</b></p>
-              <p>One favourite movie has to be selected </p>
+            <p>Fill in every row and rate the movie with 'Like' or 'Dislike'.
+              <br>At least pick one favourite movie with the star icon</p>
+              <p></p>
 
+              <p><b>You liked:</b></p>
+                <table class="form-matrix-table-liked">
+                    <tbody>
+                        <tr>
+                            <td>Joker</td></tr>
+                        <tr>
+                            <td>Pulp Fiction</td></tr>
+                    </tbody>
+                </table>
           </div>
         </div>
       </li>
       <li class="form-line jf-required" data-type="control_matrix" id="id_20">
         <label class="form-label form-label-top" id="label_20" for="input_20">
-          10 Movies
           <span class="form-required">
           </span>
         </label>
@@ -85,7 +93,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                  <label> <input type="radio" id="input_20_0_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" required value="Dislike" aria-labelledby="label_20 label_20_row_0 label_20_col_3" /> Dislike </label>
                 </td>
                     <td scope="row" style="text-align:center" class="form-matrix-values">
-                   <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q23_bestRecommended" required value="Interstellar"/> my favourite movie </label>
+                      <input type="radio" class="radio_item" value="Interstellar" name="q23_bestRecommended" id="radio1">
+                         <label class="label_item" for="radio1"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
                 </td>
               </tr>
               <tr>
@@ -105,7 +114,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                   <label><input type="radio" id="input_20_1_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" required value="Dislike" aria-labelledby="label_20 label_20_row_1 label_20_col_3" /> Dislike </label>
                 </td>
                     <td scope="row" style="text-align:center" class="form-matrix-values">
-                   <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q23_bestRecommended" required value="Django Unchained"/> my favourite movie </label>
+                      <input type="radio" class="radio_item" value="Django Unchained " name="q23_bestRecommended" id="radio2">
+                         <label class="label_item" for="radio2"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
                 </td>
               </tr>
               <tr>
@@ -125,7 +135,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                  <label> <input type="radio" id="input_20_2_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" required value="Dislike" aria-labelledby="label_20 label_20_row_2 label_20_col_3" /> Dislike </label>
                 </td>
                 <td scope="row" style="text-align:center" class="form-matrix-values">
-                   <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q23_bestRecommended" required value="Prestige"/> my favourite movie </label>
+                     <input type="radio" class="radio_item" value="Prestige" name="q23_bestRecommended" id="radio3">
+                        <label class="label_item" for="radio3"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"></label>
                 </td>
               </tr>
               <tr>
@@ -145,7 +156,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                  <label> <input type="radio" id="input_20_3_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" required value="Dislike" aria-labelledby="label_20 label_20_row_3 label_20_col_3" /> Dislike </label>
                 </td>
                 <td scope="row" style="text-align:center" class="form-matrix-values">
-                   <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q23_bestRecommended" required value="Batman Begins"/> my favourite movie </label>
+                       <input type="radio" class="radio_item" value="Batman Begins" name="q23_bestRecommended" id="radio4">
+                            <label class="label_item" for="radio4"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"></label>
                 </td>
               </tr>
               <tr>
@@ -165,7 +177,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                   <input type="radio" id="input_20_4_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[4]" required value="Dislike" aria-labelledby="label_20 label_20_row_4 label_20_col_3" /> Dislike </label>
                 </td>
                                       <td scope="row" style="text-align:center" class="form-matrix-values">
-                   <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q23_bestRecommended" required value="Shutter Island"/> my favourite movie </label>
+                       <input type="radio" class="radio_item" value="Shutter Island" name="q23_bestRecommended" id="radio5">
+                        <label class="label_item" for="radio5"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
                 </td>
               </tr>
               <tr>
@@ -185,7 +198,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                   <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" required value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Dislike </label>
                 </td>
                                       <td scope="row" style="text-align:center" class="form-matrix-values">
-                   <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q23_bestRecommended" required value="Kill Bill: Vol. 1"/> my favourite movie </label>
+                      <input type="radio" class="radio_item" value="Kill Bill: Vol. 1" name="q23_bestRecommended" id="radio6">
+                        <label class="label_item" for="radio6"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"></label>
                 </td>
               </tr>
              <tr>
@@ -205,7 +219,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                   <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[6]" required value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Dislike </label>
                 </td>
                                       <td scope="row" style="text-align:center" class="form-matrix-values">
-                   <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q23_bestRecommended" required value="The Wolf of Wall Street"/> my favourite movie </label>
+                       <input type="radio" class="radio_item" value="The Wolf of Wall Street" name="q23_bestRecommended" id="radio7">
+    <label class="label_item" for="radio7"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
                 </td>
               </tr>
              <tr>
@@ -225,7 +240,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                   <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[7]" required value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Dislike </label>
                 </td>
                                       <td scope="row" style="text-align:center" class="form-matrix-values">
-                   <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q23_bestRecommended" required value="Terminator 2: Judgment Day"/> my favourite movie </label>
+                      <input type="radio" class="radio_item" value="Terminator 2: Judgment Day" name="q23_bestRecommended" id="radio8">
+                        <label class="label_item" for="radio8"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
                 </td>
               </tr>
              <tr>
@@ -245,7 +261,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                   <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[8]" required value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Dislike </label>
                 </td>
                                       <td scope="row" style="text-align:center" class="form-matrix-values">
-                   <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q23_bestRecommended" required value="Up"/> my favourite movie </label>
+                       <input type="radio" class="radio_item" value="Up" name="q23_bestRecommended" id="radio9">
+    <label class="label_item" for="radio9"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
                 </td>
               </tr>
              <tr>
@@ -265,7 +282,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                   <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" required value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Dislike </label>
                 </td>
                                       <td scope="row" style="text-align:center" class="form-matrix-values">
-                   <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q23_bestRecommended" required value="The Silence of the Lambs "/> my favourite movie </label>
+                       <input type="radio" class="radio_item" value="The Silence of the Lambs " name="q23_bestRecommended" id="radio10">
+                        <label class="label_item" for="radio10"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"></label>
                 </td>
               </tr>
             </tbody>
@@ -286,11 +304,9 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
     </ul>
 
 </div>
+</fieldset>
 </form>
 </body>
 </html></title>
 </head>
-<body>
-
-</body>
 </html>

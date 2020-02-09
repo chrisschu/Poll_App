@@ -390,13 +390,14 @@ li.form-line-error .form-error-message img {
 /*----- Matrix Field -----*/
 
 .form-matrix-row-headers {
-    font-size: 1.250em; /*11px*/
+    font-size: 1.050em; /*11px*/
 	font-weight: bold;
 }
 
 .form-matrix-table {
 	font-size: 0.800em;
 }
+
 .form-matrix-column-headers {
 	font-size:0.786em; /*11px*/
 	font-weight: normal;
@@ -640,3 +641,27 @@ li.form-line-error .form-error-message img {
         }
 }
 
+table.form-matrix-table-liked {
+  font-family: Georgia, serif;
+  border: 1px solid #000000;
+  background-color: #eee;
+  width: 50%;
+  text-align: left;
+}
+table.form-matrix-table-liked td, table.form-matrix-table-liked th {
+}
+table.form-matrix-table-liked thead {
+  }
+
+  /*______for the star image______*/
+    .radio_item{
+    display: none !important;
+    }
+
+    .label_item {
+    opacity: 0.5;
+    }
+
+    .radio_item:checked + label {
+    opacity: 5;
+    }

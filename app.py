@@ -1,5 +1,4 @@
 import datetime
-from random import *
 
 import pymongo
 from flask import Flask, render_template, request, url_for, redirect
@@ -11,7 +10,7 @@ from pymongo import *
 
 ## first decleration of global variables
 
-#variable which user gets
+# variable which user gets
 form = ''
 
 # variable for timestamps
@@ -38,6 +37,9 @@ favourite = 'X'
 poll_q1 = 'X'
 poll_q2 = 'X'
 poll_q3 = 'X'
+
+#this variable is roundrobin princible, first user gets page 1, second user gets page 2, and so on
+page = 1
 
 app = Flask(__name__)
 
@@ -110,7 +112,7 @@ def task_description():
 
 @app.route('/pref_movies.html', methods=['POST', 'GET'])
 def pref_movies():
-    global pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, date_page_pref_movie_2
+    global pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, date_page_pref_movie_2, page
 
     date_page_pref_movie_2 = datetime.datetime.utcnow()
 
@@ -122,7 +124,7 @@ def pref_movies():
 
     if request.method == 'POST':
         # will be exectued after form pref_movie_form is commited
-        if random() >= 0.5:
+        if page == 1:
             # 50 per cent chance to have the first list with 10 objects
             return redirect(url_for('rec_movies_1'))
         else:
@@ -135,8 +137,8 @@ def pref_movies():
 @app.route('/rec_movies_1.html', methods=['POST', 'GET'])
 def rec_movies_1():
     # list with 10 objects
-    global suggested_movie_1, suggested_movie_2, suggested_movie_3, suggested_movie_4, suggested_movie_5,\
-        suggested_movie_6, favourite, date_page_rec_movie_3
+    global suggested_movie_1, suggested_movie_2, suggested_movie_3, suggested_movie_4, suggested_movie_5, \
+        suggested_movie_6, favourite, date_page_rec_movie_3, page
 
     date_page_rec_movie_3 = datetime.datetime.utcnow()
 
@@ -150,6 +152,8 @@ def rec_movies_1():
     favourite = str(request.form.get('q23_bestRecommended'))
 
     if request.method == 'POST':
+        #next user gets page rec_movies_2.html
+        page = 2
         return redirect(url_for('questionnaire'))
 
     return render_template('/rec_movies_1.html', thing_to_say='Click here to start')
@@ -159,7 +163,7 @@ def rec_movies_1():
 def rec_movies_2():
     # list with 10 objects + 2 additional objects
     global suggested_movie_1, suggested_movie_2, suggested_movie_3, suggested_movie_4, suggested_movie_5, \
-        suggested_movie_6, favourite, date_page_rec_movie_3
+        suggested_movie_6, favourite, date_page_rec_movie_3, page
 
     date_page_rec_movie_3 = datetime.datetime.utcnow()
 
@@ -173,6 +177,8 @@ def rec_movies_2():
     favourite = str(request.form.get('q23_bestRecommended'))
 
     if request.method == 'POST':
+        # next user gets page rec_movies_1.html
+        page = 1
         return redirect(url_for('questionnaire'))
 
     return render_template('/rec_movies_2.html', thing_to_say='Click here to start')
@@ -223,7 +229,8 @@ def my_new_form():
 
 
 def save(pre_movie_0_x, pre_movie_1_x, pre_movie_2_x, pre_movie_3_x, pre_movie_4_x, suggested_movie_1_x,
-         suggested_movie_2_x, suggested_movie_3_x, suggested_movie_4_x, suggested_movie_5_x, suggested_movie_6_x, favourite_x, poll_q1_x,
+         suggested_movie_2_x, suggested_movie_3_x, suggested_movie_4_x, suggested_movie_5_x, suggested_movie_6_x,
+         favourite_x, poll_q1_x,
          poll_q2_x, poll_q3_x, date_page_task_description_1_x, date_page_pref_movie_2_x, date_page_rec_movie_3_x,
          date_page_questionnaire_4_x, date_page_submit_5_x):
     """
@@ -267,6 +274,12 @@ def save(pre_movie_0_x, pre_movie_1_x, pre_movie_2_x, pre_movie_3_x, pre_movie_4
 
 
 def fill_datalist_pref():
+    # for future to load datasets automatically in page
+    pass
+
+
+def roundrobin_page():
+    #
     pass
 
 
