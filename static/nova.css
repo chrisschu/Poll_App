@@ -659,7 +659,7 @@ table.form-matrix-table-liked thead {
     }
 
     .label_item {
-    opacity: 0.5;
+    opacity: 0.4;
     }
 
     .radio_item:checked + label {

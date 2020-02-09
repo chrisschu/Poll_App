@@ -10,8 +10,6 @@ from pymongo import *
 
 ## first decleration of global variables
 
-# variable which user gets
-form = ''
 
 # variable for timestamps
 date_page_task_description_1 = ''
@@ -209,7 +207,7 @@ def submit():
 def my_new_form():
     ## Assignment of the resulted input of the html variables
 
-    global pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, suggested_movie_1, suggested_movie_2, \
+    global page, pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, suggested_movie_1, suggested_movie_2, \
         suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, favourite, poll_q1, poll_q2, \
         poll_q3
 
@@ -219,7 +217,7 @@ def my_new_form():
     date_page_submit_5 = datetime.datetime.utcnow()
 
     ## saving in mongodb
-    save(pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, suggested_movie_1, suggested_movie_2,
+    save(page, pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, suggested_movie_1, suggested_movie_2,
          suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, favourite, poll_q1, poll_q2,
          poll_q3,
          date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3,
@@ -238,7 +236,7 @@ def save(pre_movie_0_x, pre_movie_1_x, pre_movie_2_x, pre_movie_3_x, pre_movie_4
     """
 
     new = {
-        "form": 1,
+        "Form": page,
         "pre_movie_0": pre_movie_0_x,
         "pre_movie_1": pre_movie_1_x,
         "pre_movie_2": pre_movie_2_x,

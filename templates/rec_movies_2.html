@@ -32,6 +32,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
 </head>
 <body>
 <form class="myForm" method="POST" enctype="application/x-www-form-urlencoded" action="{{ url_for('rec_movies_2') }}">
+    <fieldset>
  <input type="hidden" name="formID" value="200006188570347" />
   <input type="hidden" id="JWTContainer" value="" />
   <input type="hidden" id="cardinalOrderNumber" value="" />
@@ -50,33 +51,31 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
       <li class="form-line form-line-column form-col-1" data-type="control_text" id="id_21">
         <div id="cid_21" class="form-input-wide">
           <div id="text_21" class="form-html" data-component="text">
-              <p>Instruction:</p>
-            <p>Fill in every row and rate the movie with 'Like', 'Dislike' or 'Unknown'.</p>
-              <p style="text-align: left;">You liked <b>Pulp Fiction</b>, <b>Joker</b></p>
+            <p>Fill in every row and rate the movie with 'Like' or 'Dislike'.
+              <br>At least pick one favourite movie by clicking the star icon</p>
+              <p></p>
 
           </div>
         </div>
       </li>
       <li class="form-line jf-required" data-type="control_matrix" id="id_20">
         <label class="form-label form-label-top" id="label_20" for="input_20">
-          12 Movies
           <span class="form-required">
           </span>
         </label>
         <div id="cid_20" class="form-input-wide jf-required">
           <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
             <tbody>
-
               <tr>
                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_0"> Prestige </label>
+                  <label id="label_20_row_0"> Interstellar </label>
                 </th>
                 <td style="text-align:left" class="form-matrix-values">
-                  <p> After a tragic accident, two stage magicians engage in a battle to create the ultimate illusion while sacrificing everything they have to outwit each other.  </p>
+                  <p> A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.  </p>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
                   <!-- <input type="radio" id="input_20_0_1" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" value="Trailer (click for watching)" aria-labelledby="label_20 label_20_row_0 label_20_col_1" /> -->
-                  <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/ijXruSzfGEc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/zSWdZVtXT7E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
                   <label><input type="radio" id="input_20_0_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" required value="Like" aria-labelledby="label_20 label_20_row_0 label_20_col_2" /> Like </label>
@@ -84,16 +83,20 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                 <td style="text-align:center" class="form-matrix-values">
                  <label> <input type="radio" id="input_20_0_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" required value="Dislike" aria-labelledby="label_20 label_20_row_0 label_20_col_3" /> Dislike </label>
                 </td>
+                    <td scope="row" style="text-align:center" class="form-matrix-values">
+                      <input type="radio" class="radio_item" value="Interstellar" name="q23_bestRecommended" id="radio1">
+                         <label class="label_item" for="radio1"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
+                </td>
               </tr>
               <tr>
                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_1"> Jumanji: Welcome </label>
+                  <label id="label_20_row_1"> Django Unchained </label>
                 </th>
                 <td style="text-align:left" class="form-matrix-values">
-                  <p>Four teenagers are sucked into a magical video game, and the only way they can escape is to work together to finish the game.</p>
+                  <p>With the help of a German bounty hunter, a freed slave sets out to rescue his wife from a brutal Mississippi plantation owner.</p>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                  <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/qh9yY7uk1Hg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="280" height="175"  src="https://www.youtube.com/embed/_iH0UBYDI4g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
                     <label><input type="radio" id="input_20_1_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" required value="Like" aria-labelledby="label_20 label_20_row_1 label_20_col_2" /> Like </label>
@@ -101,17 +104,20 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                 <td style="text-align:center" class="form-matrix-values">
                   <label><input type="radio" id="input_20_1_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[1]" required value="Dislike" aria-labelledby="label_20 label_20_row_1 label_20_col_3" /> Dislike </label>
                 </td>
+                    <td scope="row" style="text-align:center" class="form-matrix-values">
+                      <input type="radio" class="radio_item" value="Django Unchained " name="q23_bestRecommended" id="radio2">
+                         <label class="label_item" for="radio2"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
+                </td>
               </tr>
               <tr>
                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_2"> Interstellar </label>
+                  <label id="label_20_row_2"> Prestige </label>
                 </th>
                 <td style="text-align:left" class="form-matrix-values">
-                <p> A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.  </p>
-
+                <p> After a tragic accident, two stage magicians engage in a battle to create the ultimate illusion while sacrificing everything they have to outwit each other.</p>
                 </td>
-                <td style="text-align:left" class="form-matrix-values">
-        <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/zSWdZVtXT7E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <td style="text-align:center" class="form-matrix-values">
+                   <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/ijXruSzfGEc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
                  <label> <input type="radio" id="input_20_2_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" required value="Like" aria-labelledby="label_20 label_20_row_2 label_20_col_2" /> Like </label>
@@ -119,15 +125,20 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                 <td style="text-align:center" class="form-matrix-values">
                  <label> <input type="radio" id="input_20_2_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[2]" required value="Dislike" aria-labelledby="label_20 label_20_row_2 label_20_col_3" /> Dislike </label>
                 </td>
+                <td scope="row" style="text-align:center" class="form-matrix-values">
+                     <input type="radio" class="radio_item" value="Prestige" name="q23_bestRecommended" id="radio3">
+                        <label class="label_item" for="radio3"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"></label>
+                </td>
               </tr>
               <tr>
                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_3"> Movie A </label>
+                  <label id="label_20_row_3"> Batman Begins </label>
                 </th>
                 <td style="text-align:left" class="form-matrix-values">
-                  <p>Description Movie A</p>
+                  <p>After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from corruption. </p>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
+                    <iframe width="280" height="175" src="https://www.youtube.com/embed/vak9ZLfhGnQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
                  <label> <input type="radio" id="input_20_3_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" required value="Like" aria-labelledby="label_20 label_20_row_3 label_20_col_2" /> Like </label>
@@ -135,16 +146,20 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                 <td style="text-align:center" class="form-matrix-values">
                  <label> <input type="radio" id="input_20_3_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[3]" required value="Dislike" aria-labelledby="label_20 label_20_row_3 label_20_col_3" /> Dislike </label>
                 </td>
+                <td scope="row" style="text-align:center" class="form-matrix-values">
+                       <input type="radio" class="radio_item" value="Batman Begins" name="q23_bestRecommended" id="radio4">
+                            <label class="label_item" for="radio4"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"></label>
+                </td>
               </tr>
               <tr>
                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_4"> Movie B </label>
+                  <label id="label_20_row_4"> Shutter Island </label>
                 </th>
                 <td style="text-align:left" class="form-matrix-values">
-                       <p>Description Movie B</p>
+                       <p>In 1954, a U.S. Marshal investigates the disappearance of a murderer who escaped from a hospital for the criminally insane.</p>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-
+                    <iframe width="280" height="175" src="https://www.youtube.com/embed/5iaYLCiq5RM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
                   <input type="radio" id="input_20_4_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[4]" required value="Like" aria-labelledby="label_20 label_20_row_4 label_20_col_2" /> Like </label>
@@ -152,15 +167,20 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                 <td style="text-align:center" class="form-matrix-values">
                   <input type="radio" id="input_20_4_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[4]" required value="Dislike" aria-labelledby="label_20 label_20_row_4 label_20_col_3" /> Dislike </label>
                 </td>
+                                      <td scope="row" style="text-align:center" class="form-matrix-values">
+                       <input type="radio" class="radio_item" value="Shutter Island" name="q23_bestRecommended" id="radio5">
+                        <label class="label_item" for="radio5"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
+                </td>
               </tr>
               <tr>
                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_5"> Movie C </label>
+                  <label id="label_20_row_5"> Kill Bill: Vol. 1 </label>
                 </th>
                 <td style="text-align:left" class="form-matrix-values">
-                    <p>Description Movie C</p>
+                    <p>After awakening from a four-year coma, a former assassin wreaks vengeance on the team of assassins who betrayed her.</p>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
+                    <iframe width="280" height="175" src="https://www.youtube.com/embed/ORFWdXl_zJ4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
                  <label> <input type="radio" id="input_20_5_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" required value="Like" aria-labelledby="label_20 label_20_row_5 label_20_col_2" /> Like </label>
@@ -168,23 +188,97 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                 <td style="text-align:center" class="form-matrix-values">
                   <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" required value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Dislike </label>
                 </td>
+                                      <td scope="row" style="text-align:center" class="form-matrix-values">
+                      <input type="radio" class="radio_item" value="Kill Bill: Vol. 1" name="q23_bestRecommended" id="radio6">
+                        <label class="label_item" for="radio6"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"></label>
+                </td>
+              </tr>
+             <tr>
+                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                  <label id="label_20_row_5"> The Wolf of Wall Street </label>
+                </th>
+                <td style="text-align:left" class="form-matrix-values">
+                    <p>Relive the excessive profanity, lengthy runtime, and bad behavior of Martin Scorsese's The Wolf of Wall Street.</p>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                    <iframe width="280" height="175" src="https://www.youtube.com/embed/iszwuX1AK6A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                 <label> <input type="radio" id="input_20_5_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[6]" required value="Like" aria-labelledby="label_20 label_20_row_5 label_20_col_2" /> Like </label>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                  <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[6]" required value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Dislike </label>
+                </td>
+                                      <td scope="row" style="text-align:center" class="form-matrix-values">
+                       <input type="radio" class="radio_item" value="The Wolf of Wall Street" name="q23_bestRecommended" id="radio7">
+    <label class="label_item" for="radio7"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
+                </td>
+              </tr>
+             <tr>
+                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                  <label id="label_20_row_5"> Terminator 2: Judgment Day </label>
+                </th>
+                <td style="text-align:left" class="form-matrix-values">
+                    <p>A cyborg, identical to the one who failed to kill Sarah Connor, must now protect her teenage son, John Connor, from a more advanced and powerful cyborg..</p>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                    <iframe width="280" height="175" src="https://www.youtube.com/embed/5ktiuGhFV9g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                 <label> <input type="radio" id="input_20_5_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[7]" required value="Like" aria-labelledby="label_20 label_20_row_5 label_20_col_2" /> Like </label>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                  <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[7]" required value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Dislike </label>
+                </td>
+                                      <td scope="row" style="text-align:center" class="form-matrix-values">
+                      <input type="radio" class="radio_item" value="Terminator 2: Judgment Day" name="q23_bestRecommended" id="radio8">
+                        <label class="label_item" for="radio8"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
+                </td>
+              </tr>
+             <tr>
+                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                  <label id="label_20_row_5"> Up </label>
+                </th>
+                <td style="text-align:left" class="form-matrix-values">
+                    <p>78-year-old Carl Fredricksen travels to Paradise Falls in his house equipped with balloons, inadvertently taking a young stowaway.</p>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                    <iframe width="280" height="175" src="https://www.youtube.com/embed/ORFWdXl_zJ4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                 <label> <input type="radio" id="input_20_5_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[8]" required value="Like" aria-labelledby="label_20 label_20_row_5 label_20_col_2" /> Like </label>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                  <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[8]" required value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Dislike </label>
+                </td>
+                                      <td scope="row" style="text-align:center" class="form-matrix-values">
+                       <input type="radio" class="radio_item" value="Up" name="q23_bestRecommended" id="radio9">
+    <label class="label_item" for="radio9"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
+                </td>
+              </tr>
+             <tr>
+                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+                  <label id="label_20_row_5"> The Silence of the Lambs  </label>
+                </th>
+                <td style="text-align:left" class="form-matrix-values">
+                    <p>A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.</p>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                    <iframe width="280" height="175" src="https://www.youtube.com/embed/W6Mm8Sbe__o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                 <label> <input type="radio" id="input_20_5_2" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" required value="Like" aria-labelledby="label_20 label_20_row_5 label_20_col_2" /> Like </label>
+                </td>
+                <td style="text-align:center" class="form-matrix-values">
+                  <label><input type="radio" id="input_20_5_3" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[5]" required value="Dislike" aria-labelledby="label_20 label_20_row_5 label_20_col_3" /> Dislike </label>
+                </td>
+                                      <td scope="row" style="text-align:center" class="form-matrix-values">
+                       <input type="radio" class="radio_item" value="The Silence of the Lambs " name="q23_bestRecommended" id="radio10">
+                        <label class="label_item" for="radio10"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"></label>
+                </td>
               </tr>
             </tbody>
           </table>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_dropdown" id="id_23">
-        <label class="form-label form-label-top form-label-auto" id="label_23" for="input_23"> favourite movie </label>
-        <div id="cid_23" class="form-input-wide">
-          <select class="form-dropdown" id="input_23" name="q23_bestRecommended" style="width:150px" data-component="dropdown" aria-labelledby="label_23">
-            <option value="">  </option>
-            <option value="Prestige "> Prestige </option>
-            <option value="Jumanji: Welcome to the Jungle"> Jumanji: Welcome to the Jungle </option>
-            <option value="Interstellar"> Interstellar</option>
-            <option value="Movie A"> Movie A </option>
-            <option value="Movie B"> Movie B</option>
-            <option value="Movie C"> Movie C</option>
-          </select>
         </div>
       </li>
       <li id="cid_15" class="form-input-wide" data-type="control_pagebreak">
@@ -201,6 +295,9 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
     </ul>
 
 </div>
+</fieldset>
 </form>
 </body>
+</html></title>
+</head>
 </html>
