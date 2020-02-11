@@ -16,7 +16,6 @@ date_page_task_description_1 = ''
 date_page_pref_movie_2 = ''
 date_page_rec_movie_3 = ''
 date_page_questionnaire_4 = ''
-date_page_submit_5 = ''
 
 pre_movie_0 = "X"
 pre_movie_1 = 'X'
@@ -30,13 +29,17 @@ suggested_movie_3 = 'X'
 suggested_movie_4 = 'X'
 suggested_movie_5 = 'X'
 suggested_movie_6 = 'X'
+suggested_movie_7 = 'X'
+suggested_movie_8 = 'X'
+suggested_movie_9 = 'X'
+suggested_movie_10 = 'X'
 
 favourite = 'X'
 poll_q1 = 'X'
 poll_q2 = 'X'
 poll_q3 = 'X'
 
-#this variable is roundrobin princible, first user gets page 1, second user gets page 2, and so on
+# this variable is roundrobin princible, first user gets page 1, second user gets page 2, and so on
 page = 1
 
 app = Flask(__name__)
@@ -72,7 +75,7 @@ def Movie_poll():
 
 
 @app.route('/my_form', methods=['POST'])
-##old poll app, just for testing
+##old poll app, just for testing things
 def my_form():
     new = {
         "question1": str(request.form.get('question1')),
@@ -123,10 +126,8 @@ def pref_movies():
     if request.method == 'POST':
         # will be exectued after form pref_movie_form is commited
         if page == 1:
-            # 50 per cent chance to have the first list with 10 objects
             return redirect(url_for('rec_movies_1'))
         else:
-            # 50 per cent chance to have the first list with 12 objects
             return redirect(url_for('rec_movies_2'))
 
     return render_template('/pref_movies.html', thing_to_say='Click here to start')
@@ -136,7 +137,8 @@ def pref_movies():
 def rec_movies_1():
     # list with 10 objects
     global suggested_movie_1, suggested_movie_2, suggested_movie_3, suggested_movie_4, suggested_movie_5, \
-        suggested_movie_6, favourite, date_page_rec_movie_3, page
+        suggested_movie_6, suggested_movie_7, suggested_movie_8, suggested_movie_9, suggested_movie_10, favourite, \
+        date_page_rec_movie_3, page
 
     date_page_rec_movie_3 = datetime.datetime.utcnow()
 
@@ -146,12 +148,14 @@ def rec_movies_1():
     suggested_movie_4 = str(request.form.get('q20_movies20[3]'))
     suggested_movie_5 = str(request.form.get('q20_movies20[4]'))
     suggested_movie_6 = str(request.form.get('q20_movies20[5]'))
+    suggested_movie_7 = str(request.form.get('q20_movies20[6]'))
+    suggested_movie_8 = str(request.form.get('q20_movies20[7]'))
+    suggested_movie_9 = str(request.form.get('q20_movies20[8]'))
+    suggested_movie_10 = str(request.form.get('q20_movies20[9]'))
 
     favourite = str(request.form.get('q23_bestRecommended'))
 
     if request.method == 'POST':
-        #next user gets page rec_movies_2.html
-        page = 2
         return redirect(url_for('questionnaire'))
 
     return render_template('/rec_movies_1.html', thing_to_say='Click here to start')
@@ -161,7 +165,8 @@ def rec_movies_1():
 def rec_movies_2():
     # list with 10 objects + 2 additional objects
     global suggested_movie_1, suggested_movie_2, suggested_movie_3, suggested_movie_4, suggested_movie_5, \
-        suggested_movie_6, favourite, date_page_rec_movie_3, page
+        suggested_movie_6, suggested_movie_7, suggested_movie_8, suggested_movie_9, suggested_movie_10, favourite, \
+        date_page_rec_movie_3, page
 
     date_page_rec_movie_3 = datetime.datetime.utcnow()
 
@@ -171,11 +176,14 @@ def rec_movies_2():
     suggested_movie_4 = str(request.form.get('q20_movies20[3]'))
     suggested_movie_5 = str(request.form.get('q20_movies20[4]'))
     suggested_movie_6 = str(request.form.get('q20_movies20[5]'))
+    suggested_movie_7 = str(request.form.get('q20_movies20[6]'))
+    suggested_movie_8 = str(request.form.get('q20_movies20[7]'))
+    suggested_movie_9 = str(request.form.get('q20_movies20[8]'))
+    suggested_movie_10 = str(request.form.get('q20_movies20[9]'))
 
     favourite = str(request.form.get('q23_bestRecommended'))
 
     if request.method == 'POST':
-        # next user gets page rec_movies_1.html
         page = 1
         return redirect(url_for('questionnaire'))
 
@@ -208,35 +216,43 @@ def my_new_form():
     ## Assignment of the resulted input of the html variables
 
     global page, pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, suggested_movie_1, suggested_movie_2, \
-        suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, favourite, poll_q1, poll_q2, \
-        poll_q3
+        suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, suggested_movie_7, suggested_movie_8, \
+        suggested_movie_9, suggested_movie_10, poll_q1, poll_q2, poll_q3
 
     global date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4
-    global date_page_submit_5
 
     date_page_submit_5 = datetime.datetime.utcnow()
 
     ## saving in mongodb
     save(page, pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, suggested_movie_1, suggested_movie_2,
-         suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, favourite, poll_q1, poll_q2,
-         poll_q3,
-         date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3,
-         date_page_questionnaire_4, date_page_submit_5)
+         suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, suggested_movie_7,
+         suggested_movie_8, suggested_movie_9, suggested_movie_10, favourite, poll_q1, poll_q2, poll_q3,
+         date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4,
+         date_page_submit_5)
+
+    # for the next user, so user 1 gets List 1, User 2 gets List 2, and so on
+    if page == 1:
+        page = 2
+    else:
+        page = 1
 
     return "Db entry successful"
 
 
-def save(pre_movie_0_x, pre_movie_1_x, pre_movie_2_x, pre_movie_3_x, pre_movie_4_x, suggested_movie_1_x,
+def save(n, pre_movie_0_x, pre_movie_1_x, pre_movie_2_x, pre_movie_3_x, pre_movie_4_x, suggested_movie_1_x,
          suggested_movie_2_x, suggested_movie_3_x, suggested_movie_4_x, suggested_movie_5_x, suggested_movie_6_x,
-         favourite_x, poll_q1_x,
-         poll_q2_x, poll_q3_x, date_page_task_description_1_x, date_page_pref_movie_2_x, date_page_rec_movie_3_x,
-         date_page_questionnaire_4_x, date_page_submit_5_x):
+         suggested_movie_7_x, suggested_movie_8_x, suggested_movie_9_x, suggested_movie_10_x,
+         favourite_x, poll_q1_x, poll_q2_x, poll_q3_x, date_page_task_description_1_x,
+         date_page_pref_movie_2_x, date_page_rec_movie_3_x, date_page_questionnaire_4_x,
+         date_page_submit_5_x):
     """
     Saving in Cloud Atlas MongoDB
     """
 
+    # variable n shows which page is used, if n is == 2 then user got list 2, is n == 1 then user got List 1
+
     new = {
-        "Form": page,
+        "Form": n,
         "pre_movie_0": pre_movie_0_x,
         "pre_movie_1": pre_movie_1_x,
         "pre_movie_2": pre_movie_2_x,
@@ -248,6 +264,10 @@ def save(pre_movie_0_x, pre_movie_1_x, pre_movie_2_x, pre_movie_3_x, pre_movie_4
         "suggested_movie_4": suggested_movie_4_x,
         "suggested_movie_5": suggested_movie_5_x,
         "suggested_movie_6": suggested_movie_6_x,
+        "suggested_movie_7": suggested_movie_7_x,
+        "suggested_movie_8": suggested_movie_8_x,
+        "suggested_movie_9": suggested_movie_9_x,
+        "suggested_movie_10": suggested_movie_10_x,
         "favourite": favourite_x,
         "poll_q1": poll_q1_x,
         "poll_q2": poll_q2_x,
@@ -268,16 +288,12 @@ def save(pre_movie_0_x, pre_movie_1_x, pre_movie_2_x, pre_movie_3_x, pre_movie_4
     # returns a successful message if sucessfull
     print("db entry " + str(new) + " was successfully inserted in database")
     ## return str(message)
+
     pass
 
 
 def fill_datalist_pref():
     # for future to load datasets automatically in page
-    pass
-
-
-def roundrobin_page():
-    #
     pass
 
 
