@@ -1,10 +1,9 @@
 # Poll App
 
-LAST CHANGE: 09.02.2020
+LAST CHANGE: 11.02.2020
 
-    - Star Icon added
-    - User get alternate list
-        User A gets List 1, User B gets List 2, User C gets List 1, and so on....
+    * new Like/Dislike Button
+    * db-changes, now all suggested Movies - Rating included in DB
 
 The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
 It contains a questionnaire which results will be inserted into the database.
