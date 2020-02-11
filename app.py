@@ -11,18 +11,43 @@ from pymongo import *
 ## first decleration of global variables
 
 
-# variable for timestamps
+# variables for timestamps
 date_page_task_description_1 = ''
 date_page_pref_movie_2 = ''
 date_page_rec_movie_3 = ''
 date_page_questionnaire_4 = ''
 
+# variables for rating the preference movies, for (Like/Dislike/unknown)
 pre_movie_0 = "X"
 pre_movie_1 = 'X'
 pre_movie_2 = 'X'
 pre_movie_3 = 'X'
 pre_movie_4 = 'X'
 
+pre_movie_0_title = "The Pianist"
+pre_movie_0_description = "A Polish Jewish musician struggles to survive the destruction of the Warsaw ghetto of " \
+                          "World War II. "
+pre_movie_1_title = "Rataouille"
+pre_movie_1_description = "A rat who can cook makes an unusual alliance with a young kitchen worker at a famous " \
+                          "restaurant. "
+pre_movie_2_title = "Inglorious Basterds"
+pre_movie_2_description = "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group "\
+                          "of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same. "
+pre_movie_3_title = "The Pianist"
+pre_movie_3_description = "A Polish Jewish musician struggles to survive the destruction of the Warsaw ghetto of " \
+                          "World War II. "
+pre_movie_4_title = "No Country for Old Men"
+pre_movie_4_description = "Violence and mayhem ensue after a hunter stumbles upon a drug deal gone wrong and more " \
+                          "than two million dollars in cash near the Rio Grande. "
+pre_movie_5_title = "Logan - The Wolverine"
+pre_movie_5_description = "In a future where mutants are nearly extinct, an elderly and weary Logan leads a quiet " \
+                          "life. But when Laura, a mutant child pursued by scientists, comes to him for help, " \
+                          "he must get her to safety "
+pre_movie_6_title = "The Bourne Ultimatum "
+pre_movie_6_description = "Jason Bourne dodges a ruthless C.I.A. official and his Agents from a new assassination " \
+                          "program while searching for the origins of his life as a trained killer.. "
+
+# variables for rating the "suggested" movies, (Like/Dislike)
 suggested_movie_1 = 'X'
 suggested_movie_2 = 'X'
 suggested_movie_3 = 'X'
@@ -34,10 +59,14 @@ suggested_movie_8 = 'X'
 suggested_movie_9 = 'X'
 suggested_movie_10 = 'X'
 
+# variable for the "star" movie, gets the movie title
 favourite = 'X'
+
+# variables for questionnaire
 poll_q1 = 'X'
 poll_q2 = 'X'
 poll_q3 = 'X'
+
 
 # this variable is roundrobin princible, first user gets page 1, second user gets page 2, and so on
 page = 1
@@ -106,6 +135,8 @@ def welcome():
 def task_description():
     ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
     global date_page_task_description_1
+
+    # timestamp
     date_page_task_description_1 = datetime.datetime.utcnow()
 
     return render_template('/task_description.html', thing_to_say='Click here to start')
@@ -114,7 +145,10 @@ def task_description():
 @app.route('/pref_movies.html', methods=['POST', 'GET'])
 def pref_movies():
     global pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, date_page_pref_movie_2, page
+    global pre_movie_0_description, pre_movie_0_title
+    global pre_movie_1_description, pre_movie_1_title
 
+    # timestamp
     date_page_pref_movie_2 = datetime.datetime.utcnow()
 
     pre_movie_0 = str(request.form.get('q4_overallSatisfaction[0]'))

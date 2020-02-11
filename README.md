@@ -2,8 +2,9 @@
 
 LAST CHANGE: 11.02.2020
 
-    * new Like/Dislike Button
+    * new Like/Dislike buttons
     * db-changes, now all suggested Movies - Rating included in DB
+    * further design changes in tables
 
 The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
 It contains a questionnaire which results will be inserted into the database.
