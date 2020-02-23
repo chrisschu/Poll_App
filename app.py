@@ -1,4 +1,6 @@
 import datetime
+import json
+import random
 
 import pymongo
 from flask import Flask, render_template, request, url_for, redirect
@@ -10,6 +12,15 @@ from pymongo import *
 
 ## first decleration of global variables
 
+# new variables for using arrays
+title = []
+description = []
+trailer_link = []
+genre = []
+
+# write here how many movies should displayed at the page
+pref_numMovies = 25
+sugg_numMovies = 9
 
 # variables for timestamps
 date_page_task_description_1 = ''
@@ -31,7 +42,7 @@ pre_movie_1_title = "Rataouille"
 pre_movie_1_description = "A rat who can cook makes an unusual alliance with a young kitchen worker at a famous " \
                           "restaurant. "
 pre_movie_2_title = "Inglorious Basterds"
-pre_movie_2_description = "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group "\
+pre_movie_2_description = "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group " \
                           "of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same. "
 pre_movie_3_title = "The Pianist"
 pre_movie_3_description = "A Polish Jewish musician struggles to survive the destruction of the Warsaw ghetto of " \
@@ -67,21 +78,57 @@ poll_q1 = 'X'
 poll_q2 = 'X'
 poll_q3 = 'X'
 
-
 # this variable is roundrobin princible, first user gets page 1, second user gets page 2, and so on
 page = 1
 
 app = Flask(__name__)
 
 ## Connection to the MongoDB Atlas Cloud
+
+usr = 'christian'
+pwd = 'LkipSB6LPbBV8wM'
+
 try:
     client = pymongo.MongoClient(
-        "mongodb+srv://christian:LkipSB6LPbBV8wM@mongodbmovie-702qa.mongodb.net/test?retryWrites=true&w=majority")
+        "mongodb+srv://" + usr + ":" + pwd + "@mongodbmovie-702qa.mongodb.net/test?retryWrites=true&w=majority")
     db = client['masterproject']
+    # variable for writing poll data
     collection = db['survey']
+    # variable for getting movie data
+    collectíon_movies = db['movies']
     print("Connected to DB succesfully!")
 except:
-    print("Could not connect to MongoDB")
+    print(
+        "Could not connect to MongoDB. Write an E-Mail to chschusc@edu.aau.at with your IP-address to get access to the database")
+
+
+@app.route('/get_survey')
+# displays the data of the surveys collection
+def get_surveys():
+    documents = collection.find()
+    response = []
+    for document in documents:
+        document['_id'] = str(document['_id'])
+        response.append(document)
+        response.append("<br/>")
+    return json.dumps(response, indent=4, sort_keys=True, default=str)
+
+
+@app.route('/get_movies')
+# displays the data of the movies collection
+def get_movies():
+    documents = collectíon_movies.find()
+    response = []
+    for document in documents:
+        document['_id'] = str(document['_id'])
+        response.append(document)
+    return json.dumps(response)
+
+
+@app.route('/get_title')
+def title():
+    documents = str(collectíon_movies.find({"title": "Interstellar"}))
+    return documents
 
 
 @app.route('/home')
@@ -151,7 +198,7 @@ def pref_movies():
     # timestamp
     date_page_pref_movie_2 = datetime.datetime.utcnow()
 
-    pre_movie_0 = str(request.form.get('q4_overallSatisfaction[0]'))
+    ##pre_movie_0 = str(request.form.get('q4_overallSatisfaction[0]'))
     pre_movie_1 = str(request.form.get('q4_overallSatisfaction[1]'))
     pre_movie_2 = str(request.form.get('q4_overallSatisfaction[2]'))
     pre_movie_3 = str(request.form.get('q4_overallSatisfaction[3]'))
@@ -164,7 +211,7 @@ def pref_movies():
         else:
             return redirect(url_for('rec_movies_2'))
 
-    return render_template('/pref_movies.html', thing_to_say='Click here to start')
+    return render_template('/pref_movies.html', pre_movie_0_title=pre_movie_0_title, desc1=pre_movie_0_description)
 
 
 @app.route('/rec_movies_1.html', methods=['POST', 'GET'])
@@ -172,7 +219,31 @@ def rec_movies_1():
     # list with 10 objects
     global suggested_movie_1, suggested_movie_2, suggested_movie_3, suggested_movie_4, suggested_movie_5, \
         suggested_movie_6, suggested_movie_7, suggested_movie_8, suggested_movie_9, suggested_movie_10, favourite, \
-        date_page_rec_movie_3, page
+        date_page_rec_movie_3, page, sugg_numMovies
+
+    dbmovies = db['movies']
+    allsuggmovies = []
+
+    name1 = dbmovies.find_one({'title': 'Interstellar'})
+
+    # querying all titles
+    # for x in range(0, sugg_numMovies):
+
+    for movies in dbmovies.find({'type': 'rec'}, {"_id": False}):
+        allsuggmovies.append(movies)
+
+    # for randomizing the movie list
+    random.shuffle(allsuggmovies)
+
+    #for x in range(0, sugg_numMovies):
+    #    titles.append() = allsuggmovies.split
+
+    print(allsuggmovies)
+    #print(allsuggmovies.pop())
+    #
+    # for x in range(0, sugg_numMovies):
+    #    list = dbmovies.find()
+    #    print('exit')
 
     date_page_rec_movie_3 = datetime.datetime.utcnow()
 
@@ -192,7 +263,7 @@ def rec_movies_1():
     if request.method == 'POST':
         return redirect(url_for('questionnaire'))
 
-    return render_template('/rec_movies_1.html', thing_to_say='Click here to start')
+    return render_template('/rec_movies_1.html', movie=allsuggmovies)
 
 
 @app.route('/rec_movies_2.html', methods=['POST', 'GET'])

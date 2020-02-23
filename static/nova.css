@@ -331,24 +331,6 @@ li:not([data-type="control_phone"]) input[data-component="phone"] {
 }
 
 
-/* FORM-LINE ACTIVE
-------------------------------*/
-
-
-.form-line-active {
-	background: #FFFBEA;
-}
-
-.form-line-active input:focus,
-.form-line-active textarea:focus {
-	border:1px solid #FFD300;
-
-	-moz-box-shadow: 0 0 3px #FFF0AA;
-	-webkit-box-shadow: 0 0 3px #FFF0AA;
-	box-shadow: 0 0 3px #FFF0AA;
-}
-
-
 
 /* ERROR MESSAGES
 ------------------------------*/
@@ -395,7 +377,7 @@ li.form-line-error .form-error-message img {
 }
 
 .form-matrix-table {
-	font-size: 0.900em;
+	font-size: 1.200em;
 }
 
 .form-matrix-column-headers {
@@ -665,3 +647,12 @@ table.form-matrix-table-liked thead {
     .radio_item:checked + label {
     opacity: 5;
     }
+
+	/* for the + add to watchlist button
+	.check_item {
+		 display: none !important;
+	}
+
+    .check_item:checked + label {
+    opacity: 5;
+    }*/

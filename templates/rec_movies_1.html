@@ -74,18 +74,50 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
           </span>
         </label>
         <div id="cid_20" class="form-input-wide jf-required">
+        <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
+        <tbody>
+              <tr>
+          {% for o in movie %}
+              <th scope="row" style="text-align:left" class="form-matrix-row-headers">
+              <img src="{{ o.cover_link }}" height="300" width="200" alt="" border="2" align="right" hspace="50" vspace="30">
+              </th>
+              <td style="text-align:center">
+                  <label> <h2>{{ o.title }} </h2></label>
+                  <br>
+                    <p>{{ o.description }} </p>
+                    <p><b>Writers:</b> {{ o.writers }} </p>
+                    <p><b>Stars:</b> {{ o.stars }} </p>
+                    <p><b>Genres:</b> {{ o.genre }} </p>
+              </td>
+              <td style="text-align:center" class="form-matrix-values">
+                  <p> <b>Trailer:</b> </p>
+                <a target="_blank" rel="noopener noreferrer" href="{{ o.trailer_link }}"><img src=" {{url_for('static', filename='imdb.png')}}" height="80" width="80"></a>
+              <td>
+                  <input type="checkbox" value="{{ o.title }}" name="q23_bestRecommended" id="input_20_1_{{ o.number }}">
+                         <label for="input_20_1_{{ o.number }}" class="check-box"> </label>
+              </td>
+              <td> <a href="#" class="watchlistbutton">+ Add to Watchlist</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+
+        <div id="cid_20" class="form-input-wide jf-required">
           <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
             <tbody>
               <tr>
                 <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_0"> Interstellar </label>
+                    {% for o in movie %}
+                  <label id="label_20_row_0"> {{ o.title }}  </label>
+                    {% endfor %}
                 </th>
                 <td style="text-align:left" class="form-matrix-values">
                   <p> A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.  </p>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
                   <!-- <input type="radio" id="input_20_0_1" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" value="Trailer (click for watching)" aria-labelledby="label_20 label_20_row_0 label_20_col_1" /> -->
-                  <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/zSWdZVtXT7E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  <iframe width="280" height="175" src="www.imdb.com/video/imdb/vi1586278169" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
                     <input type="radio" class="radio_item" value="Like" name="q20_movies20[0]" id="input_20_0_1">
