@@ -19,8 +19,10 @@ trailer_link = []
 genre = []
 
 # write here how many movies should displayed at the page
-pref_numMovies = 25
+pref_numMovies = 49
 sugg_numMovies = 9
+
+suggested_movies = []
 
 # variables for timestamps
 date_page_task_description_1 = ''
@@ -29,34 +31,11 @@ date_page_rec_movie_3 = ''
 date_page_questionnaire_4 = ''
 
 # variables for rating the preference movies, for (Like/Dislike/unknown)
-pre_movie_0 = "X"
-pre_movie_1 = 'X'
-pre_movie_2 = 'X'
-pre_movie_3 = 'X'
-pre_movie_4 = 'X'
-
-pre_movie_0_title = "The Pianist"
-pre_movie_0_description = "A Polish Jewish musician struggles to survive the destruction of the Warsaw ghetto of " \
-                          "World War II. "
-pre_movie_1_title = "Rataouille"
-pre_movie_1_description = "A rat who can cook makes an unusual alliance with a young kitchen worker at a famous " \
-                          "restaurant. "
-pre_movie_2_title = "Inglorious Basterds"
-pre_movie_2_description = "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group " \
-                          "of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same. "
-pre_movie_3_title = "The Pianist"
-pre_movie_3_description = "A Polish Jewish musician struggles to survive the destruction of the Warsaw ghetto of " \
-                          "World War II. "
-pre_movie_4_title = "No Country for Old Men"
-pre_movie_4_description = "Violence and mayhem ensue after a hunter stumbles upon a drug deal gone wrong and more " \
-                          "than two million dollars in cash near the Rio Grande. "
-pre_movie_5_title = "Logan - The Wolverine"
-pre_movie_5_description = "In a future where mutants are nearly extinct, an elderly and weary Logan leads a quiet " \
-                          "life. But when Laura, a mutant child pursued by scientists, comes to him for help, " \
-                          "he must get her to safety "
-pre_movie_6_title = "The Bourne Ultimatum "
-pre_movie_6_description = "Jason Bourne dodges a ruthless C.I.A. official and his Agents from a new assassination " \
-                          "program while searching for the origins of his life as a trained killer.. "
+pref_movie_0 = "X"
+pref_movie_1 = 'X'
+pref_movie_2 = 'X'
+pref_movie_3 = 'X'
+pref_movie_4 = 'X'
 
 # variables for rating the "suggested" movies, (Like/Dislike)
 suggested_movie_1 = 'X'
@@ -122,6 +101,8 @@ def get_movies():
     for document in documents:
         document['_id'] = str(document['_id'])
         response.append(document)
+        response.append("<br/>")
+        response.append("<br/>")
     return json.dumps(response)
 
 
@@ -208,7 +189,7 @@ def pref_movies():
     date_page_pref_movie_2 = datetime.datetime.utcnow()
 
     ##pre_movie_0 = str(request.form.get('q4_overallSatisfaction[0]'))
-   
+
     pre_movie_1 = str(request.form.get('q4_overallSatisfaction[1]'))
     pre_movie_2 = str(request.form.get('q4_overallSatisfaction[2]'))
     pre_movie_3 = str(request.form.get('q4_overallSatisfaction[3]'))
@@ -229,7 +210,7 @@ def rec_movies_1():
     # list with 10 objects
     global suggested_movie_1, suggested_movie_2, suggested_movie_3, suggested_movie_4, suggested_movie_5, \
         suggested_movie_6, suggested_movie_7, suggested_movie_8, suggested_movie_9, suggested_movie_10, favourite, \
-        date_page_rec_movie_3, page, sugg_numMovies
+        date_page_rec_movie_3, page, sugg_numMovies, suggested_movies
 
     dbmovies = db['movies']
     allsuggmovies = []
@@ -242,26 +223,20 @@ def rec_movies_1():
         allsuggmovies.append(movies)
     # for randomizing the movie list
     random.shuffle(allsuggmovies)
-    #for x in range(0, sugg_numMovies):
+    # for x in range(0, sugg_numMovies):
     #    titles.append() = allsuggmovies.split
     print(allsuggmovies)
-    #print(allsuggmovies.pop())
+    # print(allsuggmovies.pop())
     #
     # for x in range(0, sugg_numMovies):
     #    list = dbmovies.find()
     #    print('exit')
     date_page_rec_movie_3 = datetime.datetime.utcnow()
 
-    suggested_movie_1 = str(request.form.get('q20_movies20[0]'))
-    suggested_movie_2 = str(request.form.get('q20_movies20[1]'))
-    suggested_movie_3 = str(request.form.get('q20_movies20[2]'))
-    suggested_movie_4 = str(request.form.get('q20_movies20[3]'))
-    suggested_movie_5 = str(request.form.get('q20_movies20[4]'))
-    suggested_movie_6 = str(request.form.get('q20_movies20[5]'))
-    suggested_movie_7 = str(request.form.get('q20_movies20[6]'))
-    suggested_movie_8 = str(request.form.get('q20_movies20[7]'))
-    suggested_movie_9 = str(request.form.get('q20_movies20[8]'))
-    suggested_movie_10 = str(request.form.get('q20_movies20[9]'))
+    suggested_movies = []
+
+    for n in range(0, sugg_numMovies):
+        suggested_movies.append(str(request.form.get('q20_movies20[' + str(n) + ']')))
 
     favourite = str(request.form.get('q23_bestRecommended'))
 
@@ -276,9 +251,14 @@ def rec_movies_2():
     # list with 10 objects + 2 additional objects
     global suggested_movie_1, suggested_movie_2, suggested_movie_3, suggested_movie_4, suggested_movie_5, \
         suggested_movie_6, suggested_movie_7, suggested_movie_8, suggested_movie_9, suggested_movie_10, favourite, \
-        date_page_rec_movie_3, page
+        date_page_rec_movie_3, page, sugg_numMovies
 
     date_page_rec_movie_3 = datetime.datetime.utcnow()
+
+    suggested_movie = []
+
+    for n in range(0, sugg_numMovies):
+        suggested_movie.append(str(request.form.get('q20_movies20[' + str(n) + ']')))
 
     suggested_movie_1 = str(request.form.get('q20_movies20[0]'))
     suggested_movie_2 = str(request.form.get('q20_movies20[1]'))
@@ -327,14 +307,15 @@ def my_new_form():
 
     global page, pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, suggested_movie_1, suggested_movie_2, \
         suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, suggested_movie_7, suggested_movie_8, \
-        suggested_movie_9, suggested_movie_10, poll_q1, poll_q2, poll_q3
+        suggested_movie_9, suggested_movie_10, poll_q1, poll_q2, poll_q3, suggested_movies, sugg_numMovies
 
     global date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4
 
     date_page_submit_5 = datetime.datetime.utcnow()
 
     ## saving in mongodb
-    save(page, pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, suggested_movie_1, suggested_movie_2,
+    save(suggested_movies, sugg_numMovies, page, pref_movie_0, pref_movie_1, pref_movie_2, pref_movie_3, pref_movie_4,
+         suggested_movie_1, suggested_movie_2,
          suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, suggested_movie_7,
          suggested_movie_8, suggested_movie_9, suggested_movie_10, favourite, poll_q1, poll_q2, poll_q3,
          date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4,
@@ -349,7 +330,8 @@ def my_new_form():
     return "Db entry successful"
 
 
-def save(n, pre_movie_0_x, pre_movie_1_x, pre_movie_2_x, pre_movie_3_x, pre_movie_4_x, suggested_movie_1_x,
+def save(suggested_movies_x, sugg_numMovies_x, n, pref_movie_0_x, pref_movie_1_x, pref_movie_2_x, pref_movie_3_x,
+         pref_movie_4_x, suggested_movie_1_x,
          suggested_movie_2_x, suggested_movie_3_x, suggested_movie_4_x, suggested_movie_5_x, suggested_movie_6_x,
          suggested_movie_7_x, suggested_movie_8_x, suggested_movie_9_x, suggested_movie_10_x,
          favourite_x, poll_q1_x, poll_q2_x, poll_q3_x, date_page_task_description_1_x,
@@ -361,13 +343,23 @@ def save(n, pre_movie_0_x, pre_movie_1_x, pre_movie_2_x, pre_movie_3_x, pre_movi
 
     # variable n shows which page is used, if n is == 2 then user got list 2, is n == 1 then user got List 1
 
+    pref_movie = []
+
+    # https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions
+    for x in range(0, pref_numMovies):
+        pref_movie.append('pref_movie_'+str(x))
+
+    print(pref_movie)
+
+
+    # using the dictionary form to input data in mongodb
     new = {
         "Form": n,
-        "pre_movie_0": pre_movie_0_x,
-        "pre_movie_1": pre_movie_1_x,
-        "pre_movie_2": pre_movie_2_x,
-        "pre_movie_3": pre_movie_3_x,
-        "pre_movie_4": pre_movie_4_x,
+        "pre_movie_0": pref_movie_0_x,
+        "pre_movie_1": pref_movie_1_x,
+        "pre_movie_2": pref_movie_2_x,
+        "pre_movie_3": pref_movie_3_x,
+        "pre_movie_4": pref_movie_4_x,
         "suggested_movie_1": suggested_movie_1_x,
         "suggested_movie_2": suggested_movie_2_x,
         "suggested_movie_3": suggested_movie_3_x,
@@ -395,7 +387,7 @@ def save(n, pre_movie_0_x, pre_movie_1_x, pre_movie_2_x, pre_movie_3_x, pre_movi
         print("database entry successfully")
     except:
         print("database entry not successfully!")
-    # returns a successful message if sucessfull
+    # returns a successful message if successful
     print("db entry " + str(new) + " was successfully inserted in database")
     ## return str(message)
 
