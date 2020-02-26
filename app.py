@@ -195,10 +195,20 @@ def pref_movies():
     global pre_movie_0_description, pre_movie_0_title
     global pre_movie_1_description, pre_movie_1_title
 
+    dbmovies = db['movies']
+    allprefmovies = []
+    for movies in dbmovies.find({'type': 'pref'}, {"_id": False}):
+        allprefmovies.append(movies)
+
+    # for randomizing the movie list
+    random.shuffle(allprefmovies)
+
+    print(allprefmovies)
     # timestamp
     date_page_pref_movie_2 = datetime.datetime.utcnow()
 
     ##pre_movie_0 = str(request.form.get('q4_overallSatisfaction[0]'))
+   
     pre_movie_1 = str(request.form.get('q4_overallSatisfaction[1]'))
     pre_movie_2 = str(request.form.get('q4_overallSatisfaction[2]'))
     pre_movie_3 = str(request.form.get('q4_overallSatisfaction[3]'))
@@ -211,7 +221,7 @@ def pref_movies():
         else:
             return redirect(url_for('rec_movies_2'))
 
-    return render_template('/pref_movies.html', pre_movie_0_title=pre_movie_0_title, desc1=pre_movie_0_description)
+    return render_template('/pref_movies.html', movie=allprefmovies)
 
 
 @app.route('/rec_movies_1.html', methods=['POST', 'GET'])
@@ -224,27 +234,22 @@ def rec_movies_1():
     dbmovies = db['movies']
     allsuggmovies = []
 
-    name1 = dbmovies.find_one({'title': 'Interstellar'})
-
+    # just one query:
+    # name1 = dbmovies.find_one({'title': 'Interstellar'})
     # querying all titles
     # for x in range(0, sugg_numMovies):
-
     for movies in dbmovies.find({'type': 'rec'}, {"_id": False}):
         allsuggmovies.append(movies)
-
     # for randomizing the movie list
     random.shuffle(allsuggmovies)
-
     #for x in range(0, sugg_numMovies):
     #    titles.append() = allsuggmovies.split
-
     print(allsuggmovies)
     #print(allsuggmovies.pop())
     #
     # for x in range(0, sugg_numMovies):
     #    list = dbmovies.find()
     #    print('exit')
-
     date_page_rec_movie_3 = datetime.datetime.utcnow()
 
     suggested_movie_1 = str(request.form.get('q20_movies20[0]'))
