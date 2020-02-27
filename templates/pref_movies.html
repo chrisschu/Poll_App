@@ -72,11 +72,11 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
                   <p> <b>Trailer:</b> </p>
                 <a target="_blank" rel="noopener noreferrer" href="{{ o.trailer_link }}"><img src=" {{url_for('static', filename='imdb.png')}}" height="80" width="80"></a>
                 <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Like" name="q20_movies20[{{ o.number }}]" id="input_20_{{ o.number }}_1">
+                    <input type="radio" class="radio_item" value="Like" name="q_pref_movies[{{ o.number }}]" id="input_20_{{ o.number }}_1">
                          <label class="label_item" for="input_20_{{ o.number }}_1"> <img src=" {{url_for('static', filename='like.png')}}" height="42" width="42"> </label>
                 </td>
                 <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Dislike" name="q20_movies20[{{ o.number }}]" id="input_20_{{ o.number }}_2">
+                    <input type="radio" class="radio_item" value="Dislike" name="q_pref_movies[{{ o.number }}]" id="input_20_{{ o.number }}_2">
                          <label class="label_item" for="input_20_{{ o.number }}_2"> <img src=" {{url_for('static', filename='dislike.png')}}" height="42" width="42"> </label>
                 </td>
                     <td scope="row" style="text-align:center" class="form-matrix-values">

@@ -18,24 +18,26 @@ description = []
 trailer_link = []
 genre = []
 
-# write here how many movies should displayed at the page
-pref_numMovies = 49
-sugg_numMovies = 9
+# write here how many movies should displayed/used at the page
+pref_numMovies = 50
+sugg_numMovies = 10
 
+#
+preferred_movies = []
 suggested_movies = []
+
+#
+allprefmovies = []
+allsuggmovies = []
+
+#for the two movies likes of the user
+user_likes_movies = []
 
 # variables for timestamps
 date_page_task_description_1 = ''
 date_page_pref_movie_2 = ''
 date_page_rec_movie_3 = ''
 date_page_questionnaire_4 = ''
-
-# variables for rating the preference movies, for (Like/Dislike/unknown)
-pref_movie_0 = "X"
-pref_movie_1 = 'X'
-pref_movie_2 = 'X'
-pref_movie_3 = 'X'
-pref_movie_4 = 'X'
 
 # variables for rating the "suggested" movies, (Like/Dislike)
 suggested_movie_1 = 'X'
@@ -173,36 +175,74 @@ def task_description():
 @app.route('/pref_movies.html', methods=['POST', 'GET'])
 def pref_movies():
     global pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, date_page_pref_movie_2, page
-    global pre_movie_0_description, pre_movie_0_title
-    global pre_movie_1_description, pre_movie_1_title
+    # for loading data into the HTML page (for example title, cover, stars ...)
+    global allprefmovies
+    # for getting the survey data (like/dislike/unknown)
+    global preferred_movies
+    global user_likes_movies
+
+    # variable for storing 2 variable
+    user_preferences = [0, 0]
+
+    allprefmovies.clear()
+    preferred_movies.clear()
 
     dbmovies = db['movies']
-    allprefmovies = []
+
     for movies in dbmovies.find({'type': 'pref'}, {"_id": False}):
         allprefmovies.append(movies)
 
     # for randomizing the movie list
     random.shuffle(allprefmovies)
 
-    print(allprefmovies)
+    # print(allprefmovies)
     # timestamp
     date_page_pref_movie_2 = datetime.datetime.utcnow()
 
     ##pre_movie_0 = str(request.form.get('q4_overallSatisfaction[0]'))
+    # preferred_movies.append(str(request.form.get('q_pref_movies[1]')))
 
-    pre_movie_1 = str(request.form.get('q4_overallSatisfaction[1]'))
-    pre_movie_2 = str(request.form.get('q4_overallSatisfaction[2]'))
-    pre_movie_3 = str(request.form.get('q4_overallSatisfaction[3]'))
-    pre_movie_4 = str(request.form.get('q4_overallSatisfaction[4]'))
+    # to get the html input, passed in this list variable
+    for n in range(1, pref_numMovies):
+        preferred_movies.append(str(request.form.get('q_pref_movies[' + str(n) + ']')))
+
+    # variable geht die bewertete movieliste durch und speichert index/number in array.
+    # this array will be used for displaying the movie in the next page
+    for n in range(0, pref_numMovies):
+        if preferred_movies[n] == 'Like':
+            user_preferences.append(n)
+            if len(user_preferences) == 2:
+                # n gets max value to end the if clause
+                n = pref_numMovies
+
+    # print("number 1: "+ str(user_preferences[0]))
+
+    #for user_likes_movies in dbmovies.find({"$and": [{'type': 'pref'},{'number': int(user_preferences.pop)}], {"_id": False}):
+    #    allprefmovies.append(user_likes_movies)
+
+    # print("number 2: "+ str(user_preferences[1]))
+
+    #for user_likes_movies in dbmovies.find({'type': 'pref'}, {'number': user_preferences.pop}, {"_id": False}):
+    #   allprefmovies.append(user_likes_movies)
+
+    # old data
+    # pre_movie_1 = str(request.form.get('q4_overallSatisfaction[1]'))
+    # pre_movie_2 = str(request.form.get('q4_overallSatisfaction[2]'))
+    # pre_movie_3 = str(request.form.get('q4_overallSatisfaction[3]'))
+    # pre_movie_4 = str(request.form.get('q4_overallSatisfaction[4]'))
+    print(len(preferred_movies))
+    print("pref_movies_first: n: " + str(preferred_movies))
 
     if request.method == 'POST':
-        # will be exectued after form pref_movie_form is commited
+        # will be exectued after form pref_movie_form is committed
         if page == 1:
             return redirect(url_for('rec_movies_1'))
         else:
             return redirect(url_for('rec_movies_2'))
 
-    return render_template('/pref_movies.html', movie=allprefmovies)
+    print(user_likes_movies)
+
+    return render_template('/pref_movies.html', movie=allprefmovies, user_pref=user_likes_movies)
 
 
 @app.route('/rec_movies_1.html', methods=['POST', 'GET'])
@@ -210,30 +250,33 @@ def rec_movies_1():
     # list with 10 objects
     global suggested_movie_1, suggested_movie_2, suggested_movie_3, suggested_movie_4, suggested_movie_5, \
         suggested_movie_6, suggested_movie_7, suggested_movie_8, suggested_movie_9, suggested_movie_10, favourite, \
-        date_page_rec_movie_3, page, sugg_numMovies, suggested_movies
+        date_page_rec_movie_3, page, sugg_numMovies, suggested_movies, allsuggmovies
+
+    global user_likes_movies
 
     dbmovies = db['movies']
-    allsuggmovies = []
 
-    # just one query:
+    allsuggmovies.clear()
+    suggested_movies.clear()
+    # just one query for testing, [deactivated]
     # name1 = dbmovies.find_one({'title': 'Interstellar'})
+
     # querying all titles
     # for x in range(0, sugg_numMovies):
     for movies in dbmovies.find({'type': 'rec'}, {"_id": False}):
         allsuggmovies.append(movies)
+
     # for randomizing the movie list
     random.shuffle(allsuggmovies)
     # for x in range(0, sugg_numMovies):
     #    titles.append() = allsuggmovies.split
     print(allsuggmovies)
     # print(allsuggmovies.pop())
-    #
+    # suggested_movies = []
     # for x in range(0, sugg_numMovies):
     #    list = dbmovies.find()
     #    print('exit')
     date_page_rec_movie_3 = datetime.datetime.utcnow()
-
-    suggested_movies = []
 
     for n in range(0, sugg_numMovies):
         suggested_movies.append(str(request.form.get('q20_movies20[' + str(n) + ']')))
@@ -243,7 +286,7 @@ def rec_movies_1():
     if request.method == 'POST':
         return redirect(url_for('questionnaire'))
 
-    return render_template('/rec_movies_1.html', movie=allsuggmovies)
+    return render_template('/rec_movies_1.html', movie=allsuggmovies, user_pref=user_likes_movies)
 
 
 @app.route('/rec_movies_2.html', methods=['POST', 'GET'])
@@ -305,16 +348,19 @@ def submit():
 def my_new_form():
     ## Assignment of the resulted input of the html variables
 
-    global page, pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, suggested_movie_1, suggested_movie_2, \
+    global page, suggested_movie_1, suggested_movie_2, \
         suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, suggested_movie_7, suggested_movie_8, \
-        suggested_movie_9, suggested_movie_10, poll_q1, poll_q2, poll_q3, suggested_movies, sugg_numMovies
+        suggested_movie_9, suggested_movie_10, poll_q1, poll_q2, poll_q3, suggested_movies, sugg_numMovies, \
+        preferred_movies, pref_numMovies
 
     global date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4
 
     date_page_submit_5 = datetime.datetime.utcnow()
 
+    print(preferred_movies)
+
     ## saving in mongodb
-    save(suggested_movies, sugg_numMovies, page, pref_movie_0, pref_movie_1, pref_movie_2, pref_movie_3, pref_movie_4,
+    save(suggested_movies, sugg_numMovies, page, preferred_movies,
          suggested_movie_1, suggested_movie_2,
          suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, suggested_movie_7,
          suggested_movie_8, suggested_movie_9, suggested_movie_10, favourite, poll_q1, poll_q2, poll_q3,
@@ -330,8 +376,7 @@ def my_new_form():
     return "Db entry successful"
 
 
-def save(suggested_movies_x, sugg_numMovies_x, n, pref_movie_0_x, pref_movie_1_x, pref_movie_2_x, pref_movie_3_x,
-         pref_movie_4_x, suggested_movie_1_x,
+def save(suggested_movies_x, sugg_numMovies_x, n, preferred_movies_x, suggested_movie_1_x,
          suggested_movie_2_x, suggested_movie_3_x, suggested_movie_4_x, suggested_movie_5_x, suggested_movie_6_x,
          suggested_movie_7_x, suggested_movie_8_x, suggested_movie_9_x, suggested_movie_10_x,
          favourite_x, poll_q1_x, poll_q2_x, poll_q3_x, date_page_task_description_1_x,
@@ -343,23 +388,31 @@ def save(suggested_movies_x, sugg_numMovies_x, n, pref_movie_0_x, pref_movie_1_x
 
     # variable n shows which page is used, if n is == 2 then user got list 2, is n == 1 then user got List 1
 
+    # idea is to merge to two lists to get one dictionary for inserting survey data in db
+
+    # this list variable is for the left part of the dictionary (for example "pre_movie_0]
+    pref_movie_attributename = []
+
+    print(preferred_movies)
+    pref_movie = []
+
+    # for the right part of the dict
+    # passes the variable
     pref_movie = []
 
     # https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions
     for x in range(0, pref_numMovies):
-        pref_movie.append('pref_movie_'+str(x))
+        pref_movie_attributename.append('pref_movie_' + str(x))
 
-    print(pref_movie)
+    print("pref attribute name" + str(pref_movie_attributename))
+    print("preferred movie x" + str(preferred_movies_x))
 
+    print(dict(zip(pref_movie_attributename, preferred_movies_x)))
+    print("suggested movies" + str(suggested_movies))
 
     # using the dictionary form to input data in mongodb
     new = {
         "Form": n,
-        "pre_movie_0": pref_movie_0_x,
-        "pre_movie_1": pref_movie_1_x,
-        "pre_movie_2": pref_movie_2_x,
-        "pre_movie_3": pref_movie_3_x,
-        "pre_movie_4": pref_movie_4_x,
         "suggested_movie_1": suggested_movie_1_x,
         "suggested_movie_2": suggested_movie_2_x,
         "suggested_movie_3": suggested_movie_3_x,
@@ -380,6 +433,7 @@ def save(suggested_movies_x, sugg_numMovies_x, n, pref_movie_0_x, pref_movie_1_x
         "date_page_questionnaire_4": date_page_questionnaire_4_x,
         "date_page_submit_5": date_page_submit_5_x,
     }
+    new.update(dict(zip(pref_movie_attributename, preferred_movies_x)))
     try:
         ## Creates a new document in DB
         # creates a new ID for json-file in mongodb
@@ -389,6 +443,7 @@ def save(suggested_movies_x, sugg_numMovies_x, n, pref_movie_0_x, pref_movie_1_x
         print("database entry not successfully!")
     # returns a successful message if successful
     print("db entry " + str(new) + " was successfully inserted in database")
+    print("to see output --> http://127.0.0.1:5000/get_survey")
     ## return str(message)
 
     pass
