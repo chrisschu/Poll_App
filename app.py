@@ -30,7 +30,7 @@ suggested_movies = []
 allprefmovies = []
 allsuggmovies = []
 
-#for the two movies likes of the user
+# for the two movies likes of the user
 user_likes_movies = []
 
 # variables for timestamps
@@ -59,7 +59,7 @@ poll_q1 = 'X'
 poll_q2 = 'X'
 poll_q3 = 'X'
 
-# this variable is roundrobin princible, first user gets page 1, second user gets page 2, and so on
+# roundrobin principle, first user gets page 1, second user gets page 2, and so on
 page = 1
 
 app = Flask(__name__)
@@ -107,10 +107,12 @@ def get_movies():
         response.append("<br/>")
     return json.dumps(response)
 
+
 @app.route('/drop_survey')
 # planned feature to drop all data in database
 def drop_survey():
     return "coming soon"
+
 
 @app.route('/get_title')
 def title():
@@ -131,10 +133,9 @@ def poll():
     return render_template('poll.html', thing_to_say='Click here to start')
 
 
-@app.route('/welcome.html')
-def Movie_poll():
-    ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
-    return render_template('/Movie-Poll.html', thing_to_say='Click here to start')
+@app.route('/conditions.html')
+def conditions():
+    return render_template('/conditions.html', thing_to_say='Click here to start')
 
 
 @app.route('/my_form', methods=['POST'])
@@ -159,13 +160,13 @@ def my_form():
     return str(message)
 
 
-@app.route('/')
+@app.route('/welcome.html')
 def welcome():
     ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
     return render_template('/welcome.html', thing_to_say='Click here to start')
 
 
-@app.route('/task_description.html')
+@app.route('/')
 def task_description():
     ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
     global date_page_task_description_1
@@ -212,7 +213,7 @@ def pref_movies():
 
     # variable geht die bewertete movieliste durch und speichert index/number in array.
     # this array will be used for displaying the movie in the next page
-    #for n in range(0, pref_numMovies):
+    # for n in range(0, pref_numMovies):
     #    if preferred_movies[n] == 'Like':
     #        user_preferences.append(n)
     #        if len(user_preferences) == 2:
@@ -221,12 +222,12 @@ def pref_movies():
 
     # print("number 1: "+ str(user_preferences[0]))
 
-    #for user_likes_movies in dbmovies.find({"$and": [{'type': 'pref'},{'number': int(user_preferences.pop)}], {"_id": False}):
+    # for user_likes_movies in dbmovies.find({"$and": [{'type': 'pref'},{'number': int(user_preferences.pop)}], {"_id": False}):
     #    allprefmovies.append(user_likes_movies)
 
     # print("number 2: "+ str(user_preferences[1]))
 
-    #for user_likes_movies in dbmovies.find({'type': 'pref'}, {'number': user_preferences.pop}, {"_id": False}):
+    # for user_likes_movies in dbmovies.find({'type': 'pref'}, {'number': user_preferences.pop}, {"_id": False}):
     #   allprefmovies.append(user_likes_movies)
 
     # old data
@@ -351,10 +352,7 @@ def submit():
 def my_new_form():
     ## Assignment of the resulted input of the html variables
 
-    global page, suggested_movie_1, suggested_movie_2, \
-        suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, suggested_movie_7, suggested_movie_8, \
-        suggested_movie_9, suggested_movie_10, poll_q1, poll_q2, poll_q3, suggested_movies, sugg_numMovies, \
-        preferred_movies, pref_numMovies
+    global page, poll_q1, poll_q2, poll_q3, suggested_movies, sugg_numMovies, preferred_movies, pref_numMovies
 
     global date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4
 
@@ -392,7 +390,7 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
     pref_movie_attributename = []
     sugg_movie_attributename = []
 
-    #print(preferred_movies)
+    # print(preferred_movies)
     pref_movie = []
 
     # for the right part of the dict
@@ -405,7 +403,6 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
 
     for x in range(0, sugg_numMovies):
         sugg_movie_attributename.append('sugg_movie_' + str(x))
-
 
     print("pref attribute name" + str(pref_movie_attributename))
     print("preferred movie x" + str(preferred_movies_x))

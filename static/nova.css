@@ -835,4 +835,19 @@ buttons
 	top:1px;
 }
 
+a:link {
+  text-decoration: underline;
+  color: white;
+}
 
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
