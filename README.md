@@ -20,7 +20,7 @@ Tutorial is written for Windows/Linux.
 
 ## PyCharm Settings
 
-![PyCharm-Configuration](link-to-image)
+![PyCharm-Configuration](https://raw.githubusercontent.com/chrisschu/Poll_App/master/static/PyCharm_Settings.PNG)
 
 
 ### Python
