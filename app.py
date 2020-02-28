@@ -107,6 +107,10 @@ def get_movies():
         response.append("<br/>")
     return json.dumps(response)
 
+@app.route('/drop_survey')
+# planned feature to drop all data in database
+def drop_survey():
+    return "coming soon"
 
 @app.route('/get_title')
 def title():
@@ -169,7 +173,7 @@ def task_description():
     # timestamp
     date_page_task_description_1 = datetime.datetime.utcnow()
 
-    return render_template('/task_description.html', thing_to_say='Click here to start')
+    return render_template('/task_description.html', font_url='http://fonts.googleapis.com/css?family=PT+Sans:400,700')
 
 
 @app.route('/pref_movies.html', methods=['POST', 'GET'])
@@ -208,12 +212,12 @@ def pref_movies():
 
     # variable geht die bewertete movieliste durch und speichert index/number in array.
     # this array will be used for displaying the movie in the next page
-    for n in range(0, pref_numMovies):
-        if preferred_movies[n] == 'Like':
-            user_preferences.append(n)
-            if len(user_preferences) == 2:
-                # n gets max value to end the if clause
-                n = pref_numMovies
+    #for n in range(0, pref_numMovies):
+    #    if preferred_movies[n] == 'Like':
+    #        user_preferences.append(n)
+    #        if len(user_preferences) == 2:
+    #            # n gets max value to end the if clause
+    #            n = pref_numMovies
 
     # print("number 1: "+ str(user_preferences[0]))
 
@@ -239,7 +243,6 @@ def pref_movies():
             return redirect(url_for('rec_movies_1'))
         else:
             return redirect(url_for('rec_movies_2'))
-
     print(user_likes_movies)
 
     return render_template('/pref_movies.html', movie=allprefmovies, user_pref=user_likes_movies)
@@ -359,11 +362,8 @@ def my_new_form():
 
     print(preferred_movies)
 
-    ## saving in mongodb
-    save(suggested_movies, sugg_numMovies, page, preferred_movies,
-         suggested_movie_1, suggested_movie_2,
-         suggested_movie_3, suggested_movie_4, suggested_movie_5, suggested_movie_6, suggested_movie_7,
-         suggested_movie_8, suggested_movie_9, suggested_movie_10, favourite, poll_q1, poll_q2, poll_q3,
+    ## fuction for saving all data in mongo database
+    save(suggested_movies, page, preferred_movies, favourite, poll_q1, poll_q2, poll_q3,
          date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4,
          date_page_submit_5)
 
@@ -376,9 +376,7 @@ def my_new_form():
     return "Db entry successful"
 
 
-def save(suggested_movies_x, sugg_numMovies_x, n, preferred_movies_x, suggested_movie_1_x,
-         suggested_movie_2_x, suggested_movie_3_x, suggested_movie_4_x, suggested_movie_5_x, suggested_movie_6_x,
-         suggested_movie_7_x, suggested_movie_8_x, suggested_movie_9_x, suggested_movie_10_x,
+def save(suggested_movies_x, page_x, preferred_movies_x,
          favourite_x, poll_q1_x, poll_q2_x, poll_q3_x, date_page_task_description_1_x,
          date_page_pref_movie_2_x, date_page_rec_movie_3_x, date_page_questionnaire_4_x,
          date_page_submit_5_x):
@@ -390,10 +388,11 @@ def save(suggested_movies_x, sugg_numMovies_x, n, preferred_movies_x, suggested_
 
     # idea is to merge to two lists to get one dictionary for inserting survey data in db
 
-    # this list variable is for the left part of the dictionary (for example "pre_movie_0]
+    # this list variable is for the left part of the dictionary (for example "pre_movie_0")
     pref_movie_attributename = []
+    sugg_movie_attributename = []
 
-    print(preferred_movies)
+    #print(preferred_movies)
     pref_movie = []
 
     # for the right part of the dict
@@ -404,6 +403,10 @@ def save(suggested_movies_x, sugg_numMovies_x, n, preferred_movies_x, suggested_
     for x in range(0, pref_numMovies):
         pref_movie_attributename.append('pref_movie_' + str(x))
 
+    for x in range(0, sugg_numMovies):
+        sugg_movie_attributename.append('sugg_movie_' + str(x))
+
+
     print("pref attribute name" + str(pref_movie_attributename))
     print("preferred movie x" + str(preferred_movies_x))
 
@@ -412,17 +415,7 @@ def save(suggested_movies_x, sugg_numMovies_x, n, preferred_movies_x, suggested_
 
     # using the dictionary form to input data in mongodb
     new = {
-        "Form": n,
-        "suggested_movie_1": suggested_movie_1_x,
-        "suggested_movie_2": suggested_movie_2_x,
-        "suggested_movie_3": suggested_movie_3_x,
-        "suggested_movie_4": suggested_movie_4_x,
-        "suggested_movie_5": suggested_movie_5_x,
-        "suggested_movie_6": suggested_movie_6_x,
-        "suggested_movie_7": suggested_movie_7_x,
-        "suggested_movie_8": suggested_movie_8_x,
-        "suggested_movie_9": suggested_movie_9_x,
-        "suggested_movie_10": suggested_movie_10_x,
+        "Form": page_x,
         "favourite": favourite_x,
         "poll_q1": poll_q1_x,
         "poll_q2": poll_q2_x,
@@ -434,6 +427,7 @@ def save(suggested_movies_x, sugg_numMovies_x, n, preferred_movies_x, suggested_
         "date_page_submit_5": date_page_submit_5_x,
     }
     new.update(dict(zip(pref_movie_attributename, preferred_movies_x)))
+    new.update(dict(zip(sugg_movie_attributename, suggested_movies_x)))
     try:
         ## Creates a new document in DB
         # creates a new ID for json-file in mongodb

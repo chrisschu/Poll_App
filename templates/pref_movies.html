@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1" />
 <meta name="HandheldFriendly" content="true" />
 <title>Movie-Poll</title>
-<link href="https://cdn.jotfor.ms/static/formCss.css?3.3.14737" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='formCSS.css') }}" />
 <link type="text/css" media="print" rel="stylesheet" href="{{ url_for('static', filename='printForm.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='nova.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='form.css') }}"/>
@@ -57,6 +57,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
         </div>
       </li>
 
+		<div class="gallery">
             <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
         <tbody>
               <tr>
@@ -87,6 +88,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
           {% endfor %}
         </tbody>
         </table>
+        </div>
 
       <li id="cid_9" class="form-input-wide" data-type="control_pagebreak">
         <div class="form-pagebreak" data-component="pagebreak">

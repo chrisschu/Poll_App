@@ -1,52 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-
-.form-label-left{
-
-
-        width:150px;
-    }
-    .form-line{
-        padding-top:-2px;
-        padding-bottom:-2px;
-    }
-    .form-label-right{
-        width:150px;
-    }
-    body, html{
-        margin:0;
-        padding:0;
-        background: #333333;
-    }
-
-    .form-all{
-        margin:0px auto;
-        padding-top:0px;
-        width:1000px;
-        color:#eeeeee;
-        font-family:'Lato';
-        font-size:14px;
-    }
-    .form-radio-item label, .form-checkbox-item label, .form-grading-label, .form-header{
-        color: false;
-    }
-
-    /* Injected CSS Code */
-.form-label.form-label-auto {
-      display: block;
-      float: none;
-      text-align: left;
-      width: 100%;
-      }@import "http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext";
 .form-all:after {
   content: "";
   display: table;
   clear: both;
 }
 .form-all {
-  font-family: 'Lato';
-}@import "http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext";
+  font-family: "Lucida Grande", sans-serif;
+}
 .form-all {
-  width: 590px;
+  width: 690px;
 }
 .form-label-left,
 .form-label-right {
@@ -55,7 +16,13 @@
 .form-label {
   white-space: normal;
 }
-
+.form-label.form-label-auto {
+  display: inline-block;
+  float: left;
+  text-align: left;
+  word-break: break-word;
+  width: 150px;
+}
 .form-label-left {
   display: inline-block;
   white-space: normal;
@@ -88,10 +55,10 @@
   font-weight: normal;
 }
 .supernova {
-  background-color: #333333;
+  background-color: #ffffff;
 }
 .supernova body {
-  background-color: #333333;
+  background-color: transparent;
 }
 /*
 @width30: (unit(@formWidth, px) + 60px);
@@ -101,7 +68,7 @@
 /* | */
 @media screen and (min-width: 480px) {
   .supernova .form-all {
-    border: 1px solid #e6e6e6;
+    border: 1px solid #dcdcdc;
     -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
     box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
@@ -125,7 +92,7 @@
 }
 /* | */
 /* | */
-@media screen and (min-width: 480px) and (max-width: 589px) {
+@media screen and (min-width: 480px) and (max-width: 689px) {
   .jotform-form .form-all {
     margin: 0;
     width: 100%;
@@ -140,7 +107,7 @@
 }
 /* | */
 /* | */
-@media screen and (max-width: 589px) {
+@media screen and (max-width: 689px) {
   .jotform-form .form-all {
     margin: 0;
     width: 100%;
@@ -149,40 +116,39 @@
 /* | */
 .supernova .form-all,
 .form-all {
-  background-color: #9a8bff;
+  background-color: #ffffff;
   border: 1px solid transparent;
 }
 .form-header-group {
-  border-color: #aaa;
+  border-color: #e6e6e6;
 }
 .form-matrix-table tr {
   border-color: #e6e6e6;
 }
 .form-matrix-table tr:nth-child(2n) {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #f2f2f2;
 }
-
 .form-all {
-  color: #ffffff;
+  color: #555555;
 }
 .form-header-group .form-header {
-  color: #ffffff;
+  color: #555555;
 }
 .form-header-group .form-subHeader {
-  color: #1a1a1a;
+  color: #6f6f6f;
 }
 .form-sub-label {
-  color: #1a1a1a;
+  color: #6f6f6f;
 }
 .form-label-top,
 .form-label-left,
 .form-label-right,
 .form-html {
-  color: #ffffff;
+  color: #555555;
 }
 .form-checkbox-item label,
 .form-radio-item label {
-  color: #1a1a1a;
+  color: #6f6f6f;
 }
 .form-line.form-line-active {
   -webkit-transition-property: all;
@@ -269,7 +235,7 @@
 .form-all .form-submit-print {
   font-size: 1em;
   padding: 9px 15px;
-  font-family: "Lato";
+  font-family: "Lucida Grande", sans-serif;
   font-size: 14px;
   font-weight: normal;
 }
@@ -277,7 +243,7 @@
 .form-all .form-pagebreak-next {
   font-size: 1em;
   padding: 9px 15px;
-  font-family: "Lato", sans-serif;
+  font-family: "Lucida Grande", sans-serif;
   font-size: 14px;
   font-weight: normal;
 }
@@ -287,18 +253,12 @@
 }
 */
 h2.form-header {
-  line-height: 1.718em;
-  font-size: 2.014em;
-  text-align: center;
+  line-height: 1.618em;
+  font-size: 1.714em;
 }
 h2 ~ .form-subHeader {
   line-height: 1.5em;
   font-size: 1.071em;
-}
-h2.second-header {
-  line-height: 0.018em;
-  font-size: 1.414em;
-  text-align: center;
 }
 .form-header-group {
   text-align: left;
@@ -314,7 +274,7 @@ h2.second-header {
   padding: 4px 3px 2px 3px;
 }
 .form-header-group {
-  font-family: "Lato", sans-serif;
+  font-family: "Lucida Grande", sans-serif;
 }
 .form-section {
   padding: 0px 0px 0px 0px;
@@ -335,14 +295,14 @@ h2.second-header {
 .form-checkbox-other-input,
 .form-captcha input,
 .form-spinner input {
-  background-color: #333;
+  background-color: #9a8bff;
 }
 [data-type="control_dropdown"] .form-input,
 [data-type="control_dropdown"] .form-input-wide {
   width: 150px;
 }
 .form-label {
-  font-family: "Lato", sans-serif;
+  font-family: "Lucida Grande", sans-serif;
 }
 li[data-type="control_image"] div {
   text-align: left;
@@ -373,7 +333,7 @@ li[data-type="control_image"] img {
   -ms-transition-timing-function: ease;
   -o-transition-timing-function: ease;
   transition-timing-function: ease;
-  background-color: #ff3200;
+  background-color: #fff4f4;
 }
 .form-line-error .form-error-message {
   background-color: #ff3200;
@@ -449,7 +409,6 @@ li[data-type="control_image"] img {
     height: auto;
   }
   .form-matrix-row-headers {
-    font-size: 1.1em;
     width: 100%;
     word-break: break-all;
     min-width: 80px;
@@ -666,148 +625,16 @@ li[data-type="control_image"] img {
 }
 /* | */
 
-/*PREFERENCES STYLE*/
-    .form-all {
-      font-family: Lato, sans-serif;
-    }
-    .form-all .qq-upload-button,
-    .form-all .form-submit-button,
-    .form-all .form-submit-reset,
-    .form-all .form-submit-print {
-      font-family: Lato, sans-serif;
-    }
-    .form-all .form-pagebreak-back-container,
-    .form-all .form-pagebreak-next-container {
-      font-family: Lato, sans-serif;
-    }
-    .form-header-group {
-      font-family: Lato, sans-serif;
-    }
-    .form-label {
-      font-family: Lato, sans-serif;
-    }
+/*__INSPECT_SEPERATOR__*/
 
-    .form-label.form-label-auto {
-
-    display: block;
-    float: none;
-    text-align: left;
-    width: 100%;
-
-    }
-
-    .form-line {
-      margin-top: -2px;
-      margin-bottom: -2px;
-    }
-
-    .form-all {
-      width: 960px;
-    }
-
-    .form-label-left,
-    .form-label-right,
-    .form-label-left.form-label-auto,
-    .form-label-right.form-label-auto {
-      width: 150px;
-    }
-
-    .form-all {
-      font-size: 14px
-    }
-    .form-all .qq-upload-button,
-    .form-all .qq-upload-button,
-    .form-all .form-submit-button,
-    .form-all .form-submit-reset,
-    .form-all .form-submit-print {
-      font-size: 14px
-    }
-    .form-all .form-pagebreak-back-container,
-    .form-all .form-pagebreak-next-container {
-      font-size: 14px
-    }
-
-    .supernova .form-all, .form-all {
-      background-color: #333333;
-      border: 1px solid transparent;
-    }
-
-    .form-all {
-      color: #eeeeee;
-    }
-    .form-header-group .form-header {
-      color: #f5f5f5;
-    }
-    .form-header-group .form-subHeader {
-      color: #f5f5f5;
-    }
-    .form-label-top,
-    .form-label-left,
-    .form-label-right,
-    .form-html,
-    .form-checkbox-item label,
-    .form-radio-item label {
-      color: #ffffff;
-    }
-    .form-sub-label {
-      color: #1a1a1a;
-    }
-
-    .supernova {
-      background-color: #333333;
-    }
-  /*.supernova body {
-      background: transparent;
-    }
-   */
-    .form-textbox,
-    .form-textarea,
-    .form-radio-other-input,
-    .form-checkbox-other-input,
-    .form-captcha input,
-    .form-spinner input {
-      background-color: #333333;
-    }
-
-    .supernova {
-      background-image: none;
-    }
-    #stage {
-      background-image: none;
-    }
-
-    .form-all {
-      background-image: none;
-    }
-
-  .ie-8 .form-all:before { display: none; }
-  .ie-8 {
-    margin-top: auto;
-    margin-top: initial;
+  .p customp {
+   font-size: 40px;
   }
 
-  /*PREFERENCES STYLE*//*__INSPECT_SEPERATOR__*/.form-matrix-table {
-    min-width : 100% !important;
-}
+  label {
+    text-align: left;
+  }
 
+  /* Questionnaire Changes
 
-.form-matrix-row-headers {
-    background : #333333;
-}
-
-.form-matrix-column-headers{
-    font-size : 12px;
-}
-
-.form-matrix-column-headers-headers {
-    background : white;
-}
-
-
-.form-line-error{
-  color : white;
-}
-
-.form-line-active{
-  color : black;
-}
+   */
