@@ -1,15 +1,15 @@
 # Poll App
 
-LAST CHANGE: 11.02.2020
+LAST CHANGE: 28.02.2020
 
-    * new Like/Dislike buttons
-    * db-changes, now all suggested Movies - Rating included in DB
-    * further design changes in tables
+    * pages have now dark theme
+    * lists and savings in mongo db are generated automatically
+
+NEXT CHANGES will be released soon: 
 
 The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
 It contains a questionnaire which results will be inserted into the database.
  
-At the moment this app offers only insertion, not viewing the database. 
 
 As database the cloud solution **MongoDB Atlas** will be used.
 
@@ -17,6 +17,11 @@ As database the cloud solution **MongoDB Atlas** will be used.
 
 I used PyCharm.
 Tutorial is written for Windows/Linux.
+
+## PyCharm Settings
+
+![PyCharm-Configuration](link-to-image)
+
 
 ### Python
 **Python 3** is required.
