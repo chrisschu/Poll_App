@@ -15,18 +15,6 @@
 <link type="text/css" media="print" rel="stylesheet" href="{{ url_for('static', filename='printForm.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='nova.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='form.css') }}"/>
-<script src="https://cdn.jotfor.ms/static/prototype.forms.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/static/jotform.forms.js?3.3.14737" type="text/javascript"></script>
-<script type="text/javascript">
-	JotForm.init(function(){
-    /*INIT-END*/
-	});
-
-   JotForm.prepareCalculationsOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":"Satisfaction Poll","type":"control_head"},{"name":"submit","qid":"2","text":"Submit","type":"control_button"},null,{"name":"overallSatisfaction","qid":"4","text":"Overall satisfaction","type":"control_matrix"},null,{"name":"pageBreak","qid":"6","text":"Page Break","type":"control_pagebreak"},{"name":"questionnaire","qid":"7","text":"Questionnaire","type":"control_head"},null,{"name":"pageBreak9","qid":"9","text":"Page Break","type":"control_pagebreak"},{"name":"welcome","qid":"10","text":"Welcome","type":"control_head"},{"name":"input11","qid":"11","text":"Aufkl&auml;rungstext (following....)\n&nbsp;\nDSGVO","type":"control_text"},{"name":"pageBreak16","qid":"12","text":"Page Break","type":"control_pagebreak"},{"name":"taskDescription","qid":"13","text":"Task Description","type":"control_head"},{"name":"input14","qid":"14","text":"Following Pages contains:\n&nbsp;\n1)\n2)\n3)\n&nbsp;\nFollow the instructions","type":"control_text"},{"name":"pageBreak15","qid":"15","text":"Page Break","type":"control_pagebreak"},{"name":"pageBreak16","qid":"16","text":"Page Break","type":"control_pagebreak"},{"name":"movies","qid":"17","text":"Movies","type":"control_head"},{"name":"input18","qid":"18","text":"Instruction:\nTEXT\n\n\n\n&nbsp;d\n&nbsp;d\nd \nd d\n\n\n\n&nbsp;","type":"control_text"},null,{"description":"","name":"movies20","qid":"20","text":"Movies","type":"control_matrix"},{"name":"input21","qid":"21","text":"You liked Pulp Fiction, Inception","type":"control_text"},null,{"description":"","name":"bestRecommended","qid":"23","subLabel":"","text":"Best recommended Movie","type":"control_dropdown"},{"name":"thankYou","qid":"24","text":"Thank you very much for participating","type":"control_head"},{"name":"input25","qid":"25","text":"Submit for ending the poll and generating the amazon mechanical turk code","type":"control_text"},{"description":"","name":"theItems","qid":"26","text":"The items recommended to me matched my interests","type":"control_radio"},{"description":"","name":"someOf","qid":"27","text":"Some of the recommended items are familiar to me","type":"control_radio"},{"description":"","name":"theItems28","qid":"28","text":"The items recommended to me are novel","type":"control_radio"}]);
-   setTimeout(function() {
-JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":"Satisfaction Poll","type":"control_head"},{"name":"submit","qid":"2","text":"Submit","type":"control_button"},null,{"name":"overallSatisfaction","qid":"4","text":"Overall satisfaction","type":"control_matrix"},null,{"name":"pageBreak","qid":"6","text":"Page Break","type":"control_pagebreak"},{"name":"questionnaire","qid":"7","text":"Questionnaire","type":"control_head"},null,{"name":"pageBreak9","qid":"9","text":"Page Break","type":"control_pagebreak"},{"name":"welcome","qid":"10","text":"Welcome","type":"control_head"},{"name":"input11","qid":"11","text":"Aufkl&auml;rungstext (following....)\n&nbsp;\nDSGVO","type":"control_text"},{"name":"pageBreak16","qid":"12","text":"Page Break","type":"control_pagebreak"},{"name":"taskDescription","qid":"13","text":"Task Description","type":"control_head"},{"name":"input14","qid":"14","text":"Following Pages contains:\n&nbsp;\n1)\n2)\n3)\n&nbsp;\nFollow the instructions","type":"control_text"},{"name":"pageBreak15","qid":"15","text":"Page Break","type":"control_pagebreak"},{"name":"pageBreak16","qid":"16","text":"Page Break","type":"control_pagebreak"},{"name":"movies","qid":"17","text":"Movies","type":"control_head"},{"name":"input18","qid":"18","text":"Instruction:\nTEXT\n\n\n\n&nbsp;d\n&nbsp;d\nd \nd d\n\n\n\n&nbsp;","type":"control_text"},null,{"description":"","name":"movies20","qid":"20","text":"Movies","type":"control_matrix"},{"name":"input21","qid":"21","text":"You liked Pulp Fiction, Inception","type":"control_text"},null,{"description":"","name":"bestRecommended","qid":"23","subLabel":"","text":"Best recommended Movie","type":"control_dropdown"},{"name":"thankYou","qid":"24","text":"Thank you very much for participating","type":"control_head"},{"name":"input25","qid":"25","text":"Submit for ending the poll and generating the amazon mechanical turk code","type":"control_text"},{"description":"","name":"theItems","qid":"26","text":"The items recommended to me matched my interests","type":"control_radio"},{"description":"","name":"someOf","qid":"27","text":"Some of the recommended items are familiar to me","type":"control_radio"},{"description":"","name":"theItems28","qid":"28","text":"The items recommended to me are novel","type":"control_radio"}]);}, 20);
-</script>
-
     <link rel=stylesheet type=
             text/css href="{{ url_for('static', filename='poll_style.css') }}" />
 <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/buttons/form-submit-button-simple_grey.css?3.3.14737"/>
@@ -48,11 +36,38 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
           </div>
         </div>
       </li>
-
+      <li class="form-line" data-type="control_radio" id="id_26">
+        <label class="form-label form-label-top" id="label_26" for="input_26"> 6)6 </label>
+        <div id="cid_26" class="form-input-wide">
+<table class="questionnaire">
+  <tr>
+    <th class="questionnaire-g1fv"></th>
+    <th class="questionnaire-aaj5">Completely disagree<br>(1)<br></th>
+    <th class="questionnaire-aaj5">(2)<br></th>
+    <th class="questionnaire-aaj5"><br>(3)<br></th>
+    <th class="questionnaire-aaj5"><br>(4)</th>
+    <th class="questionnaire-aaj5"><br>(5)</th>
+    <th class="questionnaire-aaj5"><br>(6)</th>
+    <th class="questionnaire-aaj5">Completely agree<br>(7)</th>
+  </tr>
+    {% for q in questions %}
+  <tr>
+    <td class="questionnaire-g1fv"> test {{ q.question }}</td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_{{ q.number }}" value="1"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_{{ q.number }}" value="2"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_{{ q.number }}" value="3"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_4" name="q_survey_{{ q.number }}" value="4"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_5" name="q_survey_{{ q.number }}" value="5"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_6" name="q_survey_{{ q.number }}" value="6"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_7" name="q_survey__{{ q.number }}" value="7"></td>
+  </tr>
+    {% endfor %}
+</table>
+        </div>
 
       <li class="form-line" data-type="control_radio" id="id_26">
 
-        <label class="form-label form-label-top" id="label_26" for="input_26"> I liked the movies recommendation </label>
+        <label class="form-label form-label-top" id="label_26" for="input_26"> I liked the movies recommendation</label>
         <div id="cid_26" class="form-input-wide">
           <div class="form-single-column" role="group" aria-labelledby="label_26" data-component="radio">
             <span class="form-radio-item" style="clear:left">
