@@ -32,7 +32,8 @@
             <h2 id="header_13" class="form-header" data-component="header">
               Finally, a brief little survey.
             </h2>
-              <p>Questions about the recommended movies</p>
+              <p>Questions about the recommended movies <b>(still under construction)</b>
+              </p>
           </div>
         </div>
       </li>
@@ -52,7 +53,7 @@
   </tr>
     {% for q in questions %}
   <tr>
-    <td class="questionnaire-g1fv"> test {{ q.question }}</td>
+    <td class="questionnaire-g1fv"> {{ q.question }}</td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_{{ q.number }}" value="1"></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_{{ q.number }}" value="2"></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_{{ q.number }}" value="3"></td>

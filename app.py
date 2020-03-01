@@ -93,7 +93,7 @@ def get_surveys():
 @app.route('/get_movies')
 # displays the data of the movies collection
 def get_movies():
-    documents = collection_movies.find()
+    documents = collection_questions.find()
     response = []
     for document in documents:
         document['_id'] = str(document['_id'])
@@ -227,11 +227,13 @@ def pref_movies():
         # result = movies.find().limit(3)
 
         # loop is for filling user_likes_movies list, user preferences two
-        for n in range(0, 2):
-            print("user_preferences:" + str(user_preferences[n]))
-            for movies in dbmovies.find({'number': user_preferences[n], 'type': "pref"}, {"_id": False}):
-                user_likes_movies.append(movies)
-
+        try:
+            for n in range(0, 2):
+                print("user_preferences:" + str(user_preferences[n]))
+                for movies in dbmovies.find({'number': user_preferences[n], 'type': "pref"}, {"_id": False}):
+                    user_likes_movies.append(movies)
+        except IndexError as error:
+            print("Please Like 2 Movies")
     print("number 1: " + str(user_preferences))
 
     # for user_likes_movies in dbmovies.find
@@ -264,7 +266,7 @@ def rec_movies_1():
     # list with 10 objects
     global favourite, date_page_rec_movie_3, page, sugg_numMovies, suggested_movies, allsuggmovies, watchlist
     global user_likes_movies, user_likes_movies, user_preferences
-
+    print("allsugmovies: " + str(allsuggmovies))
     dbmovies = db['movies']
 
     allsuggmovies.clear()
@@ -354,10 +356,14 @@ def questionnaire():
     global poll_q1, poll_q2, poll_q3, date_page_questionnaire_4
     global questions, quest_num, allquestions
 
-    date_page_rec_movie_4 = datetime.datetime.utcnow()
-
     dbquestions = db['questions']
 
+    for question in dbquestions.find():
+        allquestions.append(question)
+
+    print("allquestions: " + str(allquestions))
+    date_page_rec_movie_4 = datetime.datetime.utcnow()
+    # dbquestions = db['questions']
     # allquestions.clear()
     # questions.clear()
     # just one query for testing, [deactivated]
@@ -365,8 +371,6 @@ def questionnaire():
 
     # querying all titles
     # for x in range(0, sugg_numMovies):
-    for questions in dbquestions.find({'rating_rec': 'pref'}, {"_id": False}):
-        allquestions.append(questions)
 
     for n in range(0, 3):
         questions.append(str(request.form.get('q_survey_' + str(n) + ']')))
