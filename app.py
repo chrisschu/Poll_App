@@ -196,7 +196,7 @@ def pref_movies():
     # for randomizing the movie list
     random.shuffle(allprefmovies)
 
-    print("allprefmovies: " + str(allprefmovies))
+    #print("allprefmovies: " + str(allprefmovies))
     # timestamp
     date_page_pref_movie_2 = datetime.datetime.utcnow()
 
@@ -208,8 +208,8 @@ def pref_movies():
         for n in range(1, pref_numMovies):
             preferred_movies.append(str(request.form.get('q_pref_movies[' + str(n) + ']')))
 
-        print(len(preferred_movies))
-        print("pref_movies_first: n: " + str(preferred_movies))
+        #print(len(preferred_movies))
+        #print("pref_movies_first: n: " + str(preferred_movies))
 
         # variable geht die bewertete movieliste durch und speichert index/number in array.
         # this array will be used for displaying the movie in the next page
@@ -398,7 +398,7 @@ def my_new_form():
 
     date_page_submit_5 = datetime.datetime.utcnow()
 
-    print(preferred_movies)
+    #print(preferred_movies)
 
     ## fuction for saving all data in mongo database
     save(suggested_movies, page, preferred_movies, favourite, poll_q1, poll_q2, poll_q3, watchlist,
@@ -442,8 +442,8 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
     ##print("pref attribute name" + str(pref_movie_attributename)) TODO
     ##print("preferred movie x" + str(preferred_movies_x))
 
-    print(dict(zip(pref_movie_attributename, preferred_movies_x)))
-    print(dict(zip(sugg_movie_attributename, suggested_movies_x)))
+    #print(dict(zip(pref_movie_attributename, preferred_movies_x)))
+    #print(dict(zip(sugg_movie_attributename, suggested_movies_x)))
 
     print("suggested movies" + str(suggested_movies))
 
@@ -473,7 +473,7 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
         print("database entry not successfully!")
     # returns a successful message if successful
     print("db entry " + str(new) + " was successfully inserted in database")
-    print("to see output --> http://127.0.0.1:5000/get_survey")
+    #print("to see output --> http://127.0.0.1:5000/get_survey")
     ## return str(message)
 
     pass

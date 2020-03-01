@@ -11,21 +11,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1" />
 <meta name="HandheldFriendly" content="true" />
 <title>Movie-Poll</title>
-<link href="https://cdn.jotfor.ms/static/formCss.css?3.3.14737" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='formCSS.css') }}" />
 <link type="text/css" media="print" rel="stylesheet" href="{{ url_for('static', filename='printForm.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='nova.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='form.css') }}"/>
-<script src="https://cdn.jotfor.ms/static/prototype.forms.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/static/jotform.forms.js?3.3.14737" type="text/javascript"></script>
-<script type="text/javascript">
-	JotForm.init(function(){
-    /*INIT-END*/
-	});
-
-   JotForm.prepareCalculationsOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":"Satisfaction Poll","type":"control_head"},{"name":"submit","qid":"2","text":"Submit","type":"control_button"},null,{"name":"overallSatisfaction","qid":"4","text":"Overall satisfaction","type":"control_matrix"},null,{"name":"pageBreak","qid":"6","text":"Page Break","type":"control_pagebreak"},{"name":"questionnaire","qid":"7","text":"Questionnaire","type":"control_head"},null,{"name":"pageBreak9","qid":"9","text":"Page Break","type":"control_pagebreak"},{"name":"welcome","qid":"10","text":"Welcome","type":"control_head"},{"name":"input11","qid":"11","text":"Aufkl&auml;rungstext (following....)\n&nbsp;\nDSGVO","type":"control_text"},{"name":"pageBreak16","qid":"12","text":"Page Break","type":"control_pagebreak"},{"name":"taskDescription","qid":"13","text":"Task Description","type":"control_head"},{"name":"input14","qid":"14","text":"Following Pages contains:\n&nbsp;\n1)\n2)\n3)\n&nbsp;\nFollow the instructions","type":"control_text"},{"name":"pageBreak15","qid":"15","text":"Page Break","type":"control_pagebreak"},{"name":"pageBreak16","qid":"16","text":"Page Break","type":"control_pagebreak"},{"name":"movies","qid":"17","text":"Movies","type":"control_head"},{"name":"input18","qid":"18","text":"Instruction:\nTEXT\n\n\n\n&nbsp;d\n&nbsp;d\nd \nd d\n\n\n\n&nbsp;","type":"control_text"},null,{"description":"","name":"movies20","qid":"20","text":"Movies","type":"control_matrix"},{"name":"input21","qid":"21","text":"You liked Pulp Fiction, Inception","type":"control_text"},null,{"description":"","name":"bestRecommended","qid":"23","subLabel":"","text":"Best recommended Movie","type":"control_dropdown"},{"name":"thankYou","qid":"24","text":"Thank you very much for participating","type":"control_head"},{"name":"input25","qid":"25","text":"Submit for ending the poll and generating the amazon mechanical turk code","type":"control_text"},{"description":"","name":"theItems","qid":"26","text":"The items recommended to me matched my interests","type":"control_radio"},{"description":"","name":"someOf","qid":"27","text":"Some of the recommended items are familiar to me","type":"control_radio"},{"description":"","name":"theItems28","qid":"28","text":"The items recommended to me are novel","type":"control_radio"}]);
-   setTimeout(function() {
-JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":"Satisfaction Poll","type":"control_head"},{"name":"submit","qid":"2","text":"Submit","type":"control_button"},null,{"name":"overallSatisfaction","qid":"4","text":"Overall satisfaction","type":"control_matrix"},null,{"name":"pageBreak","qid":"6","text":"Page Break","type":"control_pagebreak"},{"name":"questionnaire","qid":"7","text":"Questionnaire","type":"control_head"},null,{"name":"pageBreak9","qid":"9","text":"Page Break","type":"control_pagebreak"},{"name":"welcome","qid":"10","text":"Welcome","type":"control_head"},{"name":"input11","qid":"11","text":"Aufkl&auml;rungstext (following....)\n&nbsp;\nDSGVO","type":"control_text"},{"name":"pageBreak16","qid":"12","text":"Page Break","type":"control_pagebreak"},{"name":"taskDescription","qid":"13","text":"Task Description","type":"control_head"},{"name":"input14","qid":"14","text":"Following Pages contains:\n&nbsp;\n1)\n2)\n3)\n&nbsp;\nFollow the instructions","type":"control_text"},{"name":"pageBreak15","qid":"15","text":"Page Break","type":"control_pagebreak"},{"name":"pageBreak16","qid":"16","text":"Page Break","type":"control_pagebreak"},{"name":"movies","qid":"17","text":"Movies","type":"control_head"},{"name":"input18","qid":"18","text":"Instruction:\nTEXT\n\n\n\n&nbsp;d\n&nbsp;d\nd \nd d\n\n\n\n&nbsp;","type":"control_text"},null,{"description":"","name":"movies20","qid":"20","text":"Movies","type":"control_matrix"},{"name":"input21","qid":"21","text":"You liked Pulp Fiction, Inception","type":"control_text"},null,{"description":"","name":"bestRecommended","qid":"23","subLabel":"","text":"Best recommended Movie","type":"control_dropdown"},{"name":"thankYou","qid":"24","text":"Thank you very much for participating","type":"control_head"},{"name":"input25","qid":"25","text":"Submit for ending the poll and generating the amazon mechanical turk code","type":"control_text"},{"description":"","name":"theItems","qid":"26","text":"The items recommended to me matched my interests","type":"control_radio"},{"description":"","name":"someOf","qid":"27","text":"Some of the recommended items are familiar to me","type":"control_radio"},{"description":"","name":"theItems28","qid":"28","text":"The items recommended to me are novel","type":"control_radio"}]);}, 20);
-</script>
 
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='poll_style.css') }}" />
 <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/buttons/form-submit-button-simple_grey.css?3.3.14737"/>
@@ -51,10 +40,13 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
       <li class="form-line form-line-column form-col-1" data-type="control_text" id="id_21">
         <div id="cid_21" class="form-input-wide">
           <div id="text_21" class="form-html" data-component="text">
-            <p>Fill in every row and rate the movie with 'Like' or 'Dislike'.
-              <br>At least pick one favourite movie by clicking the star icon</p>
+              <h4>Instruction</h4>
               <p></p>
-          </div>
+            <ul>
+                <li>For movies you like <b>hit the checkbox</b> 'Add to Watchlist'</b>.</li>
+                <li><b>Pick one</b> movie as 'Next Movie to Watch'</li>
+            </ul>
+              </div>
         </div>
       </li>
 
@@ -65,246 +57,59 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
           </span>
         </label>
         <div id="cid_20" class="form-input-wide jf-required">
-          <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
-            <tbody>
+        <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
+        <tbody>
               <tr>
-                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_0"> Interstellar </label>
-                </th>
-                <td style="text-align:left" class="form-matrix-values">
-                  <p> A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.  </p>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                  <!-- <input type="radio" id="input_20_0_1" class="form-radio validate[required, requireEveryRow]" name="q20_movies20[0]" value="Trailer (click for watching)" aria-labelledby="label_20 label_20_row_0 label_20_col_1" /> -->
-                  <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/zSWdZVtXT7E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Like" name="q20_movies20[0]" id="input_20_0_1">
-                         <label class="label_item" for="input_20_0_1"> <img src=" {{url_for('static', filename='like.png')}}" height="42" width="42"> </label>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Dislike" name="q20_movies20[0]" id="input_20_0_2">
-                         <label class="label_item" for="input_20_0_2"> <img src=" {{url_for('static', filename='dislike.png')}}" height="42" width="42"> </label>
-                </td>
-                    <td scope="row" style="text-align:center" class="form-matrix-values">
-                      <input type="radio" class="radio_item" value="Interstellar" name="q23_bestRecommended" id="input_20_0_3">
-                         <label class="label_item" for="input_20_0_3"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_1"> Django Unchained </label>
-                </th>
-                <td style="text-align:left" class="form-matrix-values">
-                  <p>With the help of a German bounty hunter, a freed slave sets out to rescue his wife from a brutal Mississippi plantation owner.</p>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <iframe width="280" height="175"  src="https://www.youtube.com/embed/_iH0UBYDI4g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </td>
-                  <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Like" name="q20_movies20[1]" id="input_20_1_1">
-                         <label class="label_item" for="input_20_1_1"> <img src=" {{url_for('static', filename='like.png')}}" height="42" width="42"> </label>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Dislike" name="q20_movies20[1]" id="input_20_1_2">
-                         <label class="label_item" for="input_20_1_2"> <img src=" {{url_for('static', filename='dislike.png')}}" height="42" width="42"> </label>
-                </td>
-                    <td scope="row" style="text-align:center" class="form-matrix-values">
-                      <input type="radio" class="radio_item" value="Django Unchained " name="q23_bestRecommended" id="input_20_1_3">
-                         <label class="label_item" for="input_20_1_3"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_2"> Prestige </label>
-                </th>
-                <td style="text-align:left" class="form-matrix-values">
-                <p> After a tragic accident, two stage magicians engage in a battle to create the ultimate illusion while sacrificing everything they have to outwit each other.</p>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                   <iframe width="280" height="175" src="https://www.youtube-nocookie.com/embed/ijXruSzfGEc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </td>
-                  <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Like" name="q20_movies20[2]" id="input_20_2_1">
-                         <label class="label_item" for="input_20_2_1"> <img src=" {{url_for('static', filename='like.png')}}" height="42" width="42"> </label>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Dislike" name="q20_movies20[2]" id="input_20_2_2">
-                         <label class="label_item" for="input_20_2_2"> <img src=" {{url_for('static', filename='dislike.png')}}" height="42" width="42"> </label>
-                </td>
-                <td scope="row" style="text-align:center" class="form-matrix-values">
-                     <input type="radio" class="radio_item" value="Prestige" name="q23_bestRecommended" id="input_20_2_3">
-                        <label class="label_item" for="input_20_2_3"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"></label>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_3"> Batman Begins </label>
-                </th>
-                <td style="text-align:left" class="form-matrix-values">
-                  <p>After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from corruption. </p>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <iframe width="280" height="175" src="https://www.youtube.com/embed/vak9ZLfhGnQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Like" name="q20_movies20[3]" id="input_20_3_1">
-                         <label class="label_item" for="input_20_3_1"> <img src=" {{url_for('static', filename='like.png')}}" height="42" width="42"> </label>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Dislike" name="q20_movies20[3]" id="input_20_3_2">
-                         <label class="label_item" for="input_20_3_2"> <img src=" {{url_for('static', filename='dislike.png')}}" height="42" width="42"> </label>
-                </td>
-                <td scope="row" style="text-align:center" class="form-matrix-values">
-                       <input type="radio" class="radio_item" value="Batman Begins" name="q23_bestRecommended" id="input_20_3_3">
-                            <label class="label_item" for="input_20_3_3"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"></label>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_4"> Shutter Island </label>
-                </th>
-                <td style="text-align:left" class="form-matrix-values">
-                       <p>In 1954, a U.S. Marshal investigates the disappearance of a murderer who escaped from a hospital for the criminally insane.</p>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <iframe width="280" height="175" src="https://www.youtube.com/embed/5iaYLCiq5RM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </td>
-                  <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Like" name="q20_movies20[4]" id="input_20_4_1">
-                         <label class="label_item" for="input_20_4_1"> <img src=" {{url_for('static', filename='like.png')}}" height="42" width="42"> </label>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Dislike" name="q20_movies20[4]" id="input_20_4_2">
-                         <label class="label_item" for="input_20_4_2"> <img src=" {{url_for('static', filename='dislike.png')}}" height="42" width="42"> </label>
-                </td>
-                                      <td scope="row" style="text-align:center" class="form-matrix-values">
-                       <input type="radio" class="radio_item" value="Shutter Island" name="q23_bestRecommended" id="input_20_4_3">
-                        <label class="label_item" for="input_20_4_3"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_5"> Kill Bill: Vol. 1 </label>
-                </th>
-                <td style="text-align:left" class="form-matrix-values">
-                    <p>After awakening from a four-year coma, a former assassin wreaks vengeance on the team of assassins who betrayed her.</p>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <iframe width="280" height="175" src="https://www.youtube.com/embed/ORFWdXl_zJ4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </td>
-                  <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Like" name="q20_movies20[5]" id="input_20_5_1">
-                         <label class="label_item" for="input_20_5_1"> <img src=" {{url_for('static', filename='like.png')}}" height="42" width="42"> </label>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Dislike" name="q20_movies20[5]" id="input_20_5_2">
-                         <label class="label_item" for="input_20_5_2"> <img src=" {{url_for('static', filename='dislike.png')}}" height="42" width="42"> </label>
-                </td>
-                                      <td scope="row" style="text-align:center" class="form-matrix-values">
-                      <input type="radio" class="radio_item" value="Kill Bill: Vol. 1" name="q23_bestRecommended" id="input_20_5_3">
-                        <label class="label_item" for="input_20_5_3"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"></label>
-                </td>
-              </tr>
-             <tr>
-                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_5"> The Wolf of Wall Street </label>
-                </th>
-                <td style="text-align:left" class="form-matrix-values">
-                    <p>Relive the excessive profanity, lengthy runtime, and bad behavior of Martin Scorsese's The Wolf of Wall Street.</p>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <iframe width="280" height="175" src="https://www.youtube.com/embed/iszwuX1AK6A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </td>
-                  <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Like" name="q20_movies20[6]" id="input_20_6_1">
-                         <label class="label_item" for="input_20_6_1"> <img src=" {{url_for('static', filename='like.png')}}" height="42" width="42"> </label>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Dislike" name="q20_movies20[6]" id="input_20_6_2">
-                         <label class="label_item" for="input_20_6_2"> <img src=" {{url_for('static', filename='dislike.png')}}" height="42" width="42"> </label>
-                </td>
-                                      <td scope="row" style="text-align:center" class="form-matrix-values">
-                       <input type="radio" class="radio_item" value="The Wolf of Wall Street" name="q23_bestRecommended" id="input_20_6_3">
-    <label class="label_item" for="input_20_6_3"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
-                </td>
-              </tr>
-             <tr>
-                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_5"> Terminator 2: Judgment Day </label>
-                </th>
-                <td style="text-align:left" class="form-matrix-values">
-                    <p>A cyborg, identical to the one who failed to kill Sarah Connor, must now protect her teenage son, John Connor, from a more advanced and powerful cyborg..</p>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <iframe width="280" height="175" src="https://www.youtube.com/embed/5ktiuGhFV9g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </td>
-                  <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Like" name="q20_movies20[7]" id="input_20_7_1">
-                         <label class="label_item" for="input_20_7_1"> <img src=" {{url_for('static', filename='like.png')}}" height="42" width="42"> </label>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Dislike" name="q20_movies20[7]" id="input_20_7_2">
-                         <label class="label_item" for="input_20_7_2"> <img src=" {{url_for('static', filename='dislike.png')}}" height="42" width="42"> </label>
-                </td>
-                                      <td scope="row" style="text-align:center" class="form-matrix-values">
-                      <input type="radio" class="radio_item" value="Terminator 2: Judgment Day" name="q23_bestRecommended" id="input_20_7_3">
-                        <label class="label_item" for="input_20_7_3"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
-                </td>
-              </tr>
-             <tr>
-                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_5"> Up </label>
-                </th>
-                <td style="text-align:left" class="form-matrix-values">
-                    <p>78-year-old Carl Fredricksen travels to Paradise Falls in his house equipped with balloons, inadvertently taking a young stowaway.</p>
-                </td>
-                  <td style="text-align:center" class="form-matrix-values">
-                    <iframe width="280" height="175" src="https://www.youtube.com/embed/ORFWdXl_zJ4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </td>
-                  <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Like" name="q20_movies20[8]" id="input_20_8_1">
-                         <label class="label_item" for="input_20_8_1"> <img src=" {{url_for('static', filename='like.png')}}" height="42" width="42"> </label>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Dislike" name="q20_movies20[8]" id="input_20_8_2">
-                         <label class="label_item" for="input_20_8_2"> <img src=" {{url_for('static', filename='dislike.png')}}" height="42" width="42"> </label>
-                </td>
-                                      <td scope="row" style="text-align:center" class="form-matrix-values">
-                       <input type="radio" class="radio_item" value="Up" name="q23_bestRecommended" id="input_20_8_3">
-    <label class="label_item" for="input_20_8_3"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"> </label>
-                </td>
-              </tr>
-             <tr>
-                <th scope="row" style="text-align:left" class="form-matrix-row-headers">
-                  <label id="label_20_row_5"> The Silence of the Lambs  </label>
-                </th>
-                <td style="text-align:left" class="form-matrix-values">
-                    <p>A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.</p>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <iframe width="280" height="175" src="https://www.youtube.com/embed/W6Mm8Sbe__o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </td>
-                  <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Like" name="q20_movies20[9]" id="input_20_9_1">
-                         <label class="label_item" for="input_20_9_1"> <img src=" {{url_for('static', filename='like.png')}}" height="42" width="42"> </label>
-                </td>
-                <td style="text-align:center" class="form-matrix-values">
-                    <input type="radio" class="radio_item" value="Dislike" name="q20_movies20[9]" id="input_20_9_2">
-                         <label class="label_item" for="input_20_9_2"> <img src=" {{url_for('static', filename='dislike.png')}}" height="42" width="42"> </label>
-                </td>
-                                      <td scope="row" style="text-align:center" class="form-matrix-values">
-                       <input type="radio" class="radio_item" value="The Silence of the Lambs " name="q23_bestRecommended" id="input_20_9_3">
-                        <label class="label_item" for="radio10"> <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"></label>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </li>
+          {% for o in movie %}
+              <th scope="row" style="text-align:center" class="form-matrix-row-headers">
+              <img src="{{ o.cover_link }}" height="360" width="240" alt="" border="2" align="center" hspace="10" vspace="0">
+              </th>
+              <td style="text-align:center">
+                  <label> <h2 style="text-align: center;">{{ o.title }} </h2></label>
+                    <p>{{ o.description }} </p>
+                    <p><b>Writers:</b> {{ o.writers }} </p>
+                    <p><b>Stars:</b> {{ o.stars }} </p>
+                    <p><b>Genres:</b> {{ o.genre }} </p>
+              </td>
+              <td style="text-align:center" class="form-matrix-values">
+                  <p> <b>Trailer:</b> </p>
+                  <a target="_blank" rel="noopener noreferrer" href="{{ o.trailer_link }}"><img src=" {{url_for('static', filename='imdb.png')}}" height="80" width="80"></a></td>
+              <td>
+              <div class="forms">
+                <label for="cbk_{{ o.number }}">
+                    <span>Add to Watchlist</span>
+                    <br>
+                    <br>
+                    <br>
+                    <input type="checkbox" id="cbk_{{ o.number }}" value="{{ o.title }}" name="q_Watchlist">
+                    <span class="cbx">
+                            <svg width="12px" height="12px" viewBox="0 0 12 11" >
+                                <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                    </svg>
+                    </span>
+                </label>
+              </div>
+              </td>
+                            <td>
+                      <div class="forms">
+                                <label for="input_20_1_{{ o.title }}">
+                                <span>Next Movie to Watch</span>
+                                    <br>
+                                    <br>
+                                <input type="radio" value="{{ o.title }}" name="q23_bestRecommended" id="input_20_1_{{ o.title }}">
+                                <span class="rdo"></span>
+                            </label>
+                      </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+
       <li id="cid_15" class="form-input-wide" data-type="control_pagebreak">
         <div class="form-pagebreak" data-component="pagebreak">
           <div class="form-pagebreak-next-container">
-             <button class="form-pagebreak-next  form-submit-button-simple_grey" type="submit">
+             <button class="Start">
               Next
              </button>
           </div>
@@ -313,8 +118,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"satisfactionPoll","qid":"1","text":
         </div>
       </li>
     </ul>
-
-</div>
+  </div>
 </fieldset>
 </form>
 </body>
