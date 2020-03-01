@@ -40,16 +40,21 @@
       <li class="form-line form-line-column form-col-1" data-type="control_text" id="id_21">
         <div id="cid_21" class="form-input-wide">
           <div id="text_21" class="form-html" data-component="text">
-              <p> For movies you like  <b> + Add it to your Watchlist</b>.
-              <br>Pick one movie as 'Next Movie to Watch'</p>
+              <h4>Instruction</h4>
               <p></p>
-                    <p><b>You liked:</b></p>
+            <ul>
+                <li>For movies you like <b>hit the checkbox</b> 'Add to Watchlist'</b>.</li>
+                <li><b>Pick one</b> movie as 'Next Movie to Watch'</li>
+                <br>
+            </ul>
+              <p><b>You liked:</b> </p>
                 <table class="form-matrix-table-liked">
                     <tbody>
                         <tr>
-                            <td>Joker</td></tr>
-                        <tr>
-                            <td>Pulp Fiction</td></tr>
+                            {% for n in user_pref %}
+                        <td> <img src="{{ n.cover_link }}" height="360" width="240"> </td>
+                            {% endfor %}
+                        </tr>
                     </tbody>
                 </table>
           </div>
@@ -68,11 +73,10 @@
               <tr>
           {% for o in movie %}
               <th scope="row" style="text-align:center" class="form-matrix-row-headers">
-              <img src="{{ o.cover_link }}" height="360" width="240" alt="" border="2" align="center" hspace="10" vspace="10">
+              <img src="{{ o.cover_link }}" height="360" width="240" alt="" border="2" align="center" hspace="10" vspace="0">
               </th>
               <td style="text-align:center">
                   <label> <h2 style="text-align: center;">{{ o.title }} </h2></label>
-                  <br>
                     <p>{{ o.description }} </p>
                     <p><b>Writers:</b> {{ o.writers }} </p>
                     <p><b>Stars:</b> {{ o.stars }} </p>
@@ -85,9 +89,12 @@
               <div class="forms">
                 <label for="cbk_{{ o.number }}">
                     <span>Add to Watchlist</span>
+                    <br>
+                    <br>
+                    <br>
                     <input type="checkbox" id="cbk_{{ o.number }}" value="{{ o.title }}" name="q_Watchlist">
                     <span class="cbx">
-                            <svg width="12px" height="11px" viewBox="0 0 12 11">
+                            <svg width="12px" height="12px" viewBox="0 0 12 11" >
                                 <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
                     </svg>
                     </span>
@@ -98,7 +105,8 @@
                       <div class="forms">
                                 <label for="input_20_1_{{ o.title }}">
                                 <span>Next Movie to Watch</span>
-                                    <p><br></p>
+                                    <br>
+                                    <br>
                                 <input type="radio" value="{{ o.title }}" name="q23_bestRecommended" id="input_20_1_{{ o.title }}">
                                 <span class="rdo"></span>
                             </label>

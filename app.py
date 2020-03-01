@@ -42,22 +42,8 @@ date_page_pref_movie_2 = ''
 date_page_rec_movie_3 = ''
 date_page_questionnaire_4 = ''
 
-# variables for rating the "suggested" movies, (Like/Dislike)
-# suggested_movie_1 = 'X'
-# suggested_movie_2 = 'X'
-# suggested_movie_3 = 'X'
-# suggested_movie_4 = 'X'
-# suggested_movie_5 = 'X'
-# suggested_movie_6 = 'X'
-# suggested_movie_7 = 'X'
-# suggested_movie_8 = 'X'
-# suggested_movie_9 = 'X'
-# suggested_movie_10 = 'X'
-
 # list for all the movies in the watchlist
-watchlist = [
-
-]
+watchlist = []
 
 # variable for the "star" movie, gets the movie title
 favourite = 'X'
@@ -84,7 +70,8 @@ try:
     # variable for writing poll data
     collection = db['survey']
     # variable for getting movie data
-    collectíon_movies = db['movies']
+    collection_movies = db['movies']
+    collection_questions = db['questions']
     print("Connected to DB succesfully!")
 except:
     print(
@@ -106,7 +93,7 @@ def get_surveys():
 @app.route('/get_movies')
 # displays the data of the movies collection
 def get_movies():
-    documents = collectíon_movies.find()
+    documents = collection_movies.find()
     response = []
     for document in documents:
         document['_id'] = str(document['_id'])
@@ -124,7 +111,7 @@ def drop_survey():
 
 @app.route('/get_title')
 def title():
-    documents = str(collectíon_movies.find({"title": "Interstellar"}))
+    documents = str(collection_movies.find({"title": "Interstellar"}))
     return documents
 
 
@@ -187,15 +174,16 @@ def task_description():
 
 @app.route('/pref_movies.html', methods=['POST', 'GET'])
 def pref_movies():
-    global pre_movie_0, pre_movie_1, pre_movie_2, pre_movie_3, pre_movie_4, date_page_pref_movie_2, page
+    global date_page_pref_movie_2, page
     # for loading data into the HTML page (for example title, cover, stars ...)
     global allprefmovies
     # for getting the survey data (like/dislike/unknown)
     global preferred_movies
+    # variable for generating the "you liked: " - feature
     global user_likes_movies
 
     # variable for storing 2 variable
-    user_preferences = [0, 0]
+    user_preferences = []
 
     allprefmovies.clear()
     preferred_movies.clear()
@@ -208,7 +196,7 @@ def pref_movies():
     # for randomizing the movie list
     random.shuffle(allprefmovies)
 
-    # print(allprefmovies)
+    print("allprefmovies: " + str(allprefmovies))
     # timestamp
     date_page_pref_movie_2 = datetime.datetime.utcnow()
 
@@ -220,18 +208,34 @@ def pref_movies():
         for n in range(1, pref_numMovies):
             preferred_movies.append(str(request.form.get('q_pref_movies[' + str(n) + ']')))
 
-    # variable geht die bewertete movieliste durch und speichert index/number in array.
-    # this array will be used for displaying the movie in the next page
-    # for n in range(0, pref_numMovies):
-    #    if preferred_movies[n] == 'Like':
-    #        user_preferences.append(n)
-    #        if len(user_preferences) == 2:
-    #            # n gets max value to end the if clause
-    #            n = pref_numMovies
+        print(len(preferred_movies))
+        print("pref_movies_first: n: " + str(preferred_movies))
 
-    # print("number 1: "+ str(user_preferences[0]))
+        # variable geht die bewertete movieliste durch und speichert index/number in array.
+        # this array will be used for displaying the movie in the next page
+        for n in range(1, pref_numMovies - 1):
+            if preferred_movies[n] == 'Like':
+                # n + 1 generates the right "number" and fills user_preferences with two numbers
+                user_preferences.append(n + 1)
+                if len(user_preferences) == 2:
+                    # if 2 likes found, end for loop
+                    break
 
-    # for user_likes_movies in dbmovies.find({"$and": [{'type': 'pref'},{'number': int(user_preferences.pop)}], {"_id": False}):
+        user_likes_movies = []
+
+        # movies = dbmovies
+        # result = movies.find().limit(3)
+
+        # loop is for filling user_likes_movies list, user preferences two
+        for n in range(0, 2):
+            print("user_preferences:" + str(user_preferences[n]))
+            for movies in dbmovies.find({'number': user_preferences[n], 'type': "pref"}, {"_id": False}):
+                user_likes_movies.append(movies)
+
+    print("number 1: " + str(user_preferences))
+
+    # for user_likes_movies in dbmovies.find
+    # ({"$and": [{'type': 'pref'},{'number': int(user_preferences.pop)}], {"_id": False}):
     #    allprefmovies.append(user_likes_movies)
 
     # print("number 2: "+ str(user_preferences[1]))
@@ -244,8 +248,6 @@ def pref_movies():
     # pre_movie_2 = str(request.form.get('q4_overallSatisfaction[2]'))
     # pre_movie_3 = str(request.form.get('q4_overallSatisfaction[3]'))
     # pre_movie_4 = str(request.form.get('q4_overallSatisfaction[4]'))
-    print(len(preferred_movies))
-    print("pref_movies_first: n: " + str(preferred_movies))
 
     if request.method == 'POST':
         # will be exectued after form pref_movie_form is committed
@@ -253,17 +255,15 @@ def pref_movies():
             return redirect(url_for('rec_movies_1'))
         else:
             return redirect(url_for('rec_movies_2'))
-    print(user_likes_movies)
 
-    return render_template('/pref_movies.html', movie=allprefmovies, user_pref=user_likes_movies)
+    return render_template('/pref_movies.html', movie=allprefmovies)
 
 
 @app.route('/rec_movies_1.html', methods=['POST', 'GET'])
 def rec_movies_1():
     # list with 10 objects
     global favourite, date_page_rec_movie_3, page, sugg_numMovies, suggested_movies, allsuggmovies, watchlist
-
-    global user_likes_movies
+    global user_likes_movies, user_likes_movies, user_preferences
 
     dbmovies = db['movies']
 
@@ -295,47 +295,58 @@ def rec_movies_1():
             suggested_movies.append(str(request.form.get('q20_movies20[' + str(n) + ']')))
         watchlist = request.form.getlist('q_Watchlist')
         favourite = str(request.form.get('q23_bestRecommended'))
-
     print("Watchlist:" + str(watchlist))
 
     if request.method == 'POST':
         return redirect(url_for('questionnaire'))
+    print("User_likes_movies" + str(user_likes_movies))
 
     return render_template('/rec_movies_1.html', movie=allsuggmovies, user_pref=user_likes_movies)
 
 
 @app.route('/rec_movies_2.html', methods=['POST', 'GET'])
 def rec_movies_2():
-    # list with 10 objects + 2 additional objects
-    global suggested_movie_1, suggested_movie_2, suggested_movie_3, suggested_movie_4, suggested_movie_5, \
-        suggested_movie_6, suggested_movie_7, suggested_movie_8, suggested_movie_9, suggested_movie_10, favourite, \
-        date_page_rec_movie_3, page, sugg_numMovies
+    # list with 10 objects
+    global favourite, date_page_rec_movie_3, page, sugg_numMovies, suggested_movies, allsuggmovies, watchlist
+    global user_likes_movies, user_likes_movies, user_preferences
 
+    dbmovies = db['movies']
+
+    allsuggmovies.clear()
+    suggested_movies.clear()
+    # just one query for testing, [deactivated]
+    # name1 = dbmovies.find_one({'title': 'Interstellar'})
+
+    # querying all titles
+    # for x in range(0, sugg_numMovies):
+    for movies in dbmovies.find({'type': 'rec'}, {"_id": False}):
+        allsuggmovies.append(movies)
+
+    # for randomizing the movie list
+    random.shuffle(allsuggmovies)
+    # for x in range(0, sugg_numMovies):
+    #    titles.append() = allsuggmovies.split
+    print("Länge" + str(len(allsuggmovies)))
+    print("allsugmovies" + str(allsuggmovies))
+    # print(allsuggmovies.pop())
+    # suggested_movies = []
+    # for x in range(0, sugg_numMovies):
+    #    list = dbmovies.find()
+    #    print('exit')
     date_page_rec_movie_3 = datetime.datetime.utcnow()
 
-    suggested_movie = []
-
-    for n in range(0, sugg_numMovies):
-        suggested_movie.append(str(request.form.get('q20_movies20[' + str(n) + ']')))
-
-    suggested_movie_1 = str(request.form.get('q20_movies20[0]'))
-    suggested_movie_2 = str(request.form.get('q20_movies20[1]'))
-    suggested_movie_3 = str(request.form.get('q20_movies20[2]'))
-    suggested_movie_4 = str(request.form.get('q20_movies20[3]'))
-    suggested_movie_5 = str(request.form.get('q20_movies20[4]'))
-    suggested_movie_6 = str(request.form.get('q20_movies20[5]'))
-    suggested_movie_7 = str(request.form.get('q20_movies20[6]'))
-    suggested_movie_8 = str(request.form.get('q20_movies20[7]'))
-    suggested_movie_9 = str(request.form.get('q20_movies20[8]'))
-    suggested_movie_10 = str(request.form.get('q20_movies20[9]'))
-
-    favourite = str(request.form.get('q23_bestRecommended'))
+    if request.method == 'POST':
+        for n in range(0, sugg_numMovies):
+            suggested_movies.append(str(request.form.get('q20_movies20[' + str(n) + ']')))
+        watchlist = request.form.getlist('q_Watchlist')
+        favourite = str(request.form.get('q23_bestRecommended'))
+    print("Watchlist:" + str(watchlist))
 
     if request.method == 'POST':
-        page = 1
         return redirect(url_for('questionnaire'))
+    print("User_likes_movies" + str(user_likes_movies))
 
-    return render_template('/rec_movies_2.html', thing_to_say='Click here to start')
+    return render_template('/rec_movies_2.html', movie=allsuggmovies, user_pref=user_likes_movies)
 
 
 @app.route('/questionnaire.html', methods=['POST', 'GET'])
@@ -345,24 +356,23 @@ def questionnaire():
 
     date_page_rec_movie_4 = datetime.datetime.utcnow()
 
-    dbsurvey = db['survey']
+    dbquestions = db['questions']
 
-    allquestions.clear()
-    questions.clear()
+    # allquestions.clear()
+    # questions.clear()
     # just one query for testing, [deactivated]
     # name1 = dbmovies.find_one({'title': 'Interstellar'})
 
     # querying all titles
     # for x in range(0, sugg_numMovies):
-    for questions in dbsurvey.find({"_id": False}):
+    for questions in dbquestions.find({'rating_rec': 'pref'}, {"_id": False}):
         allquestions.append(questions)
-        print(questions)
 
-    for n in range(0, quest_num):
+    for n in range(0, 3):
         questions.append(str(request.form.get('q_survey_' + str(n) + ']')))
 
     print("Länge" + str(len(allquestions)))
-    print("allsugmovies" + str(allquestions))
+    print("allquestions:" + str(allquestions))
 
     print("all questions: " + str(allquestions))
     print("questions: " + str(questions))
@@ -452,7 +462,8 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
     }
     new.update(dict(zip(pref_movie_attributename, preferred_movies_x)))
     new.update(dict(zip(sugg_movie_attributename, suggested_movies_x)))
-    new.update(watchlist_x)
+    #new.update(watchlist_x)
+
     try:
         ## Creates a new document in DB
         # creates a new ID for json-file in mongodb

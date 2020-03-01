@@ -76,7 +76,7 @@
   top: 0;
 }
 .form-all {
-  font-size: 14px;
+  font-size: 17px;
 }
 .form-label {
   font-weight: bold;
@@ -711,7 +711,7 @@ li[data-type="control_image"] img {
     }
 
     .form-all {
-      font-size: 14px
+      font-size: 17px
     }
     .form-all .qq-upload-button,
     .form-all .qq-upload-button,

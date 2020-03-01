@@ -628,9 +628,9 @@ li.form-line-error .form-error-message img {
 table.form-matrix-table-liked {
   font-family: Georgia, serif;
   border: 1px solid #000000;
-  background-color: #eee;
+  background-color: #333333;
   width: 50%;
-  text-align: left;
+  text-align: center;
 }
 table.form-matrix-table-liked td, table.form-matrix-table-liked th {
 }
