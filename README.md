@@ -1,11 +1,17 @@
 # Poll App
 
-LAST CHANGE: 28.02.2020
+LAST CHANGE: 01.03.2020
 
-    * pages have now dark theme
-    * lists and savings in mongo db are generated automatically
+    little design changes
+    "You liked" - Feature working
+    beginning of new questionnaire
 
-NEXT CHANGES will be released soon: 
+NEXT CHANGES SOON:
+
+    further work in questionnaire needed
+    watchlist will be written in mongodb
+    variable names will be clearer
+ 
 
 The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
 It contains a questionnaire which results will be inserted into the database.
