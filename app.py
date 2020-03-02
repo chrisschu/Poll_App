@@ -358,6 +358,8 @@ def questionnaire():
 
     dbquestions = db['questions']
 
+    allquestions.clear()
+
     for question in dbquestions.find():
         allquestions.append(question)
 
