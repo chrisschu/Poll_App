@@ -93,7 +93,7 @@ def get_surveys():
 @app.route('/get_movies')
 # displays the data of the movies collection
 def get_movies():
-    documents = collection_questions.find()
+    documents = collection_movies.find()
     response = []
     for document in documents:
         document['_id'] = str(document['_id'])
@@ -108,6 +108,17 @@ def get_movies():
 def drop_survey():
     return "coming soon"
 
+
+@app.route('/get_questions')
+# planned feature to drop all data in database
+def get_questions():
+    documents = collection_questions.find()
+    response = []
+    for document in documents:
+        document['_id'] = str(document['_id'])
+        response.append(document)
+        response.append("<br/>")
+    return json.dumps(response, indent=4, sort_keys=True, default=str)
 
 @app.route('/get_title')
 def title():
@@ -360,10 +371,15 @@ def questionnaire():
 
     allquestions.clear()
 
-    for question in dbquestions.find():
+    #to get the questions about the recommended systems
+    for question in dbquestions.find({'type': "rating_rec"}):
         allquestions.append(question)
 
     print("allquestions: " + str(allquestions))
+
+    #to get the questions about the personality
+
+
     date_page_rec_movie_4 = datetime.datetime.utcnow()
     # dbquestions = db['questions']
     # allquestions.clear()
