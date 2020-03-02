@@ -365,15 +365,19 @@ def rec_movies_2():
 @app.route('/questionnaire.html', methods=['POST', 'GET'])
 def questionnaire():
     global poll_q1, poll_q2, poll_q3, date_page_questionnaire_4
-    global questions, quest_num, allquestions
+    global questions, quest_num, questions_rec, questions_pers
 
     dbquestions = db['questions']
 
     allquestions.clear()
 
     #to get the questions about the recommended systems
-    for question in dbquestions.find({'type': "rating_rec"}):
-        allquestions.append(question)
+    for questions_rec in dbquestions.find({'type': "rating_rec"}):
+        allquestions.append(questions_rec)
+
+
+    #for questions_rec in dbquestions.find({'type': "rating_rec"}):
+    #    allquestions.append(questions_rec)
 
     print("allquestions: " + str(allquestions))
 
