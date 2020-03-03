@@ -31,7 +31,8 @@ questions = []
 #
 allprefmovies = []
 allsuggmovies = []
-allquestions = []
+allquestions_from_db_rec = []
+allquestions_from_db_pers = []
 
 # for the two movies likes of the user
 user_likes_movies = []
@@ -120,6 +121,7 @@ def get_questions():
         response.append("<br/>")
     return json.dumps(response, indent=4, sort_keys=True, default=str)
 
+
 @app.route('/get_title')
 def title():
     documents = str(collection_movies.find({"title": "Interstellar"}))
@@ -207,7 +209,7 @@ def pref_movies():
     # for randomizing the movie list
     random.shuffle(allprefmovies)
 
-    #print("allprefmovies: " + str(allprefmovies))
+    # print("allprefmovies: " + str(allprefmovies))
     # timestamp
     date_page_pref_movie_2 = datetime.datetime.utcnow()
 
@@ -219,8 +221,8 @@ def pref_movies():
         for n in range(1, pref_numMovies):
             preferred_movies.append(str(request.form.get('q_pref_movies[' + str(n) + ']')))
 
-        #print(len(preferred_movies))
-        #print("pref_movies_first: n: " + str(preferred_movies))
+        # print(len(preferred_movies))
+        # print("pref_movies_first: n: " + str(preferred_movies))
 
         # variable geht die bewertete movieliste durch und speichert index/number in array.
         # this array will be used for displaying the movie in the next page
@@ -368,45 +370,35 @@ def questionnaire():
     global questions, quest_num, questions_rec, questions_pers
 
     dbquestions = db['questions']
-
-    allquestions.clear()
-
-    #to get the questions about the recommended systems
-    for questions_rec in dbquestions.find({'type': "rating_rec"}):
-        allquestions.append(questions_rec)
-
-
-    #for questions_rec in dbquestions.find({'type': "rating_rec"}):
-    #    allquestions.append(questions_rec)
-
-    print("allquestions: " + str(allquestions))
-
-    #to get the questions about the personality
-
-
-    date_page_rec_movie_4 = datetime.datetime.utcnow()
     # dbquestions = db['questions']
-    # allquestions.clear()
-    # questions.clear()
-    # just one query for testing, [deactivated]
-    # name1 = dbmovies.find_one({'title': 'Interstellar'})
 
-    # querying all titles
-    # for x in range(0, sugg_numMovies):
+    allquestions_from_db_rec.clear()
+    allquestions_from_db_pers.clear()
 
-    for n in range(0, 3):
+    # to get the questions about the recommended systems
+    for questions_rec in dbquestions.find({'type': "rating_rec"}):
+        allquestions_from_db_rec.append(questions_rec)
+
+    # to get the questions about the personality
+    for questions_pers in dbquestions.find({'type': "rating_pers"}):
+        allquestions_from_db_pers.append(questions_pers)
+
+    # to get the questions about the personality
+    date_page_questionnaire_4 = datetime.datetime.utcnow()
+
+    for n in range(0, len(allquestions_from_db_rec)):
         questions.append(str(request.form.get('q_survey_' + str(n) + ']')))
 
-    print("Länge" + str(len(allquestions)))
-    print("allquestions:" + str(allquestions))
+    print("Länge" + str(len(allquestions_from_db_rec)))
+    print("allquestions:" + str(allquestions_from_db_rec))
 
-    print("all questions: " + str(allquestions))
+    print("all questions: " + str(allquestions_from_db_rec))
     print("questions: " + str(questions))
 
     if request.method == 'POST':
         return redirect(url_for('submit'))
 
-    return render_template('/questionnaire.html', questions=allquestions)
+    return render_template('/questionnaire.html', questions=allquestions_from_db_rec, questions_pers=allquestions_from_db_pers)
 
 
 @app.route('/submit.html', methods=['POST', 'GET'])
@@ -424,10 +416,10 @@ def my_new_form():
 
     date_page_submit_5 = datetime.datetime.utcnow()
 
-    #print(preferred_movies)
+    # print(preferred_movies)
 
     ## fuction for saving all data in mongo database
-    save(suggested_movies, page, preferred_movies, favourite, poll_q1, poll_q2, poll_q3, watchlist,
+    save(suggested_movies, page, preferred_movies, favourite, watchlist,
          date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4,
          date_page_submit_5)
 
@@ -441,7 +433,7 @@ def my_new_form():
 
 
 def save(suggested_movies_x, page_x, preferred_movies_x,
-         favourite_x, poll_q1_x, poll_q2_x, poll_q3_x, watchlist_x, date_page_task_description_1_x,
+         favourite_x, watchlist_x, date_page_task_description_1_x,
          date_page_pref_movie_2_x, date_page_rec_movie_3_x, date_page_questionnaire_4_x,
          date_page_submit_5_x):
     """
@@ -468,8 +460,8 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
     ##print("pref attribute name" + str(pref_movie_attributename)) TODO
     ##print("preferred movie x" + str(preferred_movies_x))
 
-    #print(dict(zip(pref_movie_attributename, preferred_movies_x)))
-    #print(dict(zip(sugg_movie_attributename, suggested_movies_x)))
+    # print(dict(zip(pref_movie_attributename, preferred_movies_x)))
+    # print(dict(zip(sugg_movie_attributename, suggested_movies_x)))
 
     print("suggested movies" + str(suggested_movies))
 
@@ -477,9 +469,6 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
     new = {
         "Form": page_x,
         "favourite": favourite_x,
-        "poll_q1": poll_q1_x,
-        "poll_q2": poll_q2_x,
-        "poll_q3": poll_q3_x,
         "date_page_task_description_1": date_page_task_description_1_x,
         "date_page_pref_movie_2": date_page_pref_movie_2_x,
         "date_page_rec_movie_3": date_page_rec_movie_3_x,
@@ -488,7 +477,7 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
     }
     new.update(dict(zip(pref_movie_attributename, preferred_movies_x)))
     new.update(dict(zip(sugg_movie_attributename, suggested_movies_x)))
-    #new.update(watchlist_x)
+    # new.update(watchlist_x)
 
     try:
         ## Creates a new document in DB
@@ -499,7 +488,7 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
         print("database entry not successfully!")
     # returns a successful message if successful
     print("db entry " + str(new) + " was successfully inserted in database")
-    #print("to see output --> http://127.0.0.1:5000/get_survey")
+    # print("to see output --> http://127.0.0.1:5000/get_survey")
     ## return str(message)
 
     pass

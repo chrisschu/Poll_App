@@ -84,7 +84,7 @@
     <th class="questionnaire-aaj5"><br>(6)</th>
     <th class="questionnaire-aaj5">Completely agree<br>(7)</th>
   </tr>
-    {% for q in questions %}
+    {% for q in questions_pers %}
   <tr>
     <td class="questionnaire-g1fv"> {{ q.question }}</td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_{{ q.number }}" value="1"></td>
