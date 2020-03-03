@@ -23,10 +23,12 @@ pref_numMovies = 50
 sugg_numMovies = 10
 quest_num = 5
 
-#
+# list for filling the survey data
 preferred_movies = []
 suggested_movies = []
 questions = []
+questions_rec = []
+questions_pers = []
 
 #
 allprefmovies = []
@@ -355,6 +357,7 @@ def rec_movies_2():
             suggested_movies.append(str(request.form.get('q20_movies20[' + str(n) + ']')))
         watchlist = request.form.getlist('q_Watchlist')
         favourite = str(request.form.get('q23_bestRecommended'))
+        print(suggested_movies)
     print("Watchlist:" + str(watchlist))
 
     if request.method == 'POST':
@@ -370,6 +373,11 @@ def questionnaire():
     global questions, quest_num, questions_rec, questions_pers
 
     dbquestions = db['questions']
+
+    questions_rec = []
+    questions_pers = []
+    print("questions_rec: " + str(questions_rec))
+    print("questions_pers: " + str(questions_pers))
     # dbquestions = db['questions']
 
     allquestions_from_db_rec.clear()
@@ -386,19 +394,26 @@ def questionnaire():
     # to get the questions about the personality
     date_page_questionnaire_4 = datetime.datetime.utcnow()
 
-    for n in range(0, len(allquestions_from_db_rec)):
-        questions.append(str(request.form.get('q_survey_' + str(n) + ']')))
-
-    print("Länge" + str(len(allquestions_from_db_rec)))
-    print("allquestions:" + str(allquestions_from_db_rec))
-
-    print("all questions: " + str(allquestions_from_db_rec))
-    print("questions: " + str(questions))
-
     if request.method == 'POST':
+        # to get the answered survey data about the personality
+        # for n in range(0, len(allquestions_from_db_pers)): todo
+            #questions_pers.append(str(request.form.get('q_survey_pers_' + str(n) + ']')))
+
+        # to get the answered survey data about the recommended system
+        #for n in range(0, len(allquestions_from_db_rec)): todo
+            #questions_rec.append(str(request.form.get('q_survey_rec_' + str(n) + ']')))
+
+        print("Länge" + str(len(allquestions_from_db_rec)))
+        print("allquestions:" + str(allquestions_from_db_rec))
+
+        print("all questions: " + str(allquestions_from_db_rec))
+
+        print("questions_rec: " + str(questions_rec))
+        print("questions_pers: " + str(questions_pers))
         return redirect(url_for('submit'))
 
-    return render_template('/questionnaire.html', questions=allquestions_from_db_rec, questions_pers=allquestions_from_db_pers)
+    return render_template('/questionnaire.html', questions=allquestions_from_db_rec,
+                           questions_pers=allquestions_from_db_pers)
 
 
 @app.route('/submit.html', methods=['POST', 'GET'])
@@ -412,7 +427,7 @@ def my_new_form():
 
     global page, poll_q1, poll_q2, poll_q3, suggested_movies, sugg_numMovies, preferred_movies, pref_numMovies
     global date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4
-    global watchlist
+    global watchlist, questions_rec, questions_pers
 
     date_page_submit_5 = datetime.datetime.utcnow()
 
@@ -474,6 +489,7 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
         "date_page_rec_movie_3": date_page_rec_movie_3_x,
         "date_page_questionnaire_4": date_page_questionnaire_4_x,
         "date_page_submit_5": date_page_submit_5_x,
+        "watchlist": watchlist_x
     }
     new.update(dict(zip(pref_movie_attributename, preferred_movies_x)))
     new.update(dict(zip(sugg_movie_attributename, suggested_movies_x)))
