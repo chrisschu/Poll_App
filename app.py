@@ -25,8 +25,7 @@ quest_num = 5
 
 # list for filling the survey data
 preferred_movies = []
-suggested_movies = []
-questions = []
+questionnaire_answer_from_survey = []
 questions_rec = []
 questions_pers = []
 
@@ -279,13 +278,12 @@ def pref_movies():
 @app.route('/rec_movies_1.html', methods=['POST', 'GET'])
 def rec_movies_1():
     # list with 10 objects
-    global favourite, date_page_rec_movie_3, page, sugg_numMovies, suggested_movies, allsuggmovies, watchlist
+    global favourite, date_page_rec_movie_3, page, sugg_numMovies, allsuggmovies, watchlist
     global user_likes_movies, user_likes_movies, user_preferences
     print("allsugmovies: " + str(allsuggmovies))
     dbmovies = db['movies']
 
     allsuggmovies.clear()
-    suggested_movies.clear()
     # just one query for testing, [deactivated]
     # name1 = dbmovies.find_one({'title': 'Interstellar'})
 
@@ -301,15 +299,12 @@ def rec_movies_1():
     print("Länge" + str(len(allsuggmovies)))
     print("allsugmovies" + str(allsuggmovies))
     # print(allsuggmovies.pop())
-    # suggested_movies = []
     # for x in range(0, sugg_numMovies):
     #    list = dbmovies.find()
     #    print('exit')
     date_page_rec_movie_3 = datetime.datetime.utcnow()
 
     if request.method == 'POST':
-        for n in range(0, sugg_numMovies):
-            suggested_movies.append(str(request.form.get('q20_movies20[' + str(n) + ']')))
         watchlist = request.form.getlist('q_Watchlist')
         favourite = str(request.form.get('q23_bestRecommended'))
     print("Watchlist:" + str(watchlist))
@@ -324,13 +319,12 @@ def rec_movies_1():
 @app.route('/rec_movies_2.html', methods=['POST', 'GET'])
 def rec_movies_2():
     # list with 10 objects
-    global favourite, date_page_rec_movie_3, page, sugg_numMovies, suggested_movies, allsuggmovies, watchlist
+    global favourite, date_page_rec_movie_3, page, sugg_numMovies, allsuggmovies, watchlist
     global user_likes_movies, user_likes_movies, user_preferences
 
     dbmovies = db['movies']
 
     allsuggmovies.clear()
-    suggested_movies.clear()
     # just one query for testing, [deactivated]
     # name1 = dbmovies.find_one({'title': 'Interstellar'})
 
@@ -353,11 +347,8 @@ def rec_movies_2():
     date_page_rec_movie_3 = datetime.datetime.utcnow()
 
     if request.method == 'POST':
-        for n in range(0, sugg_numMovies):
-            suggested_movies.append(str(request.form.get('q20_movies20[' + str(n) + ']')))
         watchlist = request.form.getlist('q_Watchlist')
         favourite = str(request.form.get('q23_bestRecommended'))
-        print(suggested_movies)
     print("Watchlist:" + str(watchlist))
 
     if request.method == 'POST':
@@ -370,7 +361,7 @@ def rec_movies_2():
 @app.route('/questionnaire.html', methods=['POST', 'GET'])
 def questionnaire():
     global poll_q1, poll_q2, poll_q3, date_page_questionnaire_4
-    global questions, quest_num, questions_rec, questions_pers
+    global questionnaire_answer_from_survey, quest_num, questions_rec, questions_pers
 
     dbquestions = db['questions']
 
@@ -396,12 +387,12 @@ def questionnaire():
 
     if request.method == 'POST':
         # to get the answered survey data about the personality
-        # for n in range(0, len(allquestions_from_db_pers)): todo
-            #questions_pers.append(str(request.form.get('q_survey_pers_' + str(n) + ']')))
+        for n in range(0, len(allquestions_from_db_pers)):
+            questionnaire_answer_from_survey.append(str(request.form.get('q_survey_pers_' + str(n) + ']')))
 
         # to get the answered survey data about the recommended system
-        #for n in range(0, len(allquestions_from_db_rec)): todo
-            #questions_rec.append(str(request.form.get('q_survey_rec_' + str(n) + ']')))
+        for n in range(0, len(allquestions_from_db_rec)):
+            questionnaire_answer_from_survey.append(str(request.form.get('q_survey_rec_' + str(n) + ']')))
 
         print("Länge" + str(len(allquestions_from_db_rec)))
         print("allquestions:" + str(allquestions_from_db_rec))
@@ -425,7 +416,7 @@ def submit():
 def my_new_form():
     ## Assignment of the resulted input of the html variables
 
-    global page, poll_q1, poll_q2, poll_q3, suggested_movies, sugg_numMovies, preferred_movies, pref_numMovies
+    global page, sugg_numMovies, preferred_movies, pref_numMovies
     global date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4
     global watchlist, questions_rec, questions_pers
 
@@ -434,7 +425,7 @@ def my_new_form():
     # print(preferred_movies)
 
     ## fuction for saving all data in mongo database
-    save(suggested_movies, page, preferred_movies, favourite, watchlist,
+    save(page, preferred_movies, favourite, watchlist,
          date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4,
          date_page_submit_5)
 
@@ -447,7 +438,7 @@ def my_new_form():
     return "Db entry successful"
 
 
-def save(suggested_movies_x, page_x, preferred_movies_x,
+def save(page_x, preferred_movies_x,
          favourite_x, watchlist_x, date_page_task_description_1_x,
          date_page_pref_movie_2_x, date_page_rec_movie_3_x, date_page_questionnaire_4_x,
          date_page_submit_5_x):
@@ -456,9 +447,7 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
     """
 
     # variable n shows which page is used, if n is == 2 then user got list 2, is n == 1 then user got List 1
-
     # idea is to merge to two lists to get one dictionary for inserting survey data in db
-
     # this list variable is for the left part of the dictionary (for example "pre_movie_0")
     pref_movie_attributename = []
     sugg_movie_attributename = []
@@ -478,8 +467,6 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
     # print(dict(zip(pref_movie_attributename, preferred_movies_x)))
     # print(dict(zip(sugg_movie_attributename, suggested_movies_x)))
 
-    print("suggested movies" + str(suggested_movies))
-
     # using the dictionary form to input data in mongodb
     new = {
         "Form": page_x,
@@ -492,7 +479,8 @@ def save(suggested_movies_x, page_x, preferred_movies_x,
         "watchlist": watchlist_x
     }
     new.update(dict(zip(pref_movie_attributename, preferred_movies_x)))
-    new.update(dict(zip(sugg_movie_attributename, suggested_movies_x)))
+    # no more suggest movie --> watchlist instead
+    # new.update(dict(zip(sugg_movie_attributename, suggested_movies_x)))
     # new.update(watchlist_x)
 
     try:
