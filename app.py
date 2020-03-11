@@ -76,8 +76,7 @@ try:
     collection_questions = db['questions']
     print("Connected to DB succesfully!")
 except:
-    print(
-        "Could not connect to MongoDB. Write an E-Mail to chschusc@edu.aau.at with your IP-address to get access to the database")
+    print("Could not connect to MongoDB. Write an E-Mail to chschusc@edu.aau.at with your IP-address to get access to the database")
 
 
 @app.route('/get_survey')
@@ -88,6 +87,7 @@ def get_surveys():
     for document in documents:
         document['_id'] = str(document['_id'])
         response.append(document)
+        response.append("<br/>")
         response.append("<br/>")
     return json.dumps(response, indent=4, sort_keys=True, default=str)
 
@@ -108,7 +108,9 @@ def get_movies():
 @app.route('/drop_survey')
 # planned feature to drop all data in database
 def drop_survey():
-    return "coming soon"
+    global collection
+    collection.drop()
+    return "Collection dropped"
 
 
 @app.route('/get_questions')
@@ -492,7 +494,7 @@ def save(page_x, preferred_movies_x,
         print("database entry not successfully!")
     # returns a successful message if successful
     print("db entry " + str(new) + " was successfully inserted in database")
-    # print("to see output --> http://127.0.0.1:5000/get_survey")
+    print("to see output --> http://127.0.0.1:5000/get_survey")
     ## return str(message)
 
     pass

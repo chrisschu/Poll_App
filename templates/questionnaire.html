@@ -2,7 +2,7 @@
 <html class="supernova"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="alternate" type="application/json+oembed" href="https://www.jotform.com/oembed/?format=json&amp;url=http%3A%2F%2Fwww.jotform.com%2Fform%2F200006188570347" title="oEmbed Form"><link rel="alternate" type="text/xml+oembed" href="https://www.jotform.com/oembed/?format=xml&amp;url=http%3A%2F%2Fwww.jotform.com%2Fform%2F200006188570347" title="oEmbed Form">
-<meta property="og:title" content="Movie-Poll" >
+<meta property="og:title" content="MovieSurvey" >
 <meta property="og:url" content="https://form.jotform.com/200006188570347" >
 <meta property="og:description" content="Please click the link to complete this form.">
 <meta name="slack-app-id" content="AHNMASS8M">
@@ -10,7 +10,7 @@
 <link rel="canonical" href="https://form.jotform.com/200006188570347" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1" />
 <meta name="HandheldFriendly" content="true" />
-<title>MovieStudy</title>
+<title>MovieSurvey</title>
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='formCSS.css') }}" />
 <link type="text/css" media="print" rel="stylesheet" href="{{ url_for('static', filename='printForm.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='nova.css') }}" />
@@ -54,13 +54,13 @@
     {% for q in questions %}
   <tr>
     <td class="questionnaire-g1fv"> {{ q.question }}</td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_rec_{{ q.number }}" value="1"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_rec_{{ q.number }}" value="2"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_rec_{{ q.number }}" value="3"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_4" name="q_survey_rec_{{ q.number }}" value="4"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_5" name="q_survey_rec_{{ q.number }}" value="5"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_6" name="q_survey_rec_{{ q.number }}" value="6"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_7" name="q_survey_rec_{{ q.number }}" value="7"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_rec_{{ q.number }}" value=1></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_rec_{{ q.number }}" value=2></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_rec_{{ q.number }}" value=3></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_4" name="q_survey_rec_{{ q.number }}" value=4></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_5" name="q_survey_rec_{{ q.number }}" value=5></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_6" name="q_survey_rec_{{ q.number }}" value=6></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_7" name="q_survey_rec_{{ q.number }}" value=7></td>
   </tr>
     {% endfor %}
 </table>
@@ -87,13 +87,13 @@
     {% for q in questions_pers %}
   <tr>
     <td class="questionnaire-g1fv"> {{ q.question }}</td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_{{ q.number }}" value="1"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_{{ q.number }}" value="2"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_{{ q.number }}" value="3"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_4" name="q_survey_{{ q.number }}" value="4"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_5" name="q_survey_{{ q.number }}" value="5"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_6" name="q_survey_{{ q.number }}" value="6"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_7" name="q_survey__{{ q.number }}" value="7"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_pers_{{ q.number }}" value="1"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_pers_{{ q.number }}" value="2"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_pers_{{ q.number }}" value="3"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_4" name="q_survey_pers_{{ q.number }}" value="4"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_5" name="q_survey_pers_{{ q.number }}" value="5"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_6" name="q_survey_pers_{{ q.number }}" value="6"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_7" name="q_survey_pers_{{ q.number }}" value="7"></td>
   </tr>
     {% endfor %}
 </table>

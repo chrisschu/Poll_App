@@ -597,37 +597,7 @@ li[data-type="control_image"] img {
     zoom: 1;
     width: auto;
   }
-  .form-collapse-table:before,
-  .form-collapse-table:after {
-    display: table;
-    content: '';
-    line-height: 0;
-  }
-  .form-collapse-table:after {
-    clear: both;
-  }
-  .fb-like-box {
-    width: 98% !important;
-  }
-  .form-error-message {
-    clear: both;
-    bottom: -10px;
-  }
-  .date-separate,
-  .phone-separate {
-    display: none;
-  }
-  .custom-field-frame,
-  .direct-embed-widgets,
-  .signature-pad-wrapper {
-    width: 100% !important;
-  }
-}
-/* | */
-
-/*__INSPECT_SEPERATOR__*/
-
-  .p customp {
+  .form-collapse-table:before,)&=
    font-size: 40px;
   }
 
