@@ -388,13 +388,14 @@ def questionnaire():
     date_page_questionnaire_4 = datetime.datetime.utcnow()
 
     if request.method == 'POST':
-        # to get the answered survey data about the personality
-        for n in range(0, len(allquestions_from_db_pers)):
-            questionnaire_answer_from_survey.append(str(request.form.get('q_survey_pers_' + str(n) + ']')))
 
         # to get the answered survey data about the recommended system
-        for n in range(0, len(allquestions_from_db_rec)):
+        for n in range(1, len(allquestions_from_db_rec)):
             questionnaire_answer_from_survey.append(str(request.form.get('q_survey_rec_' + str(n) + ']')))
+            print("A"+str(questionnaire_answer_from_survey))
+
+        #option = request.form['q_survey_pers_1']
+        #print("Questionfrage:"+str(option))
 
         print("Länge" + str(len(allquestions_from_db_rec)))
         print("allquestions:" + str(allquestions_from_db_rec))
