@@ -62,9 +62,6 @@
                   <label> <h2 style="text-align: center">{{ o.title }} </h2></label>
                     <p>{{ o.description }} </p>
               </td>
-              <td style="text-align:center" class="form-matrix-values">
-                  <p> <b>Trailer:</b> </p>
-                <a target="_blank" rel="noopener noreferrer" href="{{ o.trailer_link }}"><img src=" {{url_for('static', filename='imdb.png')}}" height="80" width="80"></a>
                 <td style="text-align:center" class="form-matrix-values">
                     <input type="radio" class="radio_item" value="Like" name="q_pref_movies[{{ o.number }}]" id="input_20_{{ o.number }}_1">
                          <label class="label_item" for="input_20_{{ o.number }}_1"> <img src=" {{url_for('static', filename='thumbs_up.png')}}" height="55" width="55" alt="Like"> </label>

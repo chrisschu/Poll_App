@@ -59,6 +59,11 @@ poll_q3 = 'X'
 # roundrobin principle, first user gets page 1, second user gets page 2, and so on
 page = 1
 
+# decleration of personal questionnaire data
+age = ''
+gender = ''
+feedbacktext = ''
+
 app = Flask(__name__)
 
 ## Connection to the MongoDB Atlas Cloud
@@ -413,6 +418,7 @@ def rec_movies_2():
 def questionnaire():
     global poll_q1, poll_q2, poll_q3, date_page_questionnaire_4
     global questionnaire_answer_from_survey, quest_num, questions_rec, questions_pers
+    global age, gender, feedbacktext
 
     dbquestions = db['questions']
 
@@ -442,6 +448,14 @@ def questionnaire():
             questionnaire_answer_from_survey.append(str(request.form.get('q_survey_rec_' + str(n) + ']')))
             print("A"+str(questionnaire_answer_from_survey))
 
+        feedbacktext = str(request.form.get('feedbacktext'))
+        age = str(request.form.get('age'))
+        gender = str(request.form.get('gender'))
+
+        print('feedbacktext: ', feedbacktext)
+        print('age: ', age)
+        print('gender: ', gender)
+
         #option = request.form['q_survey_pers_1']
         #print("Questionfrage:"+str(option))
 
@@ -469,7 +483,7 @@ def my_new_form():
 
     global page, sugg_numMovies, preferred_movies, pref_numMovies
     global date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4
-    global watchlist, questions_rec, questions_pers
+    global watchlist, questions_rec, questions_pers, gender, age, feedbacktext
 
     date_page_submit_5 = datetime.datetime.utcnow()
 
@@ -478,7 +492,7 @@ def my_new_form():
     ## fuction for saving all data in mongo database
     save(page, preferred_movies, favourite, watchlist,
          date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4,
-         date_page_submit_5)
+         date_page_submit_5, gender, age, feedbacktext)
 
     # for the next user, so user 1 gets List 1, User 2 gets List 2, and so on
     if page == 1:
@@ -492,7 +506,7 @@ def my_new_form():
 def save(page_x, preferred_movies_x,
          favourite_x, watchlist_x, date_page_task_description_1_x,
          date_page_pref_movie_2_x, date_page_rec_movie_3_x, date_page_questionnaire_4_x,
-         date_page_submit_5_x):
+         date_page_submit_5_x, gender_x, age_x, feedbacktext_x):
     """
     Saving in Cloud Atlas MongoDB
     """
@@ -506,11 +520,11 @@ def save(page_x, preferred_movies_x,
     print("Watchlist!!!!!: " + str(watchlist))
 
     # https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions
-    for x in range(0, pref_numMovies):
-        pref_movie_attributename.append('pref_movie_' + str(x))
+    # for x in range(0, pref_numMovies):
+    #    pref_movie_attributename.append('pref_movie_' + str(x))
 
-    for x in range(0, sugg_numMovies):
-        sugg_movie_attributename.append('sugg_movie_' + str(x))
+    # for x in range(0, sugg_numMovies):
+    #    sugg_movie_attributename.append('sugg_movie_' + str(x))
 
     ##print("pref attribute name" + str(pref_movie_attributename)) TODO
     ##print("preferred movie x" + str(preferred_movies_x))
@@ -521,15 +535,21 @@ def save(page_x, preferred_movies_x,
     # using the dictionary form to input data in mongodb
     new = {
         "Form": page_x,
-        "favourite": favourite_x,
-        "date_page_task_description_1": date_page_task_description_1_x,
-        "date_page_pref_movie_2": date_page_pref_movie_2_x,
-        "date_page_rec_movie_3": date_page_rec_movie_3_x,
-        "date_page_questionnaire_4": date_page_questionnaire_4_x,
-        "date_page_submit_5": date_page_submit_5_x,
-        "watchlist": watchlist_x
+        "Gender": gender_x,
+        "Age": age_x,
+        "Timestamp_page_1_end": date_page_task_description_1_x,
+        "Timestamp_page_2_end": date_page_pref_movie_2_x,
+        "Timestamp_page_3_end": date_page_rec_movie_3_x,
+        "Timestamp_page_4_end": date_page_questionnaire_4_x,
+        "Timestamp_page_submit": date_page_submit_5_x,
+        "Next_Movie_To_Watch": favourite_x,
+        "Watchlist": watchlist_x,
+        'Like': '',
+        'Dislike': '',
+        'Neutral': '',
+        "Feedback_Text": feedbacktext_x
     }
-    new.update(dict(zip(pref_movie_attributename, preferred_movies_x)))
+    # new.update(dict(zip(pref_movie_attributename, preferred_movies_x)))
     # no more suggest movie --> watchlist instead
     # new.update(dict(zip(sugg_movie_attributename, suggested_movies_x)))
     # new.update(watchlist_x)
@@ -544,6 +564,7 @@ def save(page_x, preferred_movies_x,
     # returns a successful message if successful
     print("db entry " + str(new) + " was successfully inserted in database")
     print("to see output --> http://127.0.0.1:5000/get_survey")
+    print("to generate csv/xlsx data --> http://127.0.0.1:5000/pandas")
     ## return str(message)
 
     pass
