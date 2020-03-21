@@ -40,7 +40,7 @@
       <li class="form-line" data-type="control_radio" id="id_26">
         <label class="form-label form-label-top" id="label_26" for="input_26"> Questions </label>
         <div id="cid_26" class="form-input-wide">
-<table class="questionnaire">
+    <table class="questionnaire">
   <tr>
     <th class="questionnaire-g1fv"></th>
     <th class="questionnaire-aaj5">Completely disagree<br>(1)<br></th>
@@ -64,16 +64,14 @@
   </tr>
     {% endfor %}
 </table>
-        </div>
-      <br>
-      <h2 id="header-14" class="form-header" data-component="header" >
+        <br>
+ <h2 id="header-14" class="form-header" data-component="header" >
           Questions About You
       </h2>
-
-  <li class="form-line" data-type="control_radio" id="id_26">
-        <label class="form-label form-label-top" id="label_26" for="input_26"> </label>
+       <li class="form-line" data-type="control_radio" id="id_26">
+        <label class="form-label form-label-top" id="label_26" for="input_26"> Questions </label>
         <div id="cid_26" class="form-input-wide">
-<table class="questionnaire">
+    <table class="questionnaire">
   <tr>
     <th class="questionnaire-g1fv"></th>
     <th class="questionnaire-aaj5">Completely disagree<br>(1)<br></th>
@@ -87,33 +85,36 @@
     {% for q in questions_pers %}
   <tr>
     <td class="questionnaire-g1fv"> {{ q.question }}</td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_!" name="q_survey_pers_{{ q.number }}" value="1"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_pers_{{ q.number }}" value="2"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_pers_{{ q.number }}" value="3"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_4" name="q_survey_pers_{{ q.number }}" value="4"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_5" name="q_survey_pers_{{ q.number }}" value="5"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_6" name="q_survey_pers_{{ q.number }}" value="6"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_7" name="q_survey_pers_{{ q.number }}" value="7"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_rec_{{ q.number }}" value="1"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_rec_{{ q.number }}" value="2"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_rec_{{ q.number }}" value="3"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_4" name="q_survey_rec_{{ q.number }}" value="4"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_5" name="q_survey_rec_{{ q.number }}" value="5"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_6" name="q_survey_rec_{{ q.number }}" value="6"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_7" name="q_survey_rec_{{ q.number }}" value="7"></td>
   </tr>
     {% endfor %}
-
-    <tr><label>Options for Dropdown 1
-        <select id="dropdown1" name="dropdown1">
+   </table>
+        <br>
+        <br>
+        <br>
+  <label>Your Gender
+        <select id="gender" name="gender">
     <option value="" selected="selected">Select One</option>
-    <option value="a" >a</option>
-    <option value="b" >b</option>
-    <option value="c" >c</option>
+    <option value="male" >male</option>
+    <option value="female">female</option>
+    <option value="other" >other</option>
         </select>
-    </label></tr>
-
+    </label>
     <tr>
+        <br>
+        <br>
     <td><label>Your Feedback
     <textarea name="textbox" maxlength="500"></textarea>
   </label></td></tr>
 </table>
-
-
-
+        </div>
+ </div>
 
       <li id="cid_16" class="form-input-wide" data-type="control_pagebreak">
         <div class="form-pagebreak" data-component="pagebreak">
@@ -121,14 +122,12 @@
              <button class="Start">
               Next
              </button>
-          </div></div>
-          </div>
+        </div>
           <div style="clear:both" class="pageInfo form-sub-label" id="pageInfo_16">
           </div>
         </div>
       </li>
     </ul>
-      </div>
 </form>
 </body>
 </html>

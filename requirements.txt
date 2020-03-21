@@ -9,3 +9,4 @@ dnspython==1.16.0
 itsdangerous==1.1.0
 pip==19.0.3
 setuptools==40.8.0
+pandas

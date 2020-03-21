@@ -2,6 +2,7 @@ import datetime
 import json
 import random
 
+import pandas as pd
 import pymongo
 from flask import Flask, render_template, request, url_for, redirect
 from pymongo import *
@@ -79,6 +80,8 @@ except:
     print("Could not connect to MongoDB. Write an E-Mail to chschusc@edu.aau.at with your IP-address to get access to the database")
 
 
+
+
 @app.route('/get_survey')
 # displays the data of the surveys collection
 def get_surveys():
@@ -91,6 +94,55 @@ def get_surveys():
         response.append("<br/>")
     return json.dumps(response, indent=4, sort_keys=True, default=str)
 
+@app.route('/pandas')
+def pandas():
+
+    try:
+        client = pymongo.MongoClient(
+            "mongodb+srv://" + usr + ":" + pwd + "@mongodbmovie-702qa.mongodb.net/test?retryWrites=true&w=majority")
+        db = client['masterproject']
+        # variable for writing poll data
+        collection = db['survey']
+        # variable for getting movie data
+        collection_movies = db['movies']
+        collection_questions = db['questions']
+        print("Connected to DB succesfully!")
+    except:
+        print("Could not connect to MongoDB. Write an E-Mail to chschusc@edu.aau.at with your IP-address to get "
+              "access to the database")
+
+    cursor = collection.find()
+    mongo_docs = list(cursor)
+
+    print("total docs in collection:", collection.count_documents({}))
+
+    # create an empty DataFrame for storing documents
+    docs = pd.DataFrame(columns=[])
+
+    # iterate over the list of MongoDB dict documents
+    for num, doc in enumerate(mongo_docs):
+        # convert ObjectId() to str
+        doc["_id"] = str(doc["_id"])
+
+        # get document _id from dict
+        doc_id = doc["_id"]
+
+        # create a Series obj from the MongoDB dict
+        series_obj = pd.Series(doc, name=doc_id)
+
+        # append the MongoDB Series obj to the DataFrame obj
+        docs = docs.append(series_obj)
+
+        # export MongoDB documents to a CSV file
+        docs.to_csv("object_rocket.csv", ",")  # CSV delimited by commas
+        docs.to_excel("object_rocket.xlsx", ",")
+
+        # export MongoDB documents to CSV
+        csv_export = docs.to_csv(sep=",")  # CSV delimited by commas
+
+        print("\nCSV data:", csv_export)
+
+    return "MongoDB successfully to CSV exported"
 
 @app.route('/get_movies')
 # displays the data of the movies collection
@@ -332,20 +384,17 @@ def rec_movies_2():
 
     # querying all titles
     # for x in range(0, sugg_numMovies):
+
     for movies in dbmovies.find({'type': 'rec'}, {"_id": False}):
         allsuggmovies.append(movies)
 
     # for randomizing the movie list
     random.shuffle(allsuggmovies)
-    # for x in range(0, sugg_numMovies):
-    #    titles.append() = allsuggmovies.split
+
+
     print("Länge" + str(len(allsuggmovies)))
     print("allsugmovies" + str(allsuggmovies))
-    # print(allsuggmovies.pop())
-    # suggested_movies = []
-    # for x in range(0, sugg_numMovies):
-    #    list = dbmovies.find()
-    #    print('exit')
+
     date_page_rec_movie_3 = datetime.datetime.utcnow()
 
     if request.method == 'POST':
@@ -388,7 +437,6 @@ def questionnaire():
     date_page_questionnaire_4 = datetime.datetime.utcnow()
 
     if request.method == 'POST':
-
         # to get the answered survey data about the recommended system
         for n in range(1, len(allquestions_from_db_rec)):
             questionnaire_answer_from_survey.append(str(request.form.get('q_survey_rec_' + str(n) + ']')))
