@@ -30,10 +30,8 @@
         <div class="form-header-group ">
           <div class="header-text httal htvam">
             <h2 id="header_13" class="form-header" data-component="header">
-              Finally, a brief little survey.
+              Please answer the following questions.
             </h2>
-              <p>Questions about the recommended movies <b>(still under construction)</b>
-              </p>
           </div>
         </div>
       </li>
@@ -54,13 +52,13 @@
     {% for q in questions %}
   <tr>
     <td class="questionnaire-g1fv"> {{ q.question }}</td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_rec_[{{ q.number }}]" value="1"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_rec_[{{ q.number }}]" value="2"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_rec_[{{ q.number }}]" value="3"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_4" name="q_survey_rec_[{{ q.number }}]" value="4"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_5" name="q_survey_rec_[{{ q.number }}]" value="5"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_6" name="q_survey_rec_[{{ q.number }}]" value="6"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_7" name="q_survey_rec_[{{ q.number }}]" value="7"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_rec_[{{ q.number }}]" value=1></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_rec_[{{ q.number }}]" value=2></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_rec_[{{ q.number }}]" value=3></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_4" name="q_survey_rec_[{{ q.number }}]" value=4></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_5" name="q_survey_rec_[{{ q.number }}]" value=5></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_6" name="q_survey_rec_[{{ q.number }}]" value=6></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_7" name="q_survey_rec_[{{ q.number }}]" value=7></td>
   </tr>
     {% endfor %}
 </table>
@@ -85,49 +83,42 @@
     {% for q in questions_pers %}
   <tr>
     <td class="questionnaire-g1fv"> {{ q.question }}</td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_per_{{ q.number }}_1" name="q_survey_pers_[{{ q.number }}']" value="1"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_2" name="q_survey_pers_[{{ q.number }}}" value="2"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_3" name="q_survey_pers_[{{ q.number }}]" value="3"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_4" name="q_survey_pers_[{{ q.number }}]" value="4"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_5" name="q_survey_pers_[{{ q.number }}]" value="5"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_6" name="q_survey_pers_[{{ q.number }}]" value="6"></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_7" name="q_survey_pers_[{{ q.number }}]" value="7"></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_1" name="q_survey_pers_[{{ q.number }}]" value=1></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_2" name="q_survey_pers_[{{ q.number }}}" value=2></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_3" name="q_survey_pers_[{{ q.number }}]" value=3></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_4" name="q_survey_pers_[{{ q.number }}]" value=4></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_5" name="q_survey_pers_[{{ q.number }}]" value=5></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_6" name="q_survey_pers_[{{ q.number }}]" value=6></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_7" name="q_survey_pers_[{{ q.number }}]" value=7></td>
   </tr>
     {% endfor %}
    </table>
         <br>
         <br>
         <br>
-  <label class="questionnaire_label">Your Gender
-        <select id="gender" name="gender">
+        <table>
+            <tr><td width="150" height="50">  <label class="questionnaire_label">Your Gender</label></td>
+        <td><select id="gender" name="gender">
     <option value="" selected="selected">Select One</option>
     <option value="male" >male</option>
     <option value="female">female</option>
     <option value="other" >other</option>
     <option value="donttell" >don't want to tell</option>
-        </select>
-    </label>
-        <br>
-        <br>
-        <br>
-        <tr>
-   <label class="questionnaire_label">Your Age
-    <select id="age" name="age">
+        </select></td></tr>
+            <tr width="150" height="50"> <td><label class="questionnaire_label">Your Age</label></td>
+            <td>    <select id="age" name="age">
     <option value="" selected="selected">Select One</option>
     <option value="0-18" >0-18</option>
     <option value="19-25">19-25</option>
     <option value="26-40" >26-40</option>
     <option value="41-65">41-65</option>
     <option value="66+">66+</option>
-        </select>
-    </label>
-        </tr>
-    <tr>
-        <br>
-        <br>
-    <td><label class="questionnaire_label">Your Feedback
-    <textarea name="feedbacktext" id="feedbacktext" maxlength="500"></textarea>
-  </label></td></tr>
+        </select></td></tr>
+                        <tr><td></td></tr>
+            <tr width="150" height="50"><td><label class="questionnaire_label">Your Feedback</label></td>
+            <td><textarea name="feedbacktext" id="feedbacktext" maxlength="500"></textarea></td>
+            </tr>
+        </table>
 </table>
  </div>
 

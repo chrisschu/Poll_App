@@ -801,6 +801,9 @@ li[data-type="control_image"] img {
     background : white;
 }
 
+.form-matrix-row-headers-liked {
+  text-align: right;
+}
 
 .form-line-error{
   color : white;

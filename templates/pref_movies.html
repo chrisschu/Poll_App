@@ -29,22 +29,19 @@
         <div class="form-header-group ">
           <div class="header-text httal htvam">
             <h2 id="header_13" class="form-header" data-component="header">
-              Preferences
+              Tell us which movie you like
             </h2>
           </div>
         </div>
       </li>
-
       <li class="form-line" data-type="control_text" id="id_18">
         <div id="cid_18" class="form-input-wide">
           <div id="text_18" class="form-html" data-component="text">
-              <h4>Instruction</h4>
-              <p></p>
             <ul>
                 <li>Below, you find a selection of movies. You might know at least some of them. </li>
-
-                 <li><p>For those you have seen, please let us know if you liked them. Select the appropriate thumb symbols (like, neutral, dislike).</li>
-
+                 <li><p>For those you have seen, please let us know if you liked them.
+                     Select the appropriate thumb symbols (like, neutral, dislike).</li>
+                 <li>Rate as many movies as you like.</li>
            </ul>
           </div>
         </div>
@@ -59,8 +56,10 @@
               <img src="{{ o.cover_link }}" height="150" width="100" alt="">
               </th>
               <td style="text-align:center">
-                  <label> <h2 style="text-align: center">{{ o.title }} </h2></label>
-                    <p>{{ o.description }} </p>
+                  <label> <h3 style="text-align: center">{{ o.title }} </h3></label>
+                   <p>{{ o.description }} </p>
+                  <p><b>Writers:</b> {{ o.writers }} <b>   Genres:   </b> {{ o.genre }}</p>
+                        <p><b> Stars: </b> {{ o.stars }} </p>
               </td>
                 <td style="text-align:center" class="form-matrix-values">
                     <input type="radio" class="radio_item" value="Like" name="q_pref_movies[{{ o.number }}]" id="input_20_{{ o.number }}_1">

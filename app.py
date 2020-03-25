@@ -68,7 +68,8 @@ age = ''
 gender = ''
 feedbacktext = ''
 
-# decleration boolean variable for fake, if in like_list/dislike_list Movie Popeye (number 50) is contained --> fake = true
+# decleration boolean variable for fake, if in like_list/dislike_list Movie Popeye (number , defined as number in mongo db1)
+# is contained --> fake = true
 fake = False
 
 app = Flask(__name__)
@@ -90,7 +91,8 @@ try:
     print("Connected to DB succesfully!")
 except:
     print(
-        "Could not connect to MongoDB. Write an E-Mail to chschusc@edu.aau.at with your IP-address to get access to the database")
+        "Could not connect to MongoDB. Write an E-Mail to chschusc@edu.aau.at with your IP-address to get access to "
+        "the database")
 
 
 @app.route('/get_survey')
@@ -145,7 +147,7 @@ def pandas():
         docs = docs.append(series_obj)
 
         # export MongoDB documents to a CSV file
-        docs.to_csv("object_rocket.csv", ",")  # CSV delimited by commas
+        docs.to_csv("object_rocket.csv", ",")  # CSV delimited by comma
         docs.to_excel("object_rocket.xlsx", ",")
 
         # export MongoDB documents to CSV
@@ -153,7 +155,7 @@ def pandas():
 
         print("\nCSV data:", csv_export)
 
-    return "MongoDB successfully to as CSV/XLSX - File in root folder exported"
+    return "MongoDB data exported successful as CSV/XLSX - File in root folder "
 
 
 @app.route('/get_movies')
@@ -292,25 +294,25 @@ def pref_movies():
     ##pre_movie_0 = str(request.form.get('q4_overallSatisfaction[0]'))
     # preferred_movies.append(str(request.form.get('q_pref_movies[1]')))
 
-    print(len(allprefmovies))
+    # print(len(allprefmovies))
 
     if request.method == 'POST':
         # to get the html input, passed in this list variable
         for n in range(1, len(allprefmovies)):
             preferred_movies.append(str(request.form.get('q_pref_movies[' + str(n) + ']')))
 
-        for n in range(1, len(allprefmovies)-1):
-            print(str(preferred_movies[n]))
-            if preferred_movies[n-1] == 'Like':
+        for n in range(1, len(allprefmovies) - 1):
+            # print(str(preferred_movies[n]))
+            if preferred_movies[n - 1] == 'Like':
                 likes_list.append(n)
-            elif preferred_movies[n-1] == 'Dislike':
+            elif preferred_movies[n - 1] == 'Dislike':
                 dislikes_list.append(n)
-            elif preferred_movies[n-1] == 'Neutral':
+            elif preferred_movies[n - 1] == 'Neutral':
                 neutral_list.append(n)
 
-        print('likes_list: ', likes_list)
-        print('dislikes_list: ', dislikes_list)
-        print('neutral_list: ', neutral_list)
+        # print('likes_list: ', likes_list)
+        # print('dislikes_list: ', dislikes_list)
+        # print('neutral_list: ', neutral_list)
 
         # print(len(preferred_movies))
         # print("pref_movies_first: n: " + str(preferred_movies))
@@ -333,12 +335,12 @@ def pref_movies():
         # loop is for filling user_likes_movies list, user preferences two
         try:
             for n in range(0, 2):
-                print("user_preferences:" + str(user_preferences[n]))
+                # print("user_preferences:" + str(user_preferences[n]))
                 for movies in dbmovies.find({'number': user_preferences[n], 'type': "pref"}, {"_id": False}):
                     user_likes_movies.append(movies)
         except IndexError as error:
-            print("Please Like 2 Movies")
-    print("number 1: " + str(user_preferences))
+            print(error)
+    # print("number 1: " + str(user_preferences))
 
     # for user_likes_movies in dbmovies.find
     # ({"$and": [{'type': 'pref'},{'number': int(user_preferences.pop)}], {"_id": False}):
@@ -370,7 +372,7 @@ def rec_movies_1():
     # list with 10 objects
     global favourite, date_page_rec_movie_3, page, sugg_numMovies, allsuggmovies, watchlist
     global user_likes_movies, user_likes_movies, user_preferences
-    print("allsugmovies: " + str(allsuggmovies))
+    # print("allsugmovies: " + str(allsuggmovies))
     dbmovies = db['movies']
 
     allsuggmovies.clear()
@@ -386,8 +388,8 @@ def rec_movies_1():
     random.shuffle(allsuggmovies)
     # for x in range(0, sugg_numMovies):
     #    titles.append() = allsuggmovies.split
-    print("Länge" + str(len(allsuggmovies)))
-    print("allsugmovies" + str(allsuggmovies))
+    # print("Länge" + str(len(allsuggmovies)))
+    # print("allsugmovies" + str(allsuggmovies))
     # print(allsuggmovies.pop())
     # for x in range(0, sugg_numMovies):
     #    list = dbmovies.find()
@@ -397,11 +399,11 @@ def rec_movies_1():
     if request.method == 'POST':
         watchlist = request.form.getlist('q_Watchlist')
         favourite = str(request.form.get('q23_bestRecommended'))
-    print("Watchlist:" + str(watchlist))
+    # print("Watchlist:" + str(watchlist))
 
     if request.method == 'POST':
         return redirect(url_for('questionnaire'))
-    print("User_likes_movies" + str(user_likes_movies))
+    # print("User_likes_movies" + str(user_likes_movies))
 
     return render_template('/rec_movies_1.html', movie=allsuggmovies, user_pref=user_likes_movies)
 
@@ -427,19 +429,19 @@ def rec_movies_2():
     # for randomizing the movie list
     random.shuffle(allsuggmovies)
 
-    print("Länge" + str(len(allsuggmovies)))
-    print("allsugmovies" + str(allsuggmovies))
+    # print("Länge" + str(len(allsuggmovies)))
+    # print("allsugmovies" + str(allsuggmovies))
 
     date_page_rec_movie_3 = datetime.datetime.utcnow()
 
     if request.method == 'POST':
         watchlist = request.form.getlist('q_Watchlist')
         favourite = str(request.form.get('q23_bestRecommended'))
-    print("Watchlist:" + str(watchlist))
+    # print("Watchlist:" + str(watchlist))
 
     if request.method == 'POST':
         return redirect(url_for('questionnaire'))
-    print("User_likes_movies" + str(user_likes_movies))
+    # print("User_likes_movies" + str(user_likes_movies))
 
     return render_template('/rec_movies_2.html', movie=allsuggmovies, user_pref=user_likes_movies)
 
@@ -454,8 +456,8 @@ def questionnaire():
 
     questions_rec = []
     questions_pers = []
-    print("questions_rec: " + str(questions_rec))
-    print("questions_pers: " + str(questions_pers))
+    # print("questions_rec: " + str(questions_rec))
+    # print("questions_pers: " + str(questions_pers))
     # dbquestions = db['questions']
 
     allquestions_from_db_rec.clear()
@@ -472,9 +474,11 @@ def questionnaire():
     # to get the questions about the personality
     date_page_questionnaire_4 = datetime.datetime.utcnow()
 
-    print('len(allquestions_from_db_rec)', len(allquestions_from_db_rec))
+    # random.shuffle(allquestions_from_db_rec)
+
+    # print('len(allquestions_from_db_rec)', len(allquestions_from_db_rec))
     questionnaire_answer_from_survey.clear()
-    print("preferred_movies Ergebnis" + str(questionnaire_answer_from_survey))
+    # print("preferred_movies Ergebnis" + str(questionnaire_answer_from_survey))
 
     if request.method == 'POST':
         # to get the answered survey data about the recommended system
@@ -483,34 +487,36 @@ def questionnaire():
         #    print("A"+str(questionnaire_answer_from_survey))
         for n in range(1, len(allquestions_from_db_rec) + 1):
             questionnaire_answer_from_survey.append(str(request.form.get('q_survey_rec_[' + str(n) + ']')))
-            print("questions " + str(n) + " " + str(questionnaire_answer_from_survey))
+            # print("questions " + str(n) + " " + str(questionnaire_answer_from_survey))
 
-        print('allquestions_from_db_pers ', allquestions_from_db_pers)
-        print('len(allquestions_from_db_pers) ', len(allquestions_from_db_pers))
+        # print('allquestions_from_db_pers ', allquestions_from_db_pers)
+        # print('len(allquestions_from_db_pers) ', len(allquestions_from_db_pers))
 
         for n in range(1, len(allquestions_from_db_pers) + 1):
             questionnaire_answer_from_survey_pers.append(str(request.form.get('q_survey_pers_[' + str(n) + ']')))
-            print("questions pers" + str(n) + " " + str(questionnaire_answer_from_survey_pers))
+            # print('q_survey_pers_[' + str(n) + ']')
+            # print(str(request.form.get('q_survey_pers_[' + str(n) + ']')))
+            # print("questions pers" + str(n) + " " + str(questionnaire_answer_from_survey_pers))
 
-        print('new länge questionnaire_answer_from_survey_pers', len(questionnaire_answer_from_survey_pers))
+        # print('new länge questionnaire_answer_from_survey_pers', str(questionnaire_answer_from_survey_pers))
         feedbacktext = str(request.form.get('feedbacktext'))
         age = str(request.form.get('age'))
         gender = str(request.form.get('gender'))
 
-        print('feedbacktext: ', feedbacktext)
-        print('age: ', age)
-        print('gender: ', gender)
+        # print('feedbacktext: ', feedbacktext)
+        # print('age: ', age)
+        # print('gender: ', gender)
 
         # option = request.form['q_survey_pers_1']
         # print("Questionfrage:"+str(option))
 
-        print("Länge" + str(len(allquestions_from_db_rec)))
-        print("allquestions:" + str(allquestions_from_db_rec))
+        # print("Länge" + str(len(allquestions_from_db_rec)))
+        # print("allquestions:" + str(allquestions_from_db_rec))
 
-        print("all questions: " + str(allquestions_from_db_rec))
+        # print("all questions: " + str(allquestions_from_db_rec))
 
-        print("questions_rec: " + str(questions_rec))
-        print("questions_pers: " + str(questions_pers))
+        # print("questions_rec: " + str(questions_rec))
+        # print("questions_pers: " + str(questions_pers))
         return redirect(url_for('submit'))
 
     return render_template('/questionnaire.html', questions=allquestions_from_db_rec,
@@ -528,21 +534,31 @@ def my_new_form():
     ## contains all data of the survey
 
     global page, sugg_numMovies, preferred_movies, pref_numMovies
-    global questionnaire_answer_from_survey
+    global questionnaire_answer_from_survey, questionnaire_answer_from_survey_pers
     global likes_list, dislikes_list, neutral_list, fake
     global date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4
     global watchlist, questions_rec, questions_pers, gender, age, feedbacktext
 
-    for n in range(0, len(likes_list)-1):
+    # these two loops are for checking the likes and dislike list if the user picked the fake movie popeye
+    # in mongodb popeye has the number 1
+
+    for n in range(0, len(likes_list) - 1):
         if likes_list[n] == 1:
             fake = True
 
-    for n in range(0, len(dislikes_list)-1):
+    for n in range(0, len(dislikes_list) - 1):
         if dislikes_list[n] == 1:
             fake = True
 
-    date_page_submit_5 = datetime.datetime.utcnow()
+    # this for loop is for checking the questionnaire list if the user picked the fake question "This question should
+    # be rated as 2" if he picks not 2, it is marked as fake in mongodb
 
+    for n in range(1, len(questionnaire_answer_from_survey)):
+        #    print('questionnaire_answer_from_survey[' + str(n) + '] ' + str(questionnaire_answer_from_survey[n]))
+        if questionnaire_answer_from_survey[19] != "2":
+            fake = True
+
+    date_page_submit_5 = datetime.datetime.utcnow()
 
     ## fuction for saving all data in mongo database
     save(page, questionnaire_answer_from_survey, questionnaire_answer_from_survey_pers, likes_list,
@@ -575,22 +591,23 @@ def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_s
     questions_rec_attributename = []
     questions_pers_attributename = []
 
-    print("Watchlist!!!!!: " + str(watchlist))
+    # print("Watchlist!!!!!: " + str(watchlist))
 
+    # to create attributes name for mongo db
     for x in range(1, len(questionnaire_answer_from_survey_x) + 1):
         if x < 10:
             questions_rec_attributename.append('Question_Rec_0' + str(x))
         else:
             questions_rec_attributename.append('Question_Rec_' + str(x))
 
-    for x in range(1, len(questionnaire_answer_from_survey_pers_x)+1):
+    for x in range(1, len(questionnaire_answer_from_survey_pers_x) + 1):
         if x < 10:
             questions_pers_attributename.append('Question_Pers_0' + str(x))
         else:
             questions_pers_attributename.append('Question_Pers_' + str(x))
 
-    print("questions_rec_attributename ", str(questions_rec_attributename))
-    print("questions_pers_attributename ", str(questions_pers_attributename))
+    # print("questions_rec_attributename ", str(questions_rec_attributename))
+    # print("questions_pers_attributename ", str(questions_pers_attributename))
 
     # https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions
     # for x in range(0, pref_numMovies):
@@ -610,7 +627,7 @@ def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_s
         "Form_Type": page_x,
         "Gender": gender_x,
         "Age": age_x,
-        "Timestamp_page_1": date_page_task_description_1_x,
+        "Timestamp_start_session": date_page_task_description_1_x,
         "Timestamp_page_2": date_page_pref_movie_2_x,
         "Timestamp_page_3": date_page_rec_movie_3_x,
         "Timestamp_page_4": date_page_questionnaire_4_x,
@@ -621,8 +638,9 @@ def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_s
         'Dislike': dislikes_list_x,
         'Neutral': neutral_list_x,
         "Feedback_Text": feedbacktext_x,
-        "FAKE": fake
+        "FAKE": fake_x
     }
+    # list comprehension to write
     new.update(dict(zip(questions_rec_attributename, questionnaire_answer_from_survey_x)))
     new.update(dict(zip(questions_pers_attributename, questionnaire_answer_from_survey_pers_x)))
     # new.update(dict(zip(pref_movie_attributename, preferred_movies_x)))
@@ -633,16 +651,16 @@ def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_s
     try:
         ## Creates a new document in DB
         # creates a new ID for json-file in mongodb
-        _id = collection.insert_one(new)
+        session_id = collection.insert_one(new)
         print("database entry successfully")
     except:
         print("database entry not successfully!")
     # returns a successful message if successful
     print("db entry " + str(new) + " was successfully inserted in database")
     print("to see output --> http://127.0.0.1:5000/get_survey")
-    print("to generate csv/xlsx data --> http://127.0.0.1:5000/pandas")
+    print("to generate csv/xlsx data --> http://127.0.0.1:5000/generate_files - Files be located in root folder of"
+          " the project")
     ## return str(message)
-
     pass
 
 

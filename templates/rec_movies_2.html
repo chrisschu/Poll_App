@@ -2,7 +2,7 @@
 <html class="supernova"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="alternate" type="application/json+oembed" href="https://www.jotform.com/oembed/?format=json&amp;url=http%3A%2F%2Fwww.jotform.com%2Fform%2F200006188570347" title="oEmbed Form"><link rel="alternate" type="text/xml+oembed" href="https://www.jotform.com/oembed/?format=xml&amp;url=http%3A%2F%2Fwww.jotform.com%2Fform%2F200006188570347" title="oEmbed Form">
-<meta property="og:title" content="Movie-Poll" >
+<meta property="og:title" content="MovieSurvey" >
 <meta property="og:url" content="https://form.jotform.com/200006188570347" >
 <meta property="og:description" content="Please click the link to complete this form.">
 <meta name="slack-app-id" content="AHNMASS8M">
@@ -10,7 +10,7 @@
 <link rel="canonical" href="https://form.jotform.com/200006188570347" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1" />
 <meta name="HandheldFriendly" content="true" />
-<title>MovieStudy</title>
+<title>MovieSurvey</title>
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='formCSS.css') }}" />
 <link type="text/css" media="print" rel="stylesheet" href="{{ url_for('static', filename='printForm.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='nova.css') }}" />
@@ -31,7 +31,7 @@
         <div class="form-header-group ">
           <div class="header-text httal htvam">
             <h2 id="header_13" class="form-header" data-component="header">
-              Recommended Movies
+              Our recommendations
             </h2>
           </div>
         </div>
@@ -40,16 +40,26 @@
       <li class="form-line form-line-column form-col-1" data-type="control_text" id="id_21">
         <div id="cid_21" class="form-input-wide">
           <div id="text_21" class="form-html" data-component="text">
-              <h4>Instruction</h4>
+          <table>
+          <tr>
+<td>
+    <h4>Instruction</h4>
+</td>
+          </tr>
+              <td width="600">             <ul>
+                <li>For movies you like <b>hit the checkbox</b> - 'Add to Watchlist'</b>.</li>
+                  <br>
+                <li><b>Pick one</b> movie as 'Next Movie to Watch'                                              </li>
+                <br>
+            </ul></td>
+          </table>
+
+
               <p></p>
-            <ul>
-                <li>For movies you like <b>hit the checkbox</b> 'Add to Watchlist'</b>.</li>
-                <li><b>Pick one</b> movie as 'Next Movie to Watch'</li>
-            </ul>
-              </div>
+
+          </div>
         </div>
       </li>
-
 
       <li class="form-line jf-required" data-type="control_matrix" id="id_20">
         <label class="form-label form-label-top" id="label_20" for="input_20">
@@ -62,14 +72,14 @@
               <tr>
           {% for o in movie %}
               <th scope="row" style="text-align:center" class="form-matrix-row-headers">
-              <img src="{{ o.cover_link }}" height="360" width="240" alt="" border="2" align="center" hspace="10" vspace="0">
+              <img src="{{ o.cover_link }}" height="260" width="200" alt="" border="2" align="center" hspace="10" vspace="0">
               </th>
               <td style="text-align:center">
                   <label> <h2 style="text-align: center;">{{ o.title }} </h2></label>
                     <p>{{ o.description }} </p>
                     <p><b>Writers:</b> {{ o.writers }} </p>
                     <p><b>Stars:</b> {{ o.stars }} </p>
-                    <p><b>Genres:</b> {{ o.genre }} </p>
+                    <p><b>Genre:</b> {{ o.genre }} </p>
               </td>
               <td style="text-align:center" class="form-matrix-values">
                   <p> <b>Trailer:</b> </p>
@@ -81,24 +91,28 @@
                     <br>
                     <br>
                     <br>
-                    <input type="checkbox" id="cbk_{{ o.number }}" value="{{ o.title }}" name="q_Watchlist">
-                    <span class="cbx">
-                            <svg width="12px" height="12px" viewBox="0 0 12 11" >
+                    <div class="get_button_center">
+                    <input type="checkbox" id="cbk_{{ o.number }}" value="{{ o.title }}" name="q_Watchlist" style="vertical-align: middle">
+                    <span class="cbx" style="text-align: center">
+                            <svg width="16px" height="16px" viewBox="0 0 12 11">
                                 <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
                     </svg>
+                        </div>
                     </span>
                 </label>
               </div>
               </td>
-                            <td>
+                            <td width="150" >
                       <div class="forms">
                                 <label for="input_20_1_{{ o.title }}">
                                 <span>Next Movie to Watch</span>
                                     <br>
                                     <br>
+                                <div class="get_button_center">
                                 <input type="radio" value="{{ o.title }}" name="q23_bestRecommended" id="input_20_1_{{ o.title }}">
                                 <span class="rdo"></span>
                             </label>
+                                </div>
                       </div>
               </td>
             </tr>

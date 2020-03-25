@@ -680,6 +680,14 @@ div.gallery {
 	margin-top: 30px;
 }
 
+div.get_button_center {
+	text-align:justify;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+}
+
 div.gallery ul {
 	list-style-type: none;
 	margin-left: 35px;
