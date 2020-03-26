@@ -1,6 +1,6 @@
 # Poll App
 
-CHANGES:
+CHANGES 26.03.2020:
 
     db changes
     all questionnaire survey data is written in db
