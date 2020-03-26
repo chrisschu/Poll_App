@@ -1,14 +1,17 @@
 # Poll App
 
 CHANGES:
+
     db changes
     all questionnaire survey data is written in db
     valid survey check
     bugfixes
     
 NEXT CHANGES SOON:
+
     little design changes in questionnaire
     clearer variable names
+ 
 
 The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
 It contains a questionnaire which results will be inserted into the database.
