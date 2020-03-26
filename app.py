@@ -200,7 +200,7 @@ def title():
 @app.route('/home')
 def index():
     ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
-    return render_template('home.html', thing_to_say='Click here to start')
+    return render_template('OLD/home.html', thing_to_say='Click here to start')
 
 
 @app.route('/poll.html')

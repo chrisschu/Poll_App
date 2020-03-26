@@ -1,17 +1,14 @@
 # Poll App
 
-LAST CHANGE: 01.03.2020
-
-    little design changes
-    "You liked" - Feature working
-    beginning of new questionnaire
-
+CHANGES:
+    db changes
+    all questionnaire survey data is written in db
+    valid survey check
+    bugfixes
+    
 NEXT CHANGES SOON:
-
-    further work in questionnaire needed
-    watchlist will be written in mongodb
-    variable names will be clearer
- 
+    little design changes in questionnaire
+    clearer variable names
 
 The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
 It contains a questionnaire which results will be inserted into the database.
