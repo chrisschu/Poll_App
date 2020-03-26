@@ -103,6 +103,16 @@ Now (venv) should be activated
 (venv) pip install -r requirements.txt
 ```
 
+### Install Visual C++ Tools for PANDAS 
+
+for Windows (powershell):
+
+(venv) must be activated
+```
+execute the visualcpppbuildtools_full.exe to install the c++ tools
+.\visualcppbuildtools_full.exe
+```
+
 ### Start the app
 for Linux based OS:
 

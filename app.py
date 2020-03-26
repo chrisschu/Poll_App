@@ -20,7 +20,7 @@ trailer_link = []
 genre = []
 
 # write here how many movies should displayed/used at the page
-pref_numMovies = 51
+# pref_numMovies = 51
 sugg_numMovies = 10
 quest_num = 5
 
@@ -319,7 +319,7 @@ def pref_movies():
 
         # variable geht die bewertete movieliste durch und speichert index/number in array.
         # this array will be used for displaying the movie in the next page
-        for n in range(1, pref_numMovies):
+        for n in range(1, len(allprefmovies)):
             if preferred_movies[n] == 'Like':
                 # n + 1 generates the right "number" and fills user_preferences with two numbers
                 user_preferences.append(n + 1)
@@ -494,9 +494,9 @@ def questionnaire():
 
         for n in range(1, len(allquestions_from_db_pers) + 1):
             questionnaire_answer_from_survey_pers.append(str(request.form.get('q_survey_pers_[' + str(n) + ']')))
-            # print('q_survey_pers_[' + str(n) + ']')
-            # print(str(request.form.get('q_survey_pers_[' + str(n) + ']')))
-            # print("questions pers" + str(n) + " " + str(questionnaire_answer_from_survey_pers))
+            print('q_survey_pers_[' + str(n) + ']')
+            print(str(request.form.get('q_survey_pers_[' + str(n) + ']')))
+            print("questions pers" + str(n) + " " + str(questionnaire_answer_from_survey_pers))
 
         # print('new länge questionnaire_answer_from_survey_pers', str(questionnaire_answer_from_survey_pers))
         feedbacktext = str(request.form.get('feedbacktext'))
@@ -528,12 +528,12 @@ def submit():
     return render_template('/submit.html', thing_to_say='Click here to start')
 
 
-@app.route('/my_new_form', methods=['POST', 'GET'])
+@app.route('/end.html', methods=['POST', 'GET'])
 def my_new_form():
     ## Assignment of the resulted input of the html variables
     ## contains all data of the survey
 
-    global page, sugg_numMovies, preferred_movies, pref_numMovies
+    global page, sugg_numMovies, preferred_movies
     global questionnaire_answer_from_survey, questionnaire_answer_from_survey_pers
     global likes_list, dislikes_list, neutral_list, fake
     global date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4
@@ -561,10 +561,10 @@ def my_new_form():
     date_page_submit_5 = datetime.datetime.utcnow()
 
     ## fuction for saving all data in mongo database
-    save(page, questionnaire_answer_from_survey, questionnaire_answer_from_survey_pers, likes_list,
-         dislikes_list, neutral_list, favourite,
-         watchlist, date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3,
-         date_page_questionnaire_4, date_page_submit_5, gender, age, feedbacktext, fake)
+    message = save(page, questionnaire_answer_from_survey, questionnaire_answer_from_survey_pers, likes_list,
+                   dislikes_list, neutral_list, favourite,
+                   watchlist, date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3,
+                   date_page_questionnaire_4, date_page_submit_5, gender, age, feedbacktext, fake)
 
     # for the next user, so user 1 gets List 1, User 2 gets List 2, and so on
     if page == 1:
@@ -572,7 +572,7 @@ def my_new_form():
     else:
         page = 1
 
-    return "Db entry successful"
+    return message
 
 
 def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_survey_pers_x, likes_list_x,
@@ -607,7 +607,7 @@ def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_s
             questions_pers_attributename.append('Question_Pers_' + str(x))
 
     # print("questions_rec_attributename ", str(questions_rec_attributename))
-    # print("questions_pers_attributename ", str(questions_pers_attributename))
+    print("questions_pers_attributename ", str(questions_pers_attributename))
 
     # https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions
     # for x in range(0, pref_numMovies):
@@ -660,8 +660,13 @@ def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_s
     print("to see output --> http://127.0.0.1:5000/get_survey")
     print("to generate csv/xlsx data --> http://127.0.0.1:5000/generate_files - Files be located in root folder of"
           " the project")
-    ## return str(message)
-    pass
+
+    entry = "db entry was successfully inserted in database!"
+    entry += '\n' + " "
+    message = "to see output: "
+    links = "to generate csv/xlsx data: "
+    output = entry + '\n' + message
+    return render_template('/end.html', message=output, links=links)
 
 
 def fill_datalist_pref():
