@@ -4,7 +4,7 @@ import random
 
 import pandas as pd
 import pymongo
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, session
 from pymongo import *
 
 ## Author Christian Schuschnig
@@ -19,11 +19,6 @@ description = []
 trailer_link = []
 genre = []
 
-# write here how many movies should displayed/used at the page
-# pref_numMovies = 51
-sugg_numMovies = 10
-quest_num = 5
-
 # list for filling the survey data
 likes_list = []
 dislikes_list = []
@@ -34,7 +29,7 @@ questionnaire_answer_from_survey_pers = []
 questions_rec = []
 questions_pers = []
 
-#
+# list for getting the fill the html page
 allprefmovies = []
 allsuggmovies = []
 allquestions_from_db_rec = []
@@ -68,11 +63,13 @@ age = ''
 gender = ''
 feedbacktext = ''
 
-# decleration boolean variable for fake, if in like_list/dislike_list Movie Popeye (number , defined as number in mongo db1)
+# decleration boolean variable for fake, if in like_list/dislike_list Movie Popeye (number , defined as number
+# in mongo db1)
 # is contained --> fake = true
 fake = False
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'testkgdfsgdwrey'
 
 ## Connection to the MongoDB Atlas Cloud
 
@@ -93,6 +90,12 @@ except:
     print(
         "Could not connect to MongoDB. Write an E-Mail to chschusc@edu.aau.at with your IP-address to get access to "
         "the database")
+
+
+@app.route('/set-/')
+def set_variables(mode):
+    session['mode'] = mode
+    return redirect(url_for('index'))
 
 
 @app.route('/get_survey')
@@ -248,8 +251,12 @@ def task_description():
     ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
     global date_page_task_description_1
 
+    # to clear the session
+    session.clear()
     # timestamp
     date_page_task_description_1 = datetime.datetime.utcnow()
+    session["date_page_task_description_1"] = datetime.datetime.utcnow()
+    print(session)
 
     return render_template('/task_description.html', font_url='http://fonts.googleapis.com/css?family=PT+Sans:400,700')
 
@@ -289,7 +296,7 @@ def pref_movies():
 
     # print("allprefmovies: " + str(allprefmovies))
     # timestamp
-    date_page_pref_movie_2 = datetime.datetime.utcnow()
+    session['date_page_pref_movie_2'] = datetime.datetime.utcnow()
 
     ##pre_movie_0 = str(request.form.get('q4_overallSatisfaction[0]'))
     # preferred_movies.append(str(request.form.get('q_pref_movies[1]')))
@@ -310,16 +317,27 @@ def pref_movies():
             elif preferred_movies[n - 1] == 'Neutral':
                 neutral_list.append(n)
 
+        session['likes_list'] = list(likes_list)
+        session['dislikes_list'] = list(dislikes_list)
+        session['neutral_list'] = list(neutral_list)
+
         # print('likes_list: ', likes_list)
         # print('dislikes_list: ', dislikes_list)
         # print('neutral_list: ', neutral_list)
+
 
         # print(len(preferred_movies))
         # print("pref_movies_first: n: " + str(preferred_movies))
 
         # variable geht die bewertete movieliste durch und speichert index/number in array.
         # this array will be used for displaying the movie in the next page
-        for n in range(1, len(allprefmovies)):
+
+        # this if checks if the popeye movie is selected and adds it to the list for the next
+        if preferred_movies[0] == 'Like':
+            user_preferences.append(1)
+
+        for n in range(1, len(allprefmovies)+1):
+            print("pref movies: " + preferred_movies[n])
             if preferred_movies[n] == 'Like':
                 # n + 1 generates the right "number" and fills user_preferences with two numbers
                 user_preferences.append(n + 1)
@@ -340,6 +358,8 @@ def pref_movies():
                     user_likes_movies.append(movies)
         except IndexError as error:
             print(error)
+
+        session['user_likes_movies'] = list(user_likes_movies)
     # print("number 1: " + str(user_preferences))
 
     # for user_likes_movies in dbmovies.find
@@ -370,7 +390,7 @@ def pref_movies():
 @app.route('/rec_movies_1.html', methods=['POST', 'GET'])
 def rec_movies_1():
     # list with 10 objects
-    global favourite, date_page_rec_movie_3, page, sugg_numMovies, allsuggmovies, watchlist
+    global favourite, page, allsuggmovies, watchlist
     global user_likes_movies, user_likes_movies, user_preferences
     # print("allsugmovies: " + str(allsuggmovies))
     dbmovies = db['movies']
@@ -394,24 +414,24 @@ def rec_movies_1():
     # for x in range(0, sugg_numMovies):
     #    list = dbmovies.find()
     #    print('exit')
-    date_page_rec_movie_3 = datetime.datetime.utcnow()
+    session['date_page_rec_movie_3'] = datetime.datetime.utcnow()
 
     if request.method == 'POST':
-        watchlist = request.form.getlist('q_Watchlist')
-        favourite = str(request.form.get('q23_bestRecommended'))
+        session['watchlist'] = request.form.getlist('q_Watchlist')
+        session['favourite'] = str(request.form.get('q23_bestRecommended'))
     # print("Watchlist:" + str(watchlist))
 
     if request.method == 'POST':
         return redirect(url_for('questionnaire'))
     # print("User_likes_movies" + str(user_likes_movies))
 
-    return render_template('/rec_movies_1.html', movie=allsuggmovies, user_pref=user_likes_movies)
+    return render_template('/rec_movies_1.html', movie=allsuggmovies, user_pref=session['user_likes_movies'])
 
 
 @app.route('/rec_movies_2.html', methods=['POST', 'GET'])
 def rec_movies_2():
     # list with 10 objects
-    global favourite, date_page_rec_movie_3, page, sugg_numMovies, allsuggmovies, watchlist
+    global favourite, date_page_rec_movie_3, page, allsuggmovies, watchlist
     global user_likes_movies, user_likes_movies, user_preferences
 
     dbmovies = db['movies']
@@ -432,24 +452,24 @@ def rec_movies_2():
     # print("Länge" + str(len(allsuggmovies)))
     # print("allsugmovies" + str(allsuggmovies))
 
-    date_page_rec_movie_3 = datetime.datetime.utcnow()
+    session['date_page_rec_movie_3'] = datetime.datetime.utcnow()
 
     if request.method == 'POST':
-        watchlist = request.form.getlist('q_Watchlist')
-        favourite = str(request.form.get('q23_bestRecommended'))
+        session['watchlist'] = request.form.getlist('q_Watchlist')
+        session['favourite'] = str(request.form.get('q23_bestRecommended'))
     # print("Watchlist:" + str(watchlist))
 
     if request.method == 'POST':
         return redirect(url_for('questionnaire'))
     # print("User_likes_movies" + str(user_likes_movies))
 
-    return render_template('/rec_movies_2.html', movie=allsuggmovies, user_pref=user_likes_movies)
+    return render_template('/rec_movies_2.html', movie=allsuggmovies, user_pref=session['user_likes_movies'])
 
 
 @app.route('/questionnaire.html', methods=['POST', 'GET'])
 def questionnaire():
     global poll_q1, poll_q2, poll_q3, date_page_questionnaire_4
-    global questionnaire_answer_from_survey, questionnaire_answer_from_survey_pers, quest_num, questions_rec
+    global questionnaire_answer_from_survey, questionnaire_answer_from_survey_pers, questions_rec
     global questions_pers, age, gender, feedbacktext
 
     dbquestions = db['questions']
@@ -472,12 +492,13 @@ def questionnaire():
         allquestions_from_db_pers.append(questions_pers)
 
     # to get the questions about the personality
-    date_page_questionnaire_4 = datetime.datetime.utcnow()
+    session['date_page_questionnaire_4'] = datetime.datetime.utcnow()
 
     # random.shuffle(allquestions_from_db_rec)
 
     # print('len(allquestions_from_db_rec)', len(allquestions_from_db_rec))
     questionnaire_answer_from_survey.clear()
+    questionnaire_answer_from_survey_pers.clear()
     # print("preferred_movies Ergebnis" + str(questionnaire_answer_from_survey))
 
     if request.method == 'POST':
@@ -485,23 +506,28 @@ def questionnaire():
         # for n in range(1, len(allquestions_from_db_rec)):
         #    questionnaire_answer_from_survey.append(str(request.form.get('q_survey_rec_' + str(n) + ']')))
         #    print("A"+str(questionnaire_answer_from_survey))
+
         for n in range(1, len(allquestions_from_db_rec) + 1):
             questionnaire_answer_from_survey.append(str(request.form.get('q_survey_rec_[' + str(n) + ']')))
-            # print("questions " + str(n) + " " + str(questionnaire_answer_from_survey))
+            print("questions rec " + str(n) + " " + str(questionnaire_answer_from_survey))
 
         # print('allquestions_from_db_pers ', allquestions_from_db_pers)
         # print('len(allquestions_from_db_pers) ', len(allquestions_from_db_pers))
 
         for n in range(1, len(allquestions_from_db_pers) + 1):
             questionnaire_answer_from_survey_pers.append(str(request.form.get('q_survey_pers_[' + str(n) + ']')))
-            print('q_survey_pers_[' + str(n) + ']')
-            print(str(request.form.get('q_survey_pers_[' + str(n) + ']')))
-            print("questions pers" + str(n) + " " + str(questionnaire_answer_from_survey_pers))
+            print("questions pers " + str(n) + " " + str(questionnaire_answer_from_survey_pers))
+
+        session['questionnaire_answer_from_survey'] = list(questionnaire_answer_from_survey)
+        session['questionnaire_answer_from_survey_pers'] = list(questionnaire_answer_from_survey_pers)
+
+        print("questions rec: " + str(session['questionnaire_answer_from_survey_pers']))
+        print("questions pers" + str(session['questionnaire_answer_from_survey_pers']))
 
         # print('new länge questionnaire_answer_from_survey_pers', str(questionnaire_answer_from_survey_pers))
-        feedbacktext = str(request.form.get('feedbacktext'))
-        age = str(request.form.get('age'))
-        gender = str(request.form.get('gender'))
+        session['feedbacktext'] = str(request.form.get('feedbacktext'))
+        session['age'] = str(request.form.get('age'))
+        session['gender'] = str(request.form.get('gender'))
 
         # print('feedbacktext: ', feedbacktext)
         # print('age: ', age)
@@ -533,7 +559,7 @@ def my_new_form():
     ## Assignment of the resulted input of the html variables
     ## contains all data of the survey
 
-    global page, sugg_numMovies, preferred_movies
+    global page, preferred_movies
     global questionnaire_answer_from_survey, questionnaire_answer_from_survey_pers
     global likes_list, dislikes_list, neutral_list, fake
     global date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3, date_page_questionnaire_4
@@ -541,30 +567,38 @@ def my_new_form():
 
     # these two loops are for checking the likes and dislike list if the user picked the fake movie popeye
     # in mongodb popeye has the number 1
+    print(page)
 
-    for n in range(0, len(likes_list) - 1):
-        if likes_list[n] == 1:
-            fake = True
+    session['page'] = page
+    session['retention_check_1_passed'] = True
 
-    for n in range(0, len(dislikes_list) - 1):
-        if dislikes_list[n] == 1:
-            fake = True
+    for n in range(0, len(session['likes_list']) - 1):
+        if session['likes_list'][n] == 1:
+            session['retention_check_1_passed'] = False
+
+    for n in range(0, len(session['dislikes_list']) - 1):
+        if session['likes_list'][n] == 1:
+            session['retention_check_1_passed'] = False
 
     # this for loop is for checking the questionnaire list if the user picked the fake question "This question should
     # be rated as 2" if he picks not 2, it is marked as fake in mongodb
+    session['retention_check_2_passed'] = False
 
     for n in range(1, len(questionnaire_answer_from_survey)):
         #    print('questionnaire_answer_from_survey[' + str(n) + '] ' + str(questionnaire_answer_from_survey[n]))
-        if questionnaire_answer_from_survey[19] != "2":
+        # if questionnaire_answer_from_survey[19] != "2":
+        #     fake = True
+        if session['questionnaire_answer_from_survey'][19] == "2":
             fake = True
+            session['retention_check_2_passed'] = True
 
-    date_page_submit_5 = datetime.datetime.utcnow()
+    session['date_page_submit_5'] = datetime.datetime.utcnow()
 
     ## fuction for saving all data in mongo database
-    message = save(page, questionnaire_answer_from_survey, questionnaire_answer_from_survey_pers, likes_list,
+    message = save(2, questionnaire_answer_from_survey, questionnaire_answer_from_survey_pers, likes_list,
                    dislikes_list, neutral_list, favourite,
                    watchlist, date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3,
-                   date_page_questionnaire_4, date_page_submit_5, gender, age, feedbacktext, fake)
+                   date_page_questionnaire_4, session['date_page_submit_5'], gender, age, feedbacktext, fake)
 
     # for the next user, so user 1 gets List 1, User 2 gets List 2, and so on
     if page == 1:
@@ -588,19 +622,22 @@ def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_s
     # this list variable is for the left part of the dictionary (for example "pre_movie_0")
     pref_movie_attributename = []
     sugg_movie_attributename = []
-    questions_rec_attributename = []
-    questions_pers_attributename = []
 
     # print("Watchlist!!!!!: " + str(watchlist))
 
+    questions_rec_attributename = []
+    questions_pers_attributename = []
+
+    questions_pers_attributename.clear()
+
     # to create attributes name for mongo db
-    for x in range(1, len(questionnaire_answer_from_survey_x) + 1):
+    for x in range(1, len(session['questionnaire_answer_from_survey']) + 1):
         if x < 10:
             questions_rec_attributename.append('Question_Rec_0' + str(x))
         else:
             questions_rec_attributename.append('Question_Rec_' + str(x))
 
-    for x in range(1, len(questionnaire_answer_from_survey_pers_x) + 1):
+    for x in range(1, len(session['questionnaire_answer_from_survey_pers']) + 1):
         if x < 10:
             questions_pers_attributename.append('Question_Pers_0' + str(x))
         else:
@@ -624,25 +661,26 @@ def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_s
 
     # using the dictionary form to input data in mongodb
     new = {
-        "Form_Type": page_x,
-        "Gender": gender_x,
-        "Age": age_x,
-        "Timestamp_start_session": date_page_task_description_1_x,
-        "Timestamp_page_2": date_page_pref_movie_2_x,
-        "Timestamp_page_3": date_page_rec_movie_3_x,
-        "Timestamp_page_4": date_page_questionnaire_4_x,
-        "Timestamp_page_submit": date_page_submit_5_x,
-        "Next_Movie_To_Watch": favourite_x,
-        "Watchlist": watchlist_x,
-        'Like': likes_list_x,
-        'Dislike': dislikes_list_x,
-        'Neutral': neutral_list_x,
-        "Feedback_Text": feedbacktext_x,
-        "FAKE": fake_x
+        "Form_Type": session['page'],
+        "Gender": session['gender'],
+        "Age": session['age'],
+        "Timestamp_start_session": session['date_page_task_description_1'],
+        "Timestamp_page_2": session['date_page_pref_movie_2'],
+        "Timestamp_page_3": session['date_page_rec_movie_3'],
+        "Timestamp_page_4": session['date_page_questionnaire_4'],
+        "Timestamp_page_submit": session['date_page_submit_5'],
+        "Next_Movie_To_Watch": session['favourite'],
+        "Watchlist": session['watchlist'],
+        'Like': session['likes_list'],
+        'Dislike': session['dislikes_list'],
+        'Neutral': session['neutral_list'],
+        "Feedback_Text": session['feedbacktext'],
+        "retention_check_1_passed": session['retention_check_1_passed'],
+        "retention_check_2_passed": session['retention_check_2_passed']
     }
     # list comprehension to write
-    new.update(dict(zip(questions_rec_attributename, questionnaire_answer_from_survey_x)))
-    new.update(dict(zip(questions_pers_attributename, questionnaire_answer_from_survey_pers_x)))
+    new.update(dict(zip(questions_rec_attributename, session['questionnaire_answer_from_survey'])))
+    new.update(dict(zip(questions_pers_attributename, session['questionnaire_answer_from_survey_pers'])))
     # new.update(dict(zip(pref_movie_attributename, preferred_movies_x)))
     # no more suggest movie --> watchlist instead
     # new.update(dict(zip(sugg_movie_attributename, suggested_movies_x)))

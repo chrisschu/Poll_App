@@ -34,19 +34,27 @@
           </div>
         </div>
       </li>
+    <div class="form-header-group ">
       <li class="form-line" data-type="control_text" id="id_18">
         <div id="cid_18" class="form-input-wide">
           <div id="text_18" class="form-html" data-component="text">
             <ul>
-                <li>Below, you find a selection of movies. You might know at least some of them. </li>
-                 <li><p>For those you have seen, please let us know if you liked them.
-                     Select the appropriate thumb symbols (like, neutral, dislike).</li>
-                 <li>Rate as many movies as you like.</li>
+                <li>Below, you find a selection of 25 movies. You might know at least some of them. </li>
+                 <li><p>For those you have seen, please let us know if you liked them.</li>
+                <li>Rate as many movies as you like.</li>
+
+                  <li><p>To activate your rating, select the appropriate thumb symbols </li>
+                    <ul>
+                        <li><img src=" {{url_for('static', filename='thumbs_up.png')}}" height="40" width="40" alt="Like">     -   Like</li>
+                        <li><img src=" {{url_for('static', filename='thumbs_medium.png')}}" height="40" width="40" alt="neutral">  -  Neutral</li>
+                        <li><img src=" {{url_for('static', filename='thumbs_down.png')}}" height="40" width="40" alt="Dislike">  -   Dislike</li>
+                 </ul>
+
            </ul>
           </div>
         </div>
       </li>
-
+    </div>
 		<div class="gallery">
             <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
         <tbody>

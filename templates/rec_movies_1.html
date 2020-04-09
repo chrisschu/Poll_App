@@ -41,11 +41,6 @@
         <div id="cid_21" class="form-input-wide">
           <div id="text_21" class="form-html" data-component="text">
           <table>
-          <tr>
-<td>
-</td>
-              <td> <p><b>You liked</b> </p></td>
-          </tr>
               <td width="780">
               <ul>
               <li>Below, you find a selection of our recommended movies for you. </li>
@@ -55,22 +50,31 @@
                  <li>If there are more interesting movies for you, you can add them to your watchlist.</li>
                 <br>
             </ul></td>
-              <td> <table class="form-matrix-table-liked">
-                    <tbody>
-                        <tr class="form-matrix-row-headers-liked">
-                            {% for n in user_pref %}
-                        <td> <img src="{{ n.cover_link }}" height="268" width="172"> </td>
-                            {% endfor %}
-                        </tr>
-                    </tbody>
-                </table></td>
+              <td> </td>
           </table>
-              <p></p>
-
           </div>
         </div>
       </li>
 
+
+     <div class="form-header-group ">
+         <table>
+         <tr>
+              <td> <p><b>You liked</b> </p></td>
+          </tr>
+         <table class="form-matrix-table-liked">
+                    <tbody>
+                        <tr class="form-matrix-row-headers-liked">
+                            {% for n in user_pref %}
+                           <th> <img src="{{ n.cover_link }}" height="200" width="150"> </th>
+                                <td>  <label> <h4 style="text-align: center;">{{ n.title }} </h4></label></td>
+                                <td> </td>
+                            {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+
+     </div>
       <li class="form-line jf-required" data-type="control_matrix" id="id_20">
         <label class="form-label form-label-top" id="label_20" for="input_20">
           <span class="form-required">
@@ -79,7 +83,6 @@
         <div id="cid_20" class="form-input-wide jf-required">
         <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
         <tbody>
-              <tr>
           {% for o in movie %}
               <th scope="row" style="text-align:center" class="form-matrix-row-headers">
               <img src="{{ o.cover_link }}" height="260" width="200" alt="" border="2" align="center" hspace="10" vspace="0">
