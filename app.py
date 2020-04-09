@@ -69,6 +69,8 @@ feedbacktext = ''
 fake = False
 
 app = Flask(__name__)
+
+# secret key for using the flask session
 app.config['SECRET_KEY'] = 'testkgdfsgdwrey'
 
 ## Connection to the MongoDB Atlas Cloud
