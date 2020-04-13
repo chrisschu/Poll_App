@@ -695,7 +695,7 @@ def save():
 
     # using the dictionary form to input data in mongodb
 
-    if session['warning'] > 0:
+    if session['warning'] == 0:
         warning = True
     else:
         warning = False

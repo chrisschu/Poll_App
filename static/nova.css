@@ -182,18 +182,35 @@
 	padding: 24px 0;
 	margin: 12px 36px 18px;
 	border-bottom: 1px solid #e3e3e3;
-	border-top: 0px solid #e3e3e3;
+	border-top: 1px solid #e3e3e3;
 }
 
 .form-instruction-box {
-	background: #555555; /* For overriding */
+	background: #666; /* For overriding */
 	border: none; /* For overriding */
-	padding: 24px 0;
+	padding: 10px 0;
 	margin: 12px 36px 18px;
-	border-bottom: 1px solid #e3e3e3;
+	border-bottom: 0px solid #e3e3e3;
 	border-top: 0px solid #e3e3e3;
 }
 
+.form-instruction-box-2 {
+	background: #666; /* For overriding */
+	border: none; /* For overriding */
+	padding: 10px 0;
+	margin: 12px 36px 18px;
+	border-bottom: 0px solid #e3e3e3;
+	border-top: 0px solid #e3e3e3;
+}
+
+.form-instruction-box-quest {
+	background: #666; /* For overriding */
+	border: none; /* For overriding */
+	padding: 10px 0;
+	margin: 12px 36px 18px;
+	border-bottom: 0px solid #e3e3e3;
+	border-top: 0px solid #e3e3e3;
+}
 
 li:first-child .form-header-group,
 .form-header-group + .form-header-group {

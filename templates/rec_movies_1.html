@@ -37,7 +37,7 @@
         </div>
       </li>
 
-    <div class="form-instruction-box">
+    <div class="form-instruction-box-2">
       <li class="form-line" data-type="control_text" id="id_18">
         <div id="cid_18" class="form-input-wide">
           <div id="text_18" class="form-html" data-component="text">
@@ -47,14 +47,13 @@
             <li>Select one single movie that you want to see next.</li>
             <br>
                  <li>If there are more interesting movies for you, you can add them to your watchlist.</li>
-                <br>
             </ul>
           </div>
         </div>
       </li>
       </div>
 
-     <div class="form-header-group " style="align-content: center">
+     <div class="form-header-group" style="align-content: center">
          <table>
          <tr>
              <td><h3>You liked</h3></td>
@@ -83,6 +82,9 @@
           <span class="form-required">
           </span>
         </label>
+          <h2 id="header_13" class="form-header" data-component="header">
+              Recommended for you
+            </h2>
         <div id="cid_20" class="form-input-wide jf-required">
         <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
         <tbody>
@@ -121,7 +123,7 @@
                             <td width="150" >
                       <div class="forms">
                                 <label for="input_20_1_{{ o.title }}">
-                                <span>Next Movie to Watch</span>
+                                <span>Pick Next Movie to Watch</span>
                                     <br>
                                     <br>
                                 <div class="get_button_center">
@@ -130,7 +132,7 @@
                             </label>
                                 </div>
                       </div>
-              </td>
+              </li>
             </tr>
           {% endfor %}
         </tbody>
