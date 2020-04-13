@@ -37,40 +37,43 @@
         </div>
       </li>
 
-      <li class="form-line form-line-column form-col-1" data-type="control_text" id="id_21">
-        <div id="cid_21" class="form-input-wide">
-          <div id="text_21" class="form-html" data-component="text">
-          <table>
-              <td width="780">
-              <ul>
-              <li>Below, you find a selection of our recommended movies for you. </li>
+    <div class="form-instruction-box">
+      <li class="form-line" data-type="control_text" id="id_18">
+        <div id="cid_18" class="form-input-wide">
+          <div id="text_18" class="form-html" data-component="text">
+            <ul>
+                <li>Below, you find a selection of our recommended movies for you. </li>
                 <li><p>Please let us know if you like them. </p>
             <li>Select one single movie that you want to see next.</li>
             <br>
                  <li>If there are more interesting movies for you, you can add them to your watchlist.</li>
                 <br>
-            </ul></td>
-              <td> </td>
-          </table>
+            </ul>
           </div>
         </div>
       </li>
+      </div>
 
-
-     <div class="form-header-group ">
+     <div class="form-header-group " style="align-content: center">
          <table>
          <tr>
-              <td> <p><b>You liked</b> </p></td>
-          </tr>
+             <td><h3>You liked</h3></td>
+         </tr>
+         </table>
+<br>
          <table class="form-matrix-table-liked">
                     <tbody>
-                        <tr class="form-matrix-row-headers-liked">
+                     <tr class="form-matrix-row-headers-liked" width="200">
                             {% for n in user_pref %}
-                           <th> <img src="{{ n.cover_link }}" height="200" width="150"> </th>
+                                <td><img src="{{ n.cover_link }}" height="200" width="150"> </td>
+                    {% endfor %}
+                     </tr>
+                        <tr class="form-matrix-row-headers-liked" width="400">
+                            {% for n in user_pref %}
                                 <td>  <label> <h4 style="text-align: center;">{{ n.title }} </h4></label></td>
-                                <td> </td>
                             {% endfor %}
                         </tr>
+
                     </tbody>
                 </table>
 
@@ -87,7 +90,7 @@
               <th scope="row" style="text-align:center" class="form-matrix-row-headers">
               <img src="{{ o.cover_link }}" height="260" width="200" alt="" border="2" align="center" hspace="10" vspace="0">
               </th>
-              <td style="text-align:center">
+              <td style="text-align:left">
                   <label> <h2 style="text-align: center;">{{ o.title }} </h2></label>
                     <p>{{ o.description }} </p>
                     <p><b>Writers:</b> {{ o.writers }} </p>

@@ -11,6 +11,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1" />
 <meta name="HandheldFriendly" content="true" />
 <title>MovieSurvey</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='formCSS.css') }}" />
 <link type="text/css" media="print" rel="stylesheet" href="{{ url_for('static', filename='printForm.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='nova.css') }}" />
@@ -24,6 +27,7 @@
   <input type="hidden" id="JWTContainer" value="" />
   <input type="hidden" id="cardinalOrderNumber" value="" />
 
+
 <div role="main" class="form-all">
       <li id="cid_13" class="form-input-wide" data-type="control_head">
         <div class="form-header-group ">
@@ -34,7 +38,7 @@
           </div>
         </div>
       </li>
-    <div class="form-header-group ">
+    <div class="form-instruction-box">
       <li class="form-line" data-type="control_text" id="id_18">
         <div id="cid_18" class="form-input-wide">
           <div id="text_18" class="form-html" data-component="text">
@@ -44,14 +48,25 @@
                 <li>Rate as many movies as you like.</li>
 
                   <li><p>To activate your rating, select the appropriate thumb symbols </li>
-                    <ul>
-                        <li><img src=" {{url_for('static', filename='thumbs_up.png')}}" height="40" width="40" alt="Like">     -   Like</li>
+                    <ul class="no-bullets">
+                        <li ><img src=" {{url_for('static', filename='thumbs_up.png')}}" height="40" width="40" alt="Like">     -   Like</li>
                         <li><img src=" {{url_for('static', filename='thumbs_medium.png')}}" height="40" width="40" alt="neutral">  -  Neutral</li>
                         <li><img src=" {{url_for('static', filename='thumbs_down.png')}}" height="40" width="40" alt="Dislike">  -   Dislike</li>
                  </ul>
-
            </ul>
+          <br>
+                          {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert">
+                <span>{{ message }}</span>
+            </div>
+              {% endfor %}
+            {% endif %}
+        {% endwith %}
           </div>
+
+
         </div>
       </li>
     </div>
@@ -102,6 +117,8 @@
     </ul>
 
 </div>
+
+
 </form>
 </body>
 </html>

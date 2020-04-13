@@ -41,18 +41,18 @@
     <table class="questionnaire">
   <tr>
     <th class="questionnaire-g1fv"></th>
-    <th class="questionnaire-aaj5">Completely disagree<br>(1)<br></th>
-    <th class="questionnaire-aaj5">(2)<br></th>
-    <th class="questionnaire-aaj5"><br>(3)<br></th>
-    <th class="questionnaire-aaj5"><br>(4)</th>
-    <th class="questionnaire-aaj5"><br>(5)</th>
-    <th class="questionnaire-aaj5"><br>(6)</th>
-    <th class="questionnaire-aaj5">Completely agree<br>(7)</th>
+    <th class="questionnaire-aaj5">(1)</th>
+    <th class="questionnaire-aaj5">(2)</th>
+    <th class="questionnaire-aaj5">(3)</th>
+    <th class="questionnaire-aaj5">(4)</th>
+    <th class="questionnaire-aaj5">(5)</th>
+    <th class="questionnaire-aaj5">(6)</th>
+    <th class="questionnaire-aaj5">(7)</th>
   </tr>
     {% for q in questions %}
   <tr>
     <td class="questionnaire-g1fv"> {{ q.question }}</td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_rec_[{{ q.number }}]" value=1></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_rec_[{{ q.number }}]" value=1 required></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_rec_[{{ q.number }}]" value=2></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_rec_[{{ q.number }}]" value=3></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_4" name="q_survey_rec_[{{ q.number }}]" value=4></td>
@@ -72,19 +72,19 @@
     <table class="questionnaire">
   <tr>
     <th class="questionnaire-g1fv"></th>
-    <th class="questionnaire-aaj5">Completely disagree<br>(1)<br></th>
-    <th class="questionnaire-aaj5">(2)<br></th>
-    <th class="questionnaire-aaj5"><br>(3)<br></th>
-    <th class="questionnaire-aaj5"><br>(4)</th>
-    <th class="questionnaire-aaj5"><br>(5)</th>
-    <th class="questionnaire-aaj5"><br>(6)</th>
-    <th class="questionnaire-aaj5">Completely agree<br>(7)</th>
+    <th class="questionnaire-aaj5">(1)</th>
+    <th class="questionnaire-aaj5">(2)</th>
+    <th class="questionnaire-aaj5">(3)</th>
+    <th class="questionnaire-aaj5">(4)</th>
+    <th class="questionnaire-aaj5">(5)</th>
+    <th class="questionnaire-aaj5">(6)</th>
+    <th class="questionnaire-aaj5">(7)</th>
   </tr>
     {% for q in questions_pers %}
   <tr>
-    <td class="questionnaire-g1fv"> {{ q.question }}</td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_1" name="q_survey_pers_[{{ q.number }}]" value=1></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_2" name="q_survey_pers_[{{ q.number }}}" value=2></td>
+      <td class="questionnaire-g1fv"> {{ q.question }} <font color="333333">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</font></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_1" name="q_survey_pers_[{{ q.number }}]" value=1 required></td>
+    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_2" name="q_survey_pers_[{{ q.number }}]" value=2></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_3" name="q_survey_pers_[{{ q.number }}]" value=3></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_4" name="q_survey_pers_[{{ q.number }}]" value=4></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_5" name="q_survey_pers_[{{ q.number }}]" value=5></td>
@@ -98,15 +98,15 @@
         <br>
         <table>
             <tr><td width="150" height="50">  <label class="questionnaire_label">Your Gender</label></td>
-        <td><select id="gender" name="gender">
-    <option value="" selected="selected">Select One</option>
+        <td><select id="gender" name="gender" required="">
+    <option value="" selected="selected" >Select One</option>
     <option value="male" >male</option>
     <option value="female">female</option>
     <option value="other" >other</option>
     <option value="donttell" >don't want to tell</option>
         </select></td></tr>
             <tr width="150" height="50"> <td><label class="questionnaire_label">Your Age</label></td>
-            <td>    <select id="age" name="age">
+            <td>    <select id="age" name="age" required>
     <option value="" selected="selected">Select One</option>
     <option value="0-18" >0-18</option>
     <option value="19-25">19-25</option>

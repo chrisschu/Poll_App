@@ -4,15 +4,15 @@ import random
 
 import pandas as pd
 import pymongo
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session, flash
 from pymongo import *
 
 ## Author Christian Schuschnig
 
-# Application contains global variables cause the split of the html files
+# !!! DEPRECATED !!!
+# Application contains global variables cause the split of the html files - NOW Sessions are used
 
 ## first decleration of global variables
-
 # new variables for using arrays
 title = []
 description = []
@@ -276,6 +276,22 @@ def pref_movies():
     global likes_list, dislikes_list, neutral_list
     global fake
 
+    # for assignment to the right page
+    session['Form_Type'] = 1
+
+    count_page_1 = collection.count_documents({"Form_Type": 1})
+    count_page_2 = collection.count_documents({"Form_Type": 2})
+
+    print("form type 1:", count_page_1)
+    print("form type 2:", count_page_2)
+
+    if count_page_1 <= count_page_2:
+        session['Form_Type'] = 1
+        page = 1
+    else:
+        session['Form_Type'] = 2
+        page = 2
+
     # variable for storing 2 variable
     user_preferences = []
 
@@ -293,6 +309,9 @@ def pref_movies():
     for movies in dbmovies.find({'type': 'pref'}, {"_id": False}):
         allprefmovies.append(movies)
 
+    #cut the list from database only to 25 movies for the html page
+    #allprefmovies = allprefmovies[25:]
+
     # for randomizing the movie list
     random.shuffle(allprefmovies)
 
@@ -307,6 +326,7 @@ def pref_movies():
 
     if request.method == 'POST':
         # to get the html input, passed in this list variable
+        print('allpref_movies length', len(allprefmovies))
         for n in range(1, len(allprefmovies)):
             preferred_movies.append(str(request.form.get('q_pref_movies[' + str(n) + ']')))
 
@@ -327,25 +347,11 @@ def pref_movies():
         # print('dislikes_list: ', dislikes_list)
         # print('neutral_list: ', neutral_list)
 
-
         # print(len(preferred_movies))
         # print("pref_movies_first: n: " + str(preferred_movies))
 
         # variable geht die bewertete movieliste durch und speichert index/number in array.
         # this array will be used for displaying the movie in the next page
-
-        # this if checks if the popeye movie is selected and adds it to the list for the next
-        if preferred_movies[0] == 'Like':
-            user_preferences.append(1)
-
-        for n in range(1, len(allprefmovies)+1):
-            print("pref movies: " + preferred_movies[n])
-            if preferred_movies[n] == 'Like':
-                # n + 1 generates the right "number" and fills user_preferences with two numbers
-                user_preferences.append(n + 1)
-                if len(user_preferences) == 2:
-                    # if 2 likes found, end for loop
-                    break
 
         user_likes_movies = []
 
@@ -353,15 +359,7 @@ def pref_movies():
         # result = movies.find().limit(3)
 
         # loop is for filling user_likes_movies list, user preferences two
-        try:
-            for n in range(0, 2):
-                # print("user_preferences:" + str(user_preferences[n]))
-                for movies in dbmovies.find({'number': user_preferences[n], 'type': "pref"}, {"_id": False}):
-                    user_likes_movies.append(movies)
-        except IndexError as error:
-            print(error)
 
-        session['user_likes_movies'] = list(user_likes_movies)
     # print("number 1: " + str(user_preferences))
 
     # for user_likes_movies in dbmovies.find
@@ -378,13 +376,51 @@ def pref_movies():
     # pre_movie_2 = str(request.form.get('q4_overallSatisfaction[2]'))
     # pre_movie_3 = str(request.form.get('q4_overallSatisfaction[3]'))
     # pre_movie_4 = str(request.form.get('q4_overallSatisfaction[4]'))
-
+    session['warning'] = 0
     if request.method == 'POST':
+
+        print("preferred_movies + " + str(preferred_movies))
+        print("user_preferences + " + str(user_preferences))
+        print("user likes movies + " + str(user_likes_movies))
+
         # will be exectued after form pref_movie_form is committed
-        if page == 1:
-            return redirect(url_for('rec_movies_1'))
+        # this if checks if the popeye movie is selected and adds it to the list for the next
+        if preferred_movies[0] == 'Like':
+            user_preferences.append(1)
+
+        print("preferred_movies count: ", preferred_movies.count("Like"))
+
+        if preferred_movies.count("Like") <= 1:
+            print("Yes, 'Like' NOT found in List : ", preferred_movies)
+            session['warning'] += 1
+            flash("Not enough movies have been selected: Select altleast two movies you like")
+
+            return redirect(url_for('pref_movies'))
         else:
-            return redirect(url_for('rec_movies_2'))
+            for n in range(1, len(allprefmovies)):
+                print("pref movies: " + preferred_movies[n])
+                if preferred_movies[n] == 'Like':
+                    # n + 1 generates the right "number" and fills user_preferences with two numbers
+                    user_preferences.append(n + 1)
+                    if len(user_preferences) == 2:
+                        # if 2 likes found, end for loop
+                        break
+
+            try:
+                for n in range(0, 2):
+                    # print("user_preferences:" + str(user_preferences[n]))
+                    for movies in dbmovies.find({'number': user_preferences[n], 'type': "pref"}, {"_id": False}):
+                        user_likes_movies.append(movies)
+            except IndexError as error:
+                print(error)
+
+            session['user_likes_movies'] = list(user_likes_movies)
+
+
+            if page == 1:
+                return redirect(url_for('rec_movies_1'))
+            else:
+                return redirect(url_for('rec_movies_2'))
 
     return render_template('/pref_movies.html', movie=allprefmovies)
 
@@ -531,6 +567,9 @@ def questionnaire():
         session['age'] = str(request.form.get('age'))
         session['gender'] = str(request.form.get('gender'))
 
+        ## check form is everything fullfilled
+
+
         # print('feedbacktext: ', feedbacktext)
         # print('age: ', age)
         # print('gender: ', gender)
@@ -551,6 +590,8 @@ def questionnaire():
                            questions_pers=allquestions_from_db_pers)
 
 
+
+
 @app.route('/submit.html', methods=['POST', 'GET'])
 def submit():
     return render_template('/submit.html', thing_to_say='Click here to start')
@@ -569,9 +610,6 @@ def my_new_form():
 
     # these two loops are for checking the likes and dislike list if the user picked the fake movie popeye
     # in mongodb popeye has the number 1
-    print(page)
-
-    session['page'] = page
     session['retention_check_1_passed'] = True
 
     for n in range(0, len(session['likes_list']) - 1):
@@ -597,10 +635,7 @@ def my_new_form():
     session['date_page_submit_5'] = datetime.datetime.utcnow()
 
     ## fuction for saving all data in mongo database
-    message = save(2, questionnaire_answer_from_survey, questionnaire_answer_from_survey_pers, likes_list,
-                   dislikes_list, neutral_list, favourite,
-                   watchlist, date_page_task_description_1, date_page_pref_movie_2, date_page_rec_movie_3,
-                   date_page_questionnaire_4, session['date_page_submit_5'], gender, age, feedbacktext, fake)
+    message = save()
 
     # for the next user, so user 1 gets List 1, User 2 gets List 2, and so on
     if page == 1:
@@ -611,10 +646,7 @@ def my_new_form():
     return message
 
 
-def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_survey_pers_x, likes_list_x,
-         dislikes_list_x, neutral_list_x, favourite_x, watchlist_x, date_page_task_description_1_x,
-         date_page_pref_movie_2_x, date_page_rec_movie_3_x, date_page_questionnaire_4_x,
-         date_page_submit_5_x, gender_x, age_x, feedbacktext_x, fake_x):
+def save():
     """
     Saving in Cloud Atlas MongoDB
     """
@@ -662,8 +694,16 @@ def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_s
     # print(dict(zip(sugg_movie_attributename, suggested_movies_x)))
 
     # using the dictionary form to input data in mongodb
+
+    if session['warning'] > 0:
+        warning = True
+    else:
+        warning = False
+
+
+
     new = {
-        "Form_Type": session['page'],
+        "Form_Type": session['Form_Type'],
         "Gender": session['gender'],
         "Age": session['age'],
         "Timestamp_start_session": session['date_page_task_description_1'],
@@ -678,7 +718,8 @@ def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_s
         'Neutral': session['neutral_list'],
         "Feedback_Text": session['feedbacktext'],
         "retention_check_1_passed": session['retention_check_1_passed'],
-        "retention_check_2_passed": session['retention_check_2_passed']
+        "retention_check_2_passed": session['retention_check_2_passed'],
+        "warning_occured": warning
     }
     # list comprehension to write
     new.update(dict(zip(questions_rec_attributename, session['questionnaire_answer_from_survey'])))
@@ -707,12 +748,6 @@ def save(page_x, questionnaire_answer_from_survey_x, questionnaire_answer_from_s
     links = "to generate csv/xlsx data: "
     output = entry + '\n' + message
     return render_template('/end.html', message=output, links=links)
-
-
-def fill_datalist_pref():
-    # for future to load datasets automatically in page
-    pass
-
 
 if __name__ == '__main__':
     app.run(debug=True)
