@@ -37,44 +37,41 @@
         </div>
       </li>
 
-      <li class="form-line form-line-column form-col-1" data-type="control_text" id="id_21">
-        <div id="cid_21" class="form-input-wide">
-          <div id="text_21" class="form-html" data-component="text">
-          <table>
-          <tr>
-<td>
-    <h4>Instruction</h4>
-</td>
-          </tr>
-              <td width="600">             <ul>
-                <li>For movies you like <b>hit the checkbox</b> - 'Add to Watchlist'</b>.</li>
-                  <br>
-                <li><b>Pick one</b> movie as 'Next Movie to Watch'                                              </li>
-                <br>
-            </ul></td>
-          </table>
-
-
-              <p></p>
-
+    <div class="form-instruction-box-2">
+      <li class="form-line" data-type="control_text" id="id_18">
+        <div id="cid_18" class="form-input-wide">
+          <div id="text_18" class="form-html" data-component="text">
+            <ul>
+                <li>Below, you find a selection of our recommended movies for you. </li>
+                <li><p>Please let us know if you like them. </p>
+            <li>Select one single movie that you want to see next.</li>
+            <br>
+                 <li>If there are more interesting movies for you, you can add them to your watchlist.</li>
+            </ul>
           </div>
         </div>
       </li>
-
+      </div>
+        <div class="form-header-group-3" style="align-content: center">
+        </div>
       <li class="form-line jf-required" data-type="control_matrix" id="id_20">
         <label class="form-label form-label-top" id="label_20" for="input_20">
           <span class="form-required">
           </span>
         </label>
+          <h3 id="header_13" class="form-header" data-component="header">
+              Recommended for you
+            </h3>
+      <br>
+      <br>
         <div id="cid_20" class="form-input-wide jf-required">
         <table summary="" cellPadding="4" cellSpacing="0" class="form-matrix-table" data-component="matrix">
         <tbody>
-              <tr>
           {% for o in movie %}
               <th scope="row" style="text-align:center" class="form-matrix-row-headers">
               <img src="{{ o.cover_link }}" height="260" width="200" alt="" border="2" align="center" hspace="10" vspace="0">
               </th>
-              <td style="text-align:center">
+              <td style="text-align:left">
                   <label> <h2 style="text-align: center;">{{ o.title }} </h2></label>
                     <p>{{ o.description }} </p>
                     <p><b>Writers:</b> {{ o.writers }} </p>
@@ -105,7 +102,7 @@
                             <td width="150" >
                       <div class="forms">
                                 <label for="input_20_1_{{ o.title }}">
-                                <span>Next Movie to Watch</span>
+                                <span>Pick Next Movie to Watch</span>
                                     <br>
                                     <br>
                                 <div class="get_button_center">
@@ -114,7 +111,7 @@
                             </label>
                                 </div>
                       </div>
-              </td>
+              </li>
             </tr>
           {% endfor %}
         </tbody>

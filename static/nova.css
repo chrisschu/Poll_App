@@ -185,6 +185,14 @@
 	border-top: 1px solid #e3e3e3;
 }
 
+.form-header-group-3 {
+	background: transparent; /* For overriding */
+	border: none; /* For overriding */
+	margin: 12px 36px 18px;
+	border-top: 1px solid #e3e3e3;
+}
+
+
 .form-instruction-box {
 	background: #666; /* For overriding */
 	border: none; /* For overriding */
