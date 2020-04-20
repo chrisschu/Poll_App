@@ -44,7 +44,7 @@
           <div id="text_18" class="form-html" data-component="text">
             <ul>
                 <li>Below, you find a selection of 25 movies. You might know at least some of them. </li>
-                 <li><p>For those you have seen, please let us know if you liked them.</li>
+                <!-- <li><p>For those you have seen, please let us know if you liked them or not.</li> -->
                 <li>Rate as many movies as you like.</li>
 
                   <li><p>To activate your rating, select the appropriate thumb symbols </li>
@@ -81,11 +81,11 @@
               <th scope="row" style="text-align:center" class="form-matrix-row-headers">
               <img src="{{ o.cover_link }}" height="150" width="100" alt="">
               </th>
-              <td style="text-align:center">
+              <td style="text-align:center" >
                   <label> <h3 style="text-align: center">{{ o.title }} </h3></label>
                    <p>{{ o.description }} </p>
-                  <p><b>Writers:</b> {{ o.writers }} <b>   Genres:   </b> {{ o.genre }}</p>
-                        <p><b> Stars: </b> {{ o.stars }} </p>
+                  <p> <b> Stars: </b> {{ o.stars }}<b> &nbsp;&nbsp;&nbsp;&nbsp; Genres:   </b> {{ o.genre }}</p>
+                        <p> <b>Director:</b> {{ o.writers }}</p>
               </td>
                 <td style="text-align:center" class="form-matrix-values">
                     <input type="radio" class="radio_item" value="Like" name="q_pref_movies[{{ o.number }}]" id="input_20_{{ o.number }}_1">

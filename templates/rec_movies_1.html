@@ -15,7 +15,75 @@
 <link type="text/css" media="print" rel="stylesheet" href="{{ url_for('static', filename='printForm.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='nova.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='form.css') }}"/>
+<style>
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #006400;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+</style>
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='poll_style.css') }}" />
 <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/buttons/form-submit-button-simple_grey.css?3.3.14737"/>
 </head>
@@ -97,12 +165,12 @@
               <td style="text-align:left">
                   <label> <h2 style="text-align: center;">{{ o.title }} </h2></label>
                     <p>{{ o.description }} </p>
-                    <p><b>Writers:</b> {{ o.writers }} </p>
                     <p><b>Stars:</b> {{ o.stars }} </p>
                     <p><b>Genre:</b> {{ o.genre }} </p>
+                    <p><b>Director:</b> {{ o.writers }} </p>
               </td>
               <td style="text-align:center" class="form-matrix-values">
-                  <p> <b>Trailer:</b> </p>
+                  <p> <b>Trailer</b> </p>
                   <a target="_blank" rel="noopener noreferrer" href="{{ o.trailer_link }}"><img src=" {{url_for('static', filename='imdb.png')}}" height="80" width="80"></a></td>
               <td>
               <div class="forms">
@@ -112,11 +180,11 @@
                     <br>
                     <br>
                     <div class="get_button_center">
-                    <input type="checkbox" id="cbk_{{ o.number }}" value="{{ o.title }}" name="q_Watchlist" style="vertical-align: middle">
-                    <span class="cbx" style="text-align: center">
-                            <svg width="16px" height="16px" viewBox="0 0 12 11">
-                                <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
-                    </svg>
+                    <label class="container">
+                          <input type="checkbox" id="cbk_{{ o.number }}" value="{{ o.title }}" name="q_Watchlist" style="vertical-align: middle">
+                        <span class="checkmark"></span>
+                    </label>
+
                         </div>
                     </span>
                 </label>
@@ -126,12 +194,13 @@
                       <div class="forms">
                                 <label for="input_20_1_{{ o.title }}">
                                 <span>Pick Next Movie to Watch</span>
-                                    <br>
-                                    <br>
-                                <div class="get_button_center">
-                                <input type="radio" value="{{ o.title }}" name="q23_bestRecommended" id="input_20_1_{{ o.title }}">
-                                <span class="rdo"></span>
-                            </label>
+                    <br>
+                    <br>
+                    <br>
+                      <label class="container">
+                          <input type="radio" value="{{ o.title }}" name="q23_bestRecommended" id="input_20_1_{{ o.title }}">
+                        <span class="checkmark"></span>
+                     </label>
                                 </div>
                       </div>
               </li>

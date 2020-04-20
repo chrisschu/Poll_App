@@ -15,50 +15,16 @@
 <link type="text/css" media="print" rel="stylesheet" href="{{ url_for('static', filename='printForm.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='nova.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='form.css') }}"/>
-    <link rel=stylesheet type=
-            text/css href="{{ url_for('static', filename='poll_style.css') }}" />
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='poll_style.css') }}" />
 <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/buttons/form-submit-button-simple_grey.css?3.3.14737"/>
 </head>
 <body>
-  <input type="hidden" name="formID" value="200006188570347" />
-  <input type="hidden" id="JWTContainer" value="" />
-  <input type="hidden" id="cardinalOrderNumber" value="" />
-
-<form class="myForm" method="POST" enctype="application/x-www-form-urlencoded" action="{{ url_for('my_new_form') }}">
-  <div role="main" class="form-all">
-      <li id="cid_13" class="form-input-wide" data-type="control_head">
-        <div class="form-header-group ">
-          <div class="header-text httal htvam">
-            <h2 id="header_13" class="form-header" data-component="header">
-              Submitting the data
-            </h2>
-          </div>
-        </div>
-      </li>
-
-      <li class="form-line" data-type="control_text" id="id_25">
-        <div id="cid_25" class="form-input-wide">
-          <div id="text_25" class="form-html" data-component="text">
-            <p>Thank you for participating in this study</p>
-            <p>Click the 'Submit'-button to finish your session</p>
-          </div>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_button" id="id_2">
-        <div id="cid_2" class="form-input-wide">
-          <div style="margin-left:156px" class="form-buttons-wrapper ">
-            <button class="Start">
-              Submit
-            </button>
-
-          </div>
-        </div>
-      </li>
-      <li style="display:none">
-        Should be Empty:
-        <input type="text" name="website" value="" />
-      </li>
-    </ul>
-  </div>
-  <script>
-  </script></form></body></html>
+<h1><font color="white">Thank you for participating in this study</font></h1>
+<font color="white"><h2>Output</h2></font>
+<font color="white"><p>{{ message }}</p> <font size="13"> <a style="color: white" href="http://127.0.0.1:5000/get_survey">here</a></font>
+<p>{{ entry }}</p>
+<p>{{ links }}</p><font size="13"><a style="color: white" href="http://127.0.0.1:5000/generate_files">here</a></font>
+<p> CSV/XLSX Files will be located in root folder of the project</p></font>
+</body>
+</body>
+</html>

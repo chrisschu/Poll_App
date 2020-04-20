@@ -47,23 +47,8 @@ date_page_questionnaire_4 = ''
 # list for all the movies in the watchlist
 watchlist = []
 
-# variable for the "star" movie, gets the movie title
-favourite = 'X'
 
-# variables for questionnaire
-poll_q1 = 'X'
-poll_q2 = 'X'
-poll_q3 = 'X'
-
-# roundrobin principle, first user gets page 1, second user gets page 2, and so on
-page = 1
-
-# decleration of personal questionnaire data
-age = ''
-gender = ''
-feedbacktext = ''
-
-# decleration boolean variable for fake, if in like_list/dislike_list Movie Popeye (number , defined as number
+# declaration boolean variable for fake, if in like_list/dislike_list Movie Popeye (number , defined as number
 # in mongo db1)
 # is contained --> fake = true
 fake = False
@@ -196,51 +181,9 @@ def get_questions():
     return json.dumps(response, indent=4, sort_keys=True, default=str)
 
 
-@app.route('/get_title')
-def title():
-    documents = str(collection_movies.find({"title": "Interstellar"}))
-    return documents
-
-
-@app.route('/home')
-def index():
-    ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
-    return render_template('OLD/home.html', thing_to_say='Click here to start')
-
-
-@app.route('/poll.html')
-##Routing to old poll, just for testing
-def poll():
-    ##return '<a href=' + url_for("hello", name="World") + '> Lass dich grüßen</a>'
-    return render_template('poll.html', thing_to_say='Click here to start')
-
-
 @app.route('/conditions.html')
 def conditions():
     return render_template('/conditions.html', thing_to_say='Click here to start')
-
-
-@app.route('/my_form', methods=['POST'])
-##old poll app, just for testing things, please ignore this function!
-def my_form():
-    new = {
-        "question1": str(request.form.get('question1')),
-        "question2": str(request.form.get('question2')),
-        "dropdown1": str(request.form.get('dropdown1')),
-        "dropdown2": str(request.form.get('dropdown2')),
-        "textbox": str(request.form.get('textbox')),
-    }
-
-    try:
-        _id = collection.insert_one(new)
-        print("database entry successfully")
-    except:
-        print("database entry not successfully!")
-
-    message = "db entry " + str(new) + " was successfully inserted in database"
-
-    return str(message)
-
 
 @app.route('/welcome.html')
 def welcome():
@@ -255,6 +198,7 @@ def task_description():
 
     # to clear the session
     session.clear()
+    session['warning'] = 0
     # timestamp
     date_page_task_description_1 = datetime.datetime.utcnow()
     session["date_page_task_description_1"] = datetime.datetime.utcnow()
@@ -288,6 +232,7 @@ def pref_movies():
     if count_page_1 <= count_page_2:
         session['Form_Type'] = 1
         page = 1
+        print("got selected")
     else:
         session['Form_Type'] = 2
         page = 2
@@ -309,20 +254,17 @@ def pref_movies():
     for movies in dbmovies.find({'type': 'pref'}, {"_id": False}):
         allprefmovies.append(movies)
 
-    #cut the list from database only to 25 movies for the html page
-    #allprefmovies = allprefmovies[25:]
+    fake_movie = allprefmovies.pop()
+
+    # cut the list from database only to 25 movies for the html page
+    # allprefmovies = allprefmovies[25:]
 
     # for randomizing the movie list
     random.shuffle(allprefmovies)
 
-    # print("allprefmovies: " + str(allprefmovies))
-    # timestamp
+    allprefmovies.insert(3, fake_movie)
+
     session['date_page_pref_movie_2'] = datetime.datetime.utcnow()
-
-    ##pre_movie_0 = str(request.form.get('q4_overallSatisfaction[0]'))
-    # preferred_movies.append(str(request.form.get('q_pref_movies[1]')))
-
-    # print(len(allprefmovies))
 
     if request.method == 'POST':
         # to get the html input, passed in this list variable
@@ -343,40 +285,11 @@ def pref_movies():
         session['dislikes_list'] = list(dislikes_list)
         session['neutral_list'] = list(neutral_list)
 
-        # print('likes_list: ', likes_list)
-        # print('dislikes_list: ', dislikes_list)
-        # print('neutral_list: ', neutral_list)
-
-        # print(len(preferred_movies))
-        # print("pref_movies_first: n: " + str(preferred_movies))
-
         # variable geht die bewertete movieliste durch und speichert index/number in array.
         # this array will be used for displaying the movie in the next page
 
         user_likes_movies = []
 
-        # movies = dbmovies
-        # result = movies.find().limit(3)
-
-        # loop is for filling user_likes_movies list, user preferences two
-
-    # print("number 1: " + str(user_preferences))
-
-    # for user_likes_movies in dbmovies.find
-    # ({"$and": [{'type': 'pref'},{'number': int(user_preferences.pop)}], {"_id": False}):
-    #    allprefmovies.append(user_likes_movies)
-
-    # print("number 2: "+ str(user_preferences[1]))
-
-    # for user_likes_movies in dbmovies.find({'type': 'pref'}, {'number': user_preferences.pop}, {"_id": False}):
-    #   allprefmovies.append(user_likes_movies)
-
-    # old data
-    # pre_movie_1 = str(request.form.get('q4_overallSatisfaction[1]'))
-    # pre_movie_2 = str(request.form.get('q4_overallSatisfaction[2]'))
-    # pre_movie_3 = str(request.form.get('q4_overallSatisfaction[3]'))
-    # pre_movie_4 = str(request.form.get('q4_overallSatisfaction[4]'))
-    session['warning'] = 0
     if request.method == 'POST':
 
         print("preferred_movies + " + str(preferred_movies))
@@ -392,7 +305,9 @@ def pref_movies():
 
         if preferred_movies.count("Like") <= 1:
             print("Yes, 'Like' NOT found in List : ", preferred_movies)
-            session['warning'] += 1
+            print("Warning value before" + str(session['warning']))
+            session['warning'] = 1
+            print("Warning value after" + str(session['warning']))
             flash("Not enough movies have been selected: Select altleast two movies you like")
 
             return redirect(url_for('pref_movies'))
@@ -416,7 +331,6 @@ def pref_movies():
 
             session['user_likes_movies'] = list(user_likes_movies)
 
-
             if page == 1:
                 return redirect(url_for('rec_movies_1'))
             else:
@@ -434,8 +348,6 @@ def rec_movies_1():
     dbmovies = db['movies']
 
     allsuggmovies.clear()
-    # just one query for testing, [deactivated]
-    # name1 = dbmovies.find_one({'title': 'Interstellar'})
 
     # querying all titles
     # for x in range(0, sugg_numMovies):
@@ -444,14 +356,7 @@ def rec_movies_1():
 
     # for randomizing the movie list
     random.shuffle(allsuggmovies)
-    # for x in range(0, sugg_numMovies):
-    #    titles.append() = allsuggmovies.split
-    # print("Länge" + str(len(allsuggmovies)))
-    # print("allsugmovies" + str(allsuggmovies))
-    # print(allsuggmovies.pop())
-    # for x in range(0, sugg_numMovies):
-    #    list = dbmovies.find()
-    #    print('exit')
+
     session['date_page_rec_movie_3'] = datetime.datetime.utcnow()
 
     if request.method == 'POST':
@@ -475,11 +380,6 @@ def rec_movies_2():
     dbmovies = db['movies']
 
     allsuggmovies.clear()
-    # just one query for testing, [deactivated]
-    # name1 = dbmovies.find_one({'title': 'Interstellar'})
-
-    # querying all titles
-    # for x in range(0, sugg_numMovies):
 
     for movies in dbmovies.find({'type': 'rec'}, {"_id": False}):
         allsuggmovies.append(movies)
@@ -487,19 +387,14 @@ def rec_movies_2():
     # for randomizing the movie list
     random.shuffle(allsuggmovies)
 
-    # print("Länge" + str(len(allsuggmovies)))
-    # print("allsugmovies" + str(allsuggmovies))
-
     session['date_page_rec_movie_3'] = datetime.datetime.utcnow()
 
     if request.method == 'POST':
         session['watchlist'] = request.form.getlist('q_Watchlist')
         session['favourite'] = str(request.form.get('q23_bestRecommended'))
-    # print("Watchlist:" + str(watchlist))
 
     if request.method == 'POST':
         return redirect(url_for('questionnaire'))
-    # print("User_likes_movies" + str(user_likes_movies))
 
     return render_template('/rec_movies_2.html', movie=allsuggmovies, user_pref=session['user_likes_movies'])
 
@@ -524,6 +419,11 @@ def questionnaire():
     # to get the questions about the recommended systems
     for questions_rec in dbquestions.find({'type': "rating_rec"}):
         allquestions_from_db_rec.append(questions_rec)
+
+    # last question in mongodb is the fake question
+    fake_question = allquestions_from_db_rec.pop()
+
+    allquestions_from_db_rec.insert(5, fake_question)
 
     # to get the questions about the personality
     for questions_pers in dbquestions.find({'type': "rating_pers"}):
@@ -569,7 +469,6 @@ def questionnaire():
 
         ## check form is everything fullfilled
 
-
         # print('feedbacktext: ', feedbacktext)
         # print('age: ', age)
         # print('gender: ', gender)
@@ -588,8 +487,6 @@ def questionnaire():
 
     return render_template('/questionnaire.html', questions=allquestions_from_db_rec,
                            questions_pers=allquestions_from_db_pers)
-
-
 
 
 @app.route('/submit.html', methods=['POST', 'GET'])
@@ -677,30 +574,15 @@ def save():
         else:
             questions_pers_attributename.append('Question_Pers_' + str(x))
 
-    # print("questions_rec_attributename ", str(questions_rec_attributename))
-    print("questions_pers_attributename ", str(questions_pers_attributename))
-
     # https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions
-    # for x in range(0, pref_numMovies):
-    #    pref_movie_attributename.append('pref_movie_' + str(x))
-
-    # for x in range(0, sugg_numMovies):
-    #    sugg_movie_attributename.append('sugg_movie_' + str(x))
-
-    ##print("pref attribute name" + str(pref_movie_attributename)) TODO
-    ##print("preferred movie x" + str(preferred_movies_x))
-
-    # print(dict(zip(pref_movie_attributename, preferred_movies_x)))
-    # print(dict(zip(sugg_movie_attributename, suggested_movies_x)))
+    print("questions_pers_attributename ", str(questions_pers_attributename))
 
     # using the dictionary form to input data in mongodb
 
     if session['warning'] == 0:
-        warning = True
-    else:
         warning = False
-
-
+    else:
+        warning = True
 
     new = {
         "Form_Type": session['Form_Type'],
@@ -719,15 +601,11 @@ def save():
         "Feedback_Text": session['feedbacktext'],
         "retention_check_1_passed": session['retention_check_1_passed'],
         "retention_check_2_passed": session['retention_check_2_passed'],
-        "warning_occured": warning
+        "warning_occured": session['warning']
     }
     # list comprehension to write
     new.update(dict(zip(questions_rec_attributename, session['questionnaire_answer_from_survey'])))
     new.update(dict(zip(questions_pers_attributename, session['questionnaire_answer_from_survey_pers'])))
-    # new.update(dict(zip(pref_movie_attributename, preferred_movies_x)))
-    # no more suggest movie --> watchlist instead
-    # new.update(dict(zip(sugg_movie_attributename, suggested_movies_x)))
-    # new.update(watchlist_x)
 
     try:
         ## Creates a new document in DB
@@ -748,6 +626,7 @@ def save():
     links = "to generate csv/xlsx data: "
     output = entry + '\n' + message
     return render_template('/end.html', message=output, links=links)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
