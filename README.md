@@ -153,10 +153,10 @@ sudo mkdir FlaskApp
 ```
 Your directory structure should now look like this:
 
-|----FlaskApp &nbsp;
-|---------FlaskApp &nbsp;
-|--------------static &nbsp;
-|--------------templates &nbsp;
+|----FlaskApp  
+|---------FlaskApp  
+|--------------static  
+|--------------templates  
 
 download repository via git:
 
@@ -239,20 +239,14 @@ application.secret_key = 'Add your secret key'
 ````
 Now your directory structure should look like this:
 --------------
-|--------FlaskApp
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-|----------------Poll_app
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-|-----------------------static
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-|-----------------------templates
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-|-----------------------venv
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-|-----------------------app.py
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-|----------------flaskapp.wsgi
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|--------FlaskApp  
+|----------------Poll_app  
+|-----------------------static  
+|-----------------------templates  
+|-----------------------venv  
+|-----------------------app.py  
+|----------------flaskapp.wsgi  
+
 ##### Step Six – Restart Apache
 
 Restart Apache with the following command to apply the changes:
