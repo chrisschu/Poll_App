@@ -127,7 +127,7 @@ $ python -m flask run
 ```
 
 App is now accessible via http://127.0.0.1:5000/
-###### deploying flask server on ubuntu
+# deploying flask server on ubuntu
 
 ##### Step One— Install and Enable mod_wsgi
 
