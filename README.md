@@ -1,20 +1,17 @@
 # Poll App
 
 CHANGES 26.03.2020:
-
-    db changes
-    all questionnaire survey data is written in db
-    valid survey check
-    bugfixes
+     
+     changed checkbox/radiobuttons
+     position of retentionchecks
     
 NEXT CHANGES SOON:
 
-    little design changes in questionnaire
-    clearer variable names
+    clean up the code
  
 
 The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
-It contains a questionnaire which results will be inserted into the database.
+It contains a study which results will be inserted into the database.
  
 
 As database the cloud solution **MongoDB Atlas** will be used.
@@ -130,3 +127,134 @@ $ python -m flask run
 ```
 
 App is now accessible via http://127.0.0.1:5000/
+### deploying flask server on ubuntu
+
+I) Step One— Install and Enable mod_wsgi:
+
+Open terminal and type the following command to install mod_wsgi:
+```
+$ sudo apt-get install libapache2-mod-wsgi python-dev
+```
+
+To enable mod_wsgi, run the following command:
+```
+$ sudo a2enmod wsgi 
+```
+II)
+
+[FQDN] = Full qualified domain name, name of the server
+
+```
+cd /var/[FQDN]/www
+sudo mkdir FlaskApp
+cd FlaskApp
+sudo mkdir FlaskApp
+
+```
+Your directory structure should now look like this:
+
+|----FlaskApp
+|---------FlaskApp
+|--------------static
+|--------------templates
+
+download repository:
+
+```
+git clone https://github.com/chrisschu/Poll_App.git
+```
+
+sudo apt-get install python-pip 
+sudo pip install virtualenv 
+sudo virtualenv venv
+
+source venv/bin/activate
+
+pip install -r requirements.txt
+sudo pip install Flask 
+
+Next, run the following command to test if the installation is successful and the app is running:
+
+sudo python app.py
+
+It should display “Running on http://localhost:5000/” or "Running on http://127.0.0.1:5000/". 
+If you see this message, you have successfully configured the app.
+
+To deactivate the environment, give the following command:
+````
+deactivate
+````
+
+Step Four – Configure and Enable a New Virtual Host
+
+sudo vim /etc/apache2/sites-available/Poll_App.conf
+
+    <VirtualHost *:80>
+		ServerName mywebsite.com
+		ServerAdmin admin@mywebsite.com
+		WSGIScriptAlias / /var/[FQDN]/www/FlaskApp/flaskapp.wsgi
+		<Directory /var/[FQDN]/www/FlaskApp/Poll_App/>
+			Order allow,deny
+			Allow from all
+		</Directory>
+		Alias /static /var/[FQDN]/FlaskApp/Poll_App/static
+		<Directory /var/[FQDN]/FlaskApp/Poll_App/static/>
+			Order allow,deny
+			Allow from all
+		</Directory>
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		LogLevel warn
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+
+save and close
+
+Enable the virtual host with the following command:
+````
+sudo a2ensite FlaskApp
+````
+
+Step Five – Create the .wsgi File
+
+Apache uses the .wsgi file to serve the Flask app. Move to the /var/www/FlaskApp directory and create a file named flaskapp.wsgi with following commands:
+
+cd /var/[FQDN]/www/FlaskApp
+sudo vim flaskapp.wsgi 
+
+Add the following lines of code to the flaskapp.wsgi file:
+````
+#!/usr/bin/python
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/FlaskApp/")
+
+from FlaskApp import app as application
+application.secret_key = 'Add your secret key'
+````
+Now your directory structure should look like this:
+
+|--------FlaskApp
+|----------------Poll_app
+|-----------------------static
+|-----------------------templates
+|-----------------------venv
+|-----------------------__init__.py
+|----------------flaskapp.wsgi
+
+Step Six – Restart Apache
+
+Restart Apache with the following command to apply the changes:
+````
+sudo service apache2 restart 
+````
+You may see a message similar to the following:
+
+Could not reliably determine the VPS's fully qualified domain name, using 127.0.0.1 for ServerName 
+This message is just a warning, and you will be able to access your virtual host without any further issues. To view your application, open your browser and navigate to the domain name or IP address that you entered in your virtual host configuration.
+
+You have successfully deployed a flask application.
+
+**Source:**
+
+https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
