@@ -127,9 +127,9 @@ $ python -m flask run
 ```
 
 App is now accessible via http://127.0.0.1:5000/
-### deploying flask server on ubuntu
+###### deploying flask server on ubuntu
 
-I) Step One— Install and Enable mod_wsgi:
+##### Step One— Install and Enable mod_wsgi
 
 Open terminal and type the following command to install mod_wsgi:
 ```
@@ -140,7 +140,7 @@ To enable mod_wsgi, run the following command:
 ```
 $ sudo a2enmod wsgi 
 ```
-II)
+##### Step Two – Creating a Flask App
 
 [FQDN] = Full qualified domain name, name of the server
 
@@ -163,6 +163,7 @@ download repository:
 ```
 git clone https://github.com/chrisschu/Poll_App.git
 ```
+#### Step Three – Install Flask
 
 sudo apt-get install python-pip 
 sudo pip install virtualenv 
@@ -185,7 +186,9 @@ To deactivate the environment, give the following command:
 deactivate
 ````
 
-Step Four – Configure and Enable a New Virtual Host
+
+
+#### Step Four – Configure and Enable a New Virtual Host
 
 sudo vim /etc/apache2/sites-available/Poll_App.conf
 
@@ -208,6 +211,8 @@ sudo vim /etc/apache2/sites-available/Poll_App.conf
     </VirtualHost>
 
 save and close
+
+#### Step Four – Configure and Enable a New Virtual Host
 
 Enable the virtual host with the following command:
 ````
