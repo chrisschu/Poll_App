@@ -153,12 +153,12 @@ sudo mkdir FlaskApp
 ```
 Your directory structure should now look like this:
 
-|----FlaskApp
-|---------FlaskApp
-|--------------static
-|--------------templates
+|----FlaskApp &nbsp;
+|---------FlaskApp &nbsp;
+|--------------static &nbsp;
+|--------------templates &nbsp;
 
-download repository:
+download repository via git:
 
 ```
 git clone https://github.com/chrisschu/Poll_App.git
@@ -219,13 +219,13 @@ Enable the virtual host with the following command:
 sudo a2ensite FlaskApp
 ````
 
-Step Five – Create the .wsgi File
+##### Step Five – Create the .wsgi File
 
 Apache uses the .wsgi file to serve the Flask app. Move to the /var/www/FlaskApp directory and create a file named flaskapp.wsgi with following commands:
-
+````
 cd /var/[FQDN]/www/FlaskApp
 sudo vim flaskapp.wsgi 
-
+````
 Add the following lines of code to the flaskapp.wsgi file:
 ````
 #!/usr/bin/python
@@ -238,16 +238,22 @@ from FlaskApp import app as application
 application.secret_key = 'Add your secret key'
 ````
 Now your directory structure should look like this:
-
+--------------
 |--------FlaskApp
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 |----------------Poll_app
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 |-----------------------static
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 |-----------------------templates
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 |-----------------------venv
-|-----------------------__init__.py
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|-----------------------app.py
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 |----------------flaskapp.wsgi
-
-Step Six – Restart Apache
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+##### Step Six – Restart Apache
 
 Restart Apache with the following command to apply the changes:
 ````
