@@ -9,12 +9,14 @@ from pymongo import *
 
 ## Author Christian Schuschnig
 
-# !!! DEPRECATED !!!
-# Application contains global variables cause the split of the html files - NOW Sessions are used
-
 ## first decleration of global variables
 
+# application works with global variables
+# these global variables serves as cache, data will be transfered  to sessions to get no parallel conflict
+
+
 # list for filling the survey data
+# these variable lists will be first fullfilled, then the session variables
 likes_list = []
 dislikes_list = []
 neutral_list = []
@@ -24,7 +26,7 @@ questionnaire_answer_from_survey_pers = []
 questions_rec = []
 questions_pers = []
 
-# list for getting the fill the html page
+# global variable list for getting the fill the html page
 allprefmovies = []
 allsuggmovies = []
 allquestions_from_db_rec = []
@@ -41,7 +43,6 @@ date_page_questionnaire_4 = ''
 
 # list for all the movies in the watchlist
 watchlist = []
-
 
 # declaration boolean variable for fake, if in like_list/dislike_list Movie Popeye (number , defined as number
 # in mongo db1)
@@ -102,6 +103,8 @@ def pandas():
         # variable for writing poll data
         collection = db['survey']
         # variable for getting movie data
+        # at the moment not used, but variable could be used for further features, like to generate lists for all movies,
+        # exporting data and so on
         collection_movies = db['movies']
         collection_questions = db['questions']
         print("Connected to DB succesfully!")
@@ -179,6 +182,7 @@ def get_questions():
 @app.route('/conditions.html')
 def conditions():
     return render_template('/conditions.html', thing_to_say='Click here to start')
+
 
 @app.route('/welcome.html')
 def welcome():
@@ -337,9 +341,8 @@ def pref_movies():
 @app.route('/rec_movies_1.html', methods=['POST', 'GET'])
 def rec_movies_1():
     # list with 10 objects
-    global favourite, page, allsuggmovies, watchlist
+    global page, allsuggmovies
     global user_likes_movies, user_likes_movies, user_preferences
-    # print("allsugmovies: " + str(allsuggmovies))
     dbmovies = db['movies']
 
     allsuggmovies.clear()
@@ -357,11 +360,9 @@ def rec_movies_1():
     if request.method == 'POST':
         session['watchlist'] = request.form.getlist('q_Watchlist')
         session['favourite'] = str(request.form.get('q23_bestRecommended'))
-    # print("Watchlist:" + str(watchlist))
 
     if request.method == 'POST':
         return redirect(url_for('questionnaire'))
-    # print("User_likes_movies" + str(user_likes_movies))
 
     return render_template('/rec_movies_1.html', movie=allsuggmovies, user_pref=session['user_likes_movies'])
 
@@ -396,9 +397,9 @@ def rec_movies_2():
 
 @app.route('/questionnaire.html', methods=['POST', 'GET'])
 def questionnaire():
-    global poll_q1, poll_q2, poll_q3, date_page_questionnaire_4
+    global date_page_questionnaire_4
     global questionnaire_answer_from_survey, questionnaire_answer_from_survey_pers, questions_rec
-    global questions_pers, age, gender, feedbacktext
+    global questions_pers
 
     dbquestions = db['questions']
 
@@ -461,23 +462,6 @@ def questionnaire():
         session['feedbacktext'] = str(request.form.get('feedbacktext'))
         session['age'] = str(request.form.get('age'))
         session['gender'] = str(request.form.get('gender'))
-
-        ## check form is everything fullfilled
-
-        # print('feedbacktext: ', feedbacktext)
-        # print('age: ', age)
-        # print('gender: ', gender)
-
-        # option = request.form['q_survey_pers_1']
-        # print("Questionfrage:"+str(option))
-
-        # print("Länge" + str(len(allquestions_from_db_rec)))
-        # print("allquestions:" + str(allquestions_from_db_rec))
-
-        # print("all questions: " + str(allquestions_from_db_rec))
-
-        # print("questions_rec: " + str(questions_rec))
-        # print("questions_pers: " + str(questions_pers))
         return redirect(url_for('submit'))
 
     return render_template('/questionnaire.html', questions=allquestions_from_db_rec,
@@ -546,11 +530,6 @@ def save():
     # variable n shows which page is used, if n is == 2 then user got list 2, is n == 1 then user got List 1
     # idea is to merge to two lists to get one dictionary for inserting survey data in db
     # this list variable is for the left part of the dictionary (for example "pre_movie_0")
-    pref_movie_attributename = []
-    sugg_movie_attributename = []
-
-    # print("Watchlist!!!!!: " + str(watchlist))
-
     questions_rec_attributename = []
     questions_pers_attributename = []
 
