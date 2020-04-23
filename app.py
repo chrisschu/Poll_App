@@ -13,11 +13,6 @@ from pymongo import *
 # Application contains global variables cause the split of the html files - NOW Sessions are used
 
 ## first decleration of global variables
-# new variables for using arrays
-title = []
-description = []
-trailer_link = []
-genre = []
 
 # list for filling the survey data
 likes_list = []
