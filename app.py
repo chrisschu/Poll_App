@@ -307,7 +307,7 @@ def pref_movies():
             print("Warning value before" + str(session['warning']))
             session['warning'] = 1
             print("Warning value after" + str(session['warning']))
-            flash("Not enough movies have been selected: Select altleast two movies you like")
+            flash("Not enough movies have been selected: Select atleast two movies you like.")
 
             return redirect(url_for('pref_movies'))
         else:

@@ -59,17 +59,17 @@
     <table class="questionnaire">
   <tr>
     <th class="questionnaire-g1fv"></th>
-      <th class="questionnaire-aaj5">(1)</th>
+    <th class="questionnaire-aaj5">(1) </th>
     <th class="questionnaire-aaj5">(2)</th>
     <th class="questionnaire-aaj5">(3)</th>
     <th class="questionnaire-aaj5">(4)</th>
     <th class="questionnaire-aaj5">(5)</th>
     <th class="questionnaire-aaj5">(6)</th>
-    <th class="questionnaire-aaj5">(7)</th>
+    <th class="questionnaire-aaj5">(7) </th>
   </tr>
     {% for q in questions %}
   <tr>
-    <td class="questionnaire-g1fv"> {{ q.question }} <font color="333333">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</font></td>
+    <td class="questionnaire-g1fv"> {{ q.question }} <font color="333333">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</font></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_rec_[{{ q.number }}]" value=1 required></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_rec_[{{ q.number }}]" value=2></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_rec_[{{ q.number }}]" value=3></td>
@@ -100,7 +100,7 @@
   </tr>
     {% for q in questions_pers %}
   <tr>
-      <td class="questionnaire-g1fv"> {{ q.question }} <font color="333333">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</font></td>
+      <td class="questionnaire-g1fv"> {{ q.question }} <font color="333333">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</font></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_1" name="q_survey_pers_[{{ q.number }}]" value=1 required></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_2" name="q_survey_pers_[{{ q.number }}]" value=2></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_3" name="q_survey_pers_[{{ q.number }}]" value=3></td>

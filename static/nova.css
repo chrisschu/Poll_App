@@ -661,7 +661,6 @@ li.form-line-error .form-error-message img {
 }
 
 table.form-matrix-table-liked {
-  font-family: Georgia, serif;
   border: 0px solid #000000;
   background-color: #333333;
   width: 30%;
@@ -1010,3 +1009,5 @@ textarea
 td {
 	border-spacing: 10px;
 }
+
+a:visited  {  color: #ffffff; text-decoration: none;     }
