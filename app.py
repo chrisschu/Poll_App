@@ -437,16 +437,9 @@ def questionnaire():
 
     if request.method == 'POST':
         # to get the answered survey data about the recommended system
-        # for n in range(1, len(allquestions_from_db_rec)):
-        #    questionnaire_answer_from_survey.append(str(request.form.get('q_survey_rec_' + str(n) + ']')))
-        #    print("A"+str(questionnaire_answer_from_survey))
-
         for n in range(1, len(allquestions_from_db_rec) + 1):
             questionnaire_answer_from_survey.append(str(request.form.get('q_survey_rec_[' + str(n) + ']')))
             print("questions rec " + str(n) + " " + str(questionnaire_answer_from_survey))
-
-        # print('allquestions_from_db_pers ', allquestions_from_db_pers)
-        # print('len(allquestions_from_db_pers) ', len(allquestions_from_db_pers))
 
         for n in range(1, len(allquestions_from_db_pers) + 1):
             questionnaire_answer_from_survey_pers.append(str(request.form.get('q_survey_pers_[' + str(n) + ']')))
@@ -458,7 +451,6 @@ def questionnaire():
         print("questions rec: " + str(session['questionnaire_answer_from_survey_pers']))
         print("questions pers" + str(session['questionnaire_answer_from_survey_pers']))
 
-        # print('new länge questionnaire_answer_from_survey_pers', str(questionnaire_answer_from_survey_pers))
         session['feedbacktext'] = str(request.form.get('feedbacktext'))
         session['age'] = str(request.form.get('age'))
         session['gender'] = str(request.form.get('gender'))
