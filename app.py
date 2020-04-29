@@ -61,7 +61,9 @@ pwd = 'LkipSB6LPbBV8wM'
 
 try:
     client = pymongo.MongoClient(
-        "mongodb+srv://" + usr + ":" + pwd + "@mongodbmovie-702qa.mongodb.net/test?retryWrites=true&w=majority")
+        "mongodb+srv://" + usr + ":" + pwd + "@mongodbmovie-702qa.mongodb.net/test?retryWrites=true&w=majority",
+         connectTimeoutMS=30000, socketTimeoutMS=None,socketKeepAlive=True,connect=False,maxPoolsize=1)
+
     db = client['masterproject']
     # variable for writing poll data
     collection = db['survey']
@@ -74,7 +76,7 @@ except:
         "Could not connect to MongoDB. Write an E-Mail to chschusc@edu.aau.at with your IP-address to get access to "
         "the database")
 
-
+print("1")
 @app.route('/set-/')
 def set_variables(mode):
     session['mode'] = mode

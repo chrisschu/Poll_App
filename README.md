@@ -154,7 +154,7 @@ sudo mkdir FlaskApp
 Your directory structure should now look like this:
 
 |----FlaskApp  
-|---------FlaskApp  
+|---------PoLL_App  
 |--------------static  
 |--------------templates  
 
@@ -166,13 +166,15 @@ git clone https://github.com/chrisschu/Poll_App.git
 #### Step Three – Install Flask
 
 sudo apt-get install python-pip 
-sudo pip install virtualenv 
+sudo pip3 install virtualenv 
 sudo virtualenv venv
+
+
 
 source venv/bin/activate
 
-pip install -r requirements.txt
-sudo pip install Flask 
+pip3 install -r requirements.txt
+sudo pip3 install Flask 
 
 Next, run the following command to test if the installation is successful and the app is running:
 
