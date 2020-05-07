@@ -59,24 +59,34 @@
     <table class="questionnaire">
   <tr>
     <th class="questionnaire-g1fv"></th>
-    <th class="questionnaire-aaj5">(1) </th>
-    <th class="questionnaire-aaj5">(2)</th>
-    <th class="questionnaire-aaj5">(3)</th>
-    <th class="questionnaire-aaj5">(4)</th>
-    <th class="questionnaire-aaj5">(5)</th>
-    <th class="questionnaire-aaj5">(6)</th>
-    <th class="questionnaire-aaj5">(7) </th>
+    <th class="questionnaire-aaj5" style="text-align: center">(1)</th>
+    <th class="questionnaire-aaj5" style="text-align: center">(2)</th>
+    <th class="questionnaire-aaj5" style="text-align: center">(3)</th>
+    <th class="questionnaire-aaj5" style="text-align: center">(4)</th>
+    <th class="questionnaire-aaj5" style="text-align: center">(5)</th>
+    <th class="questionnaire-aaj5" style="text-align: center">(6)</th>
+    <th class="questionnaire-aaj5" style="text-align: center">(7) </th>
   </tr>
+    <tr>
+    <td></td>
+    <td style="text-align: center">Disagree</td>
+        <td style="text-align: center"><font color="333333">disagree</font></td>
+        <td style="text-align: center"><font color="333333">disagree</font></td>
+        <td style="text-align: center"><font color="333333">disagree</font></td>
+        <td style="text-align: center"><font color="333333">disagree</font></td>
+        <td style="text-align: center"><font color="333333">disagree</font></td>
+    <td style="text-align: center">Agree</td>
     {% for q in questions %}
+        </tr>
   <tr>
-    <td class="questionnaire-g1fv"> {{ q.question }} <font color="333333">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</font></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_rec_[{{ q.number }}]" value=1 required></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_rec_[{{ q.number }}]" value=2></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_rec_[{{ q.number }}]" value=3></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_4" name="q_survey_rec_[{{ q.number }}]" value=4></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_5" name="q_survey_rec_[{{ q.number }}]" value=5></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_6" name="q_survey_rec_[{{ q.number }}]" value=6></td>
-    <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_{{ q.number }}_7" name="q_survey_rec_[{{ q.number }}]" value=7></td>
+    <td class="questionnaire-g1fv-header"> {{ q.question }} <font color="333333"></font></td>
+    <td class="questionnaire-g1fv" style="text-align: center"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_rec_[{{ q.number }}]" value=1 required style="text-align: center"></td>
+    <td class="questionnaire-g1fv" style="text-align: center"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_rec_[{{ q.number }}]" value=2 style="text-align: center"></td>
+    <td class="questionnaire-g1fv" style="text-align: center"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_rec_[{{ q.number }}]" value=3 style="text-align: center"></td>
+    <td class="questionnaire-g1fv" style="text-align: center"><input type="radio" class="form-radio" id="input_{{ q.number }}_4" name="q_survey_rec_[{{ q.number }}]" value=4 style="text-align: center"></td>
+    <td class="questionnaire-g1fv" style="text-align: center"><input type="radio" class="form-radio" id="input_{{ q.number }}_5" name="q_survey_rec_[{{ q.number }}]" value=5 style="text-align: center"></td>
+    <td class="questionnaire-g1fv" style="text-align: center"><input type="radio" class="form-radio" id="input_{{ q.number }}_6" name="q_survey_rec_[{{ q.number }}]" value=6 style="text-align: center"></td>
+    <td class="questionnaire-g1fv" style="text-align: center"><input type="radio" class="form-radio" id="input_{{ q.number }}_7" name="q_survey_rec_[{{ q.number }}]" value=7 style="text-align: center"></td>
   </tr>
     {% endfor %}
 </table>
@@ -98,9 +108,19 @@
     <th class="questionnaire-aaj5">(6)</th>
     <th class="questionnaire-aaj5">(7)</th>
   </tr>
+        <tr>
+    <td></td>
+    <td style="text-align: center">Disagree</td>
+        <td style="text-align: center"><font color="333333">disagree</font></td>
+        <td style="text-align: center"><font color="333333">disagree</font></td>
+        <td style="text-align: center"><font color="333333">disagree</font></td>
+        <td style="text-align: center"><font color="333333">disagree</font></td>
+        <td style="text-align: center"><font color="333333">disagree</font></td>
+    <td style="text-align: center">Agree</td>
+        </tr>
     {% for q in questions_pers %}
   <tr>
-      <td class="questionnaire-g1fv"> {{ q.question }} <font color="333333">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</font></td>
+      <td class="questionnaire-g1fv-header"> {{ q.question }} <font color="333333"></font></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_1" name="q_survey_pers_[{{ q.number }}]" value=1 required></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_2" name="q_survey_pers_[{{ q.number }}]" value=2></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_3" name="q_survey_pers_[{{ q.number }}]" value=3></td>
@@ -128,7 +148,7 @@
     <option value="" selected="selected">Select One</option>
     <option value="0-18" >0-18</option>
     <option value="19-25">19-25</option>
-    <option value="26-40" >26-40</option>
+    <option value="26-40">26-40</option>
     <option value="41-65">41-65</option>
     <option value="66+">66+</option>
         </select></td></tr>

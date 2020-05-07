@@ -32,6 +32,10 @@ allsuggmovies = []
 allquestions_from_db_rec = []
 allquestions_from_db_pers = []
 
+
+# for checking shuffling after fillin html page
+check_shuffling = 0
+
 # for the two movies likes of the user
 user_likes_movies = []
 
@@ -59,10 +63,13 @@ app.config['SECRET_KEY'] = 'testkgdfsgdwrey'
 usr = 'christian'
 pwd = 'LkipSB6LPbBV8wM'
 
+"connectTimeoutMS=30000, socketTimeoutMS=None, socketKeepAlive=True, connect=False, maxPoolsize=1 must be add to the " \
+"pymongo mongo client to get it working cause of mongo cloud db"
+
 try:
     client = pymongo.MongoClient(
         "mongodb+srv://" + usr + ":" + pwd + "@mongodbmovie-702qa.mongodb.net/test?retryWrites=true&w=majority",
-         connectTimeoutMS=30000, socketTimeoutMS=None,socketKeepAlive=True,connect=False,maxPoolsize=1)
+        connectTimeoutMS=30000, socketTimeoutMS=None, socketKeepAlive=True, connect=False, maxPoolsize=1)
 
     db = client['masterproject']
     # variable for writing poll data
@@ -77,6 +84,8 @@ except:
         "the database")
 
 print("1")
+
+
 @app.route('/set-/')
 def set_variables(mode):
     session['mode'] = mode
@@ -204,13 +213,14 @@ def task_description():
     date_page_task_description_1 = datetime.datetime.utcnow()
     session["date_page_task_description_1"] = datetime.datetime.utcnow()
     print(session)
+    session['check_shuffling'] = 0
 
     return render_template('/task_description.html', font_url='http://fonts.googleapis.com/css?family=PT+Sans:400,700')
 
 
 @app.route('/pref_movies.html', methods=['POST', 'GET'])
 def pref_movies():
-    global date_page_pref_movie_2, page
+    global date_page_pref_movie_2, page, allprefmovies_number, allprefmovies_number
     # for loading data into the HTML page (for example title, cover, stars ...)
     global allprefmovies
     # for getting the survey data (like/dislike/unknown)
@@ -219,7 +229,7 @@ def pref_movies():
     global user_likes_movies
     # stores the likes, dislikes and neutral thumbs of the user in form of a list
     global likes_list, dislikes_list, neutral_list
-    global fake
+    global fake, check_shuffling
 
     # for assignment to the right page
     session['Form_Type'] = 1
@@ -264,6 +274,24 @@ def pref_movies():
     random.shuffle(allprefmovies)
 
     allprefmovies.insert(3, fake_movie)
+
+    # variable for saving the list that the user got displayed
+    if session['check_shuffling'] == 0:
+        allprefmovies_number = ['']
+
+        j = 0
+        for i in allprefmovies:
+            if j == 0:
+                allprefmovies_number[0] = (i['number'])
+            else:
+                allprefmovies_number.append(i['number'])
+            j += 1
+
+    session['check_shuffling'] = 1
+
+
+    print("allppref_movie after: ", str(allprefmovies_number))
+    session['allprefmovies'] = allprefmovies_number
 
     session['date_page_pref_movie_2'] = datetime.datetime.utcnow()
 
@@ -313,6 +341,9 @@ def pref_movies():
 
             return redirect(url_for('pref_movies'))
         else:
+            # print("Warning value before" + str(session['warning']))
+            # session['warning'] = request.form['warning']
+            # print("Warning value after" + str(session['warning']))
             for n in range(1, len(allprefmovies)):
                 print("pref movies: " + preferred_movies[n])
                 if preferred_movies[n] == 'Like':
@@ -372,19 +403,19 @@ def rec_movies_1():
 @app.route('/rec_movies_2.html', methods=['POST', 'GET'])
 def rec_movies_2():
     # list with 10 objects
-    global favourite, date_page_rec_movie_3, page, allsuggmovies, watchlist
+    global page, allsuggmovies
     global user_likes_movies, user_likes_movies, user_preferences
-
     dbmovies = db['movies']
 
     allsuggmovies.clear()
 
+    # querying all titles
+    # for x in range(0, sugg_numMovies):
     for movies in dbmovies.find({'type': 'rec'}, {"_id": False}):
         allsuggmovies.append(movies)
 
     # for randomizing the movie list
     random.shuffle(allsuggmovies)
-
     session['date_page_rec_movie_3'] = datetime.datetime.utcnow()
 
     if request.method == 'POST':
@@ -569,7 +600,8 @@ def save():
         "Feedback_Text": session['feedbacktext'],
         "retention_check_1_passed": session['retention_check_1_passed'],
         "retention_check_2_passed": session['retention_check_2_passed'],
-        "warning_occured": session['warning']
+        "warning_occured": session['warning'],
+        "displayed_list_pref_movies": session['allprefmovies']
     }
     # list comprehension to write
     new.update(dict(zip(questions_rec_attributename, session['questionnaire_answer_from_survey'])))

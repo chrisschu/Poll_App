@@ -120,8 +120,6 @@
         </div>
       </li>
       </div>
-
-     <div class="form-header-group" style="align-content: center">
       <li class="form-line jf-required" data-type="control_matrix" id="id_20">
         <label class="form-label form-label-top" id="label_20" for="input_20">
           <span class="form-required">
@@ -147,7 +145,10 @@
                     <p><b>Director:</b> {{ o.writers }} </p>
               </td>
               <td style="text-align:center" class="form-matrix-values">
+              <br>
+                  <br>
                   <p> <b>Trailer</b> </p>
+                  <br>
                   <a target="_blank" rel="noopener noreferrer" href="{{ o.trailer_link }}"><img src=" {{url_for('static', filename='imdb.png')}}" height="80" width="80"></a></td>
               <td>
               <div class="forms">
@@ -170,7 +171,7 @@
                             <td width="150" >
                       <div class="forms">
                                 <label for="input_20_1_{{ o.title }}">
-                                <span>Pick Next Movie to Watch</span>
+                                <span>Pick as Next Movie to Watch</span>
                     <br>
                     <br>
                     <br>

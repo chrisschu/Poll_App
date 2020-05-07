@@ -20,9 +20,22 @@
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='form.css') }}"/>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='poll_style.css') }}" />
 <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/buttons/form-submit-button-simple_grey.css?3.3.14737"/>
+<script>
+    function validateForm() {
+if ( $("input[type=radio][value='Like']:checked").length < 2 ) {
+    alert('Not enough movies have been selected: Select atleast two movies you like.');
+    let warning;
+    console.log("warning " + warning)
+    warning = 1;
+    console.log("warning " + warning)
+    return false;
+}
+
+}
+</script>
 </head>
 <body>
-<form class="myForm" method="POST" enctype="application/x-www-form-urlencoded" action="{{ url_for('pref_movies') }}">
+<form name="myForm" class="myForm" method="POST" enctype="application/x-www-form-urlencoded" action="{{ url_for('pref_movies') }}" onsubmit="return validateForm()" method="post">
  <input type="hidden" name="formID" value="200006188570347" />
   <input type="hidden" id="JWTContainer" value="" />
   <input type="hidden" id="cardinalOrderNumber" value="" />
@@ -49,9 +62,9 @@
 
                   <li><p>To activate your rating, select the appropriate thumb symbols. </li>
                     <ul class="no-bullets">
-                        <li ><img src=" {{url_for('static', filename='thumbs_up.png')}}" height="40" width="40" alt="Like">     -   Like</li>
-                        <li><img src=" {{url_for('static', filename='thumbs_medium.png')}}" height="40" width="40" alt="neutral">  -  Neutral</li>
-                        <li><img src=" {{url_for('static', filename='thumbs_down.png')}}" height="40" width="40" alt="Dislike">  -   Dislike</li>
+                        <li><img class="label_item" src=" {{url_for('static', filename='thumbs_up.png')}}" height="40" width="40" alt="Like">     -   Like</li>
+                        <li><img class="label_item" src=" {{url_for('static', filename='thumbs_medium.png')}}" height="40" width="40" alt="neutral">  -  Neutral</li>
+                        <li><img class="label_item" src=" {{url_for('static', filename='thumbs_down.png')}}" height="40" width="40" alt="Dislike">  -   Dislike</li>
                  </ul>
            </ul>
                           {% with messages = get_flashed_messages() %}
@@ -109,7 +122,7 @@
       <li id="cid_9" class="form-input-wide" data-type="control_pagebreak">
         <div class="form-pagebreak" data-component="pagebreak">
           <div class="form-pagebreak-next-container">
-             <button class="Start">
+             <button id="button" class="Start" type="submit" value=0>
               Next
              </button>
           </div>

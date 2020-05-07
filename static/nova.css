@@ -673,7 +673,7 @@ table.form-matrix-table-liked thead {
 
   /*______for the star image______*/
     .radio_item{
-    display: none !important;
+    display: none;
     }
 
     .label_item {
@@ -682,6 +682,12 @@ table.form-matrix-table-liked thead {
 
     .radio_item:checked + label {
     opacity: 5;
+	border: 10px #ccc;
+    }
+
+    .radio_item:hover + label {
+    opacity: 5;
+	border: 10px #ccc;
     }
 
 	/* for the + add to watchlist button
@@ -1011,3 +1017,9 @@ td {
 }
 
 a:visited  {  color: #ffffff; text-decoration: none;     }
+
+input[type="radio"] {
+    -ms-transform: scale(1.3); /* IE 9 */
+    -webkit-transform: scale(1.3); /* Chrome, Safari, Opera */
+    transform: scale(1.3);
+}
