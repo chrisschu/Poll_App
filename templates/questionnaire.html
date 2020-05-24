@@ -67,19 +67,19 @@
     <th class="questionnaire-aaj5" style="text-align: center">(6)</th>
     <th class="questionnaire-aaj5" style="text-align: center">(7) </th>
   </tr>
-    <tr>
+    <tr class="questionnaire-tr">
     <td></td>
-    <td style="text-align: center">Disagree</td>
-        <td style="text-align: center"><font color="333333">disagree</font></td>
-        <td style="text-align: center"><font color="333333">disagree</font></td>
-        <td style="text-align: center"><font color="333333">disagree</font></td>
-        <td style="text-align: center"><font color="333333">disagree</font></td>
-        <td style="text-align: center"><font color="333333">disagree</font></td>
-    <td style="text-align: center">Agree</td>
+            <td style="text-align: center"><font size="2px">Fully disagree</font></td>
+        <td style="text-align: center"><font color="333333">Fully disagree</font></td>
+        <td style="text-align: center"><font color="333333">Fully disagree</font></td>
+        <td style="text-align: center"><font color="333333">Fully disagree</font></td>
+        <td style="text-align: center"><font color="333333">Fully disagree</font></td>
+        <td style="text-align: center"><font color="333333">Fully disagree</font></td>
+        <td style="text-align: center"><font size="2px">Fully agree</font></td>
     {% for q in questions %}
         </tr>
-  <tr>
-    <td class="questionnaire-g1fv-header"> {{ q.question }} <font color="333333"></font></td>
+  <tr class="questionnaire-tr">
+    <td class="questionnaire-g1fv-header"> {{ q.question }} </td>
     <td class="questionnaire-g1fv" style="text-align: center"><input type="radio" class="form-radio" id="input_{{ q.number }}_1" name="q_survey_rec_[{{ q.number }}]" value=1 required style="text-align: center"></td>
     <td class="questionnaire-g1fv" style="text-align: center"><input type="radio" class="form-radio" id="input_{{ q.number }}_2" name="q_survey_rec_[{{ q.number }}]" value=2 style="text-align: center"></td>
     <td class="questionnaire-g1fv" style="text-align: center"><input type="radio" class="form-radio" id="input_{{ q.number }}_3" name="q_survey_rec_[{{ q.number }}]" value=3 style="text-align: center"></td>
@@ -91,7 +91,7 @@
     {% endfor %}
 </table>
         <br>
- <h2 id="header-14" class="form-header" data-component="header" >
+ <h2 id="header-14" class="form-header" data-component="header">
           Questions About You
       </h2>
        <li class="form-line" data-type="control_radio" id="id_26">
@@ -110,17 +110,17 @@
   </tr>
         <tr>
     <td></td>
-    <td style="text-align: center">Disagree</td>
-        <td style="text-align: center"><font color="333333">disagree</font></td>
-        <td style="text-align: center"><font color="333333">disagree</font></td>
-        <td style="text-align: center"><font color="333333">disagree</font></td>
-        <td style="text-align: center"><font color="333333">disagree</font></td>
-        <td style="text-align: center"><font color="333333">disagree</font></td>
-    <td style="text-align: center">Agree</td>
+            <td style="text-align: center"><font size="2px">Fully disagree</font></td>
+        <td style="text-align: center"><font color="333333">Fully disagree</font></td>
+        <td style="text-align: center"><font color="333333">Fully disagree</font></td>
+        <td style="text-align: center"><font color="333333">Fully disagree</font></td>
+        <td style="text-align: center"><font color="333333">Fully disagree</font></td>
+        <td style="text-align: center"><font color="333333">Fully disagree</font></td>
+            <td style="text-align: center"><font size="2px">Fully agree</font></td>
         </tr>
     {% for q in questions_pers %}
-  <tr>
-      <td class="questionnaire-g1fv-header"> {{ q.question }} <font color="333333"></font></td>
+  <tr class="questionnaire-tr">
+      <td class="questionnaire-g1fv-header"> {{ q.question }}</td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_1" name="q_survey_pers_[{{ q.number }}]" value=1 required></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_2" name="q_survey_pers_[{{ q.number }}]" value=2></td>
     <td class="questionnaire-g1fv"><input type="radio" class="form-radio" id="input_pers_{{ q.number }}_3" name="q_survey_pers_[{{ q.number }}]" value=3></td>

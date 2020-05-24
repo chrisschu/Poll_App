@@ -487,7 +487,7 @@ def questionnaire():
         session['feedbacktext'] = str(request.form.get('feedbacktext'))
         session['age'] = str(request.form.get('age'))
         session['gender'] = str(request.form.get('gender'))
-        return redirect(url_for('submit'))
+        return redirect(url_for('my_new_form'))
 
     return render_template('/questionnaire.html', questions=allquestions_from_db_rec,
                            questions_pers=allquestions_from_db_pers)

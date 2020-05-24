@@ -15,10 +15,36 @@
 <link type="text/css" media="print" rel="stylesheet" href="{{ url_for('static', filename='printForm.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='nova.css') }}" />
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='form.css') }}"/>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='poll_style.css') }}" />
+<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='poll_style.css') }}" />
+<style>
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+</style>
 <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/buttons/form-submit-button-simple_grey.css?3.3.14737"/>
 </head>
 <body>
-<h1><font color="white">Thank you for participating in this study.</font></h1>
+      <input type="hidden" name="formID" value="200006188570347" />
+  <input type="hidden" id="JWTContainer" value="" />
+  <input type="hidden" id="cardinalOrderNumber" value="" />
+  <div role="main" class="form-all">
+      <li id="cid_13" class="form-input-wide" data-type="control_head">
+        <div class="form-header-group ">
+          <div class="header-text httal htvam">
+            <h2 id="header_13" class="form-header" data-component="header">
+              Thank you!
+            </h2>
+          </div>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_text" id="id_14">
+        <div id="cid_14" class="form-input-wide" style="alignment: center">
+          <div id="text_14" class="form-html" data-component="text">
+              <h4 style="align-content: center">Thank you for participating!</h4>
+                    <p>You can close the window now. </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+</div>
 </body>
 </html>
