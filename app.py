@@ -492,12 +492,6 @@ def questionnaire():
     return render_template('/questionnaire.html', questions=allquestions_from_db_rec,
                            questions_pers=allquestions_from_db_pers)
 
-
-@app.route('/submit.html', methods=['POST', 'GET'])
-def submit():
-    return render_template('/submit.html', thing_to_say='Click here to start')
-
-
 @app.route('/end.html', methods=['POST', 'GET'])
 def my_new_form():
     ## Assignment of the resulted input of the html variables
