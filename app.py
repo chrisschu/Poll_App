@@ -32,7 +32,6 @@ allsuggmovies = []
 allquestions_from_db_rec = []
 allquestions_from_db_pers = []
 
-
 # for checking shuffling after fillin html page
 check_shuffling = 0
 
@@ -289,7 +288,6 @@ def pref_movies():
 
     session['check_shuffling'] = 1
 
-
     print("allppref_movie after: ", str(allprefmovies_number))
     session['allprefmovies'] = allprefmovies_number
 
@@ -491,6 +489,7 @@ def questionnaire():
 
     return render_template('/questionnaire.html', questions=allquestions_from_db_rec,
                            questions_pers=allquestions_from_db_pers)
+
 
 @app.route('/end.html', methods=['POST', 'GET'])
 def my_new_form():
