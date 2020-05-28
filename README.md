@@ -1,15 +1,5 @@
 # Poll App
 
-CHANGES 26.03.2020:
-     
-     changed checkbox/radiobuttons
-     position of retentionchecks
-    
-NEXT CHANGES SOON:
-
-    clean up the code
- 
-
 The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
 It contains a study which results will be inserted into the database.
  
