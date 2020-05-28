@@ -485,14 +485,14 @@ def questionnaire():
         session['feedbacktext'] = str(request.form.get('feedbacktext'))
         session['age'] = str(request.form.get('age'))
         session['gender'] = str(request.form.get('gender'))
-        return redirect(url_for('my_new_form'))
+        return redirect(url_for('end'))
 
     return render_template('/questionnaire.html', questions=allquestions_from_db_rec,
                            questions_pers=allquestions_from_db_pers)
 
 
 @app.route('/end.html', methods=['POST', 'GET'])
-def my_new_form():
+def end():
     ## Assignment of the resulted input of the html variables
     ## contains all data of the survey
 
