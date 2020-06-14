@@ -490,11 +490,9 @@ def questionnaire():
     return render_template('/questionnaire.html', questions=allquestions_from_db_rec,
                            questions_pers=allquestions_from_db_pers)
 
-
 @app.route('/submit.html', methods=['POST', 'GET'])
 def submit():
     return redirect(url_for('end'))
-
 
 @app.route('/end.html', methods=['POST', 'GET'])
 def end():
