@@ -1,4 +1,4 @@
-# Poll App
+# Nudging in Recommender systems
 
 The idea behind this project is to make first experiences with **Mongodb, pymongo, virtuelenv** and **flask**.
 It contains a study which results will be inserted into the database.
